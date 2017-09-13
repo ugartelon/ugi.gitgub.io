@@ -1,0 +1,80 @@
+---
+title: JSON and mapping long/lat
+author: Pablo Ugarte
+date: '2017-09-13'
+slug: json-and-mapping-long-lat
+categories:
+  - json
+  - leaflet
+tags: []
+---
+
+Today we will extract information from a JSON document using the R package jsonlite and we will then plot lon/lat in a map using the R package leaflet.
+
+The data that we will be looking at is crime in LA.
+
+But first, we need to install and load libraries for this excercise.
+
+```{r, message = FALSE, warning = FALSE}
+library(jsonlite)
+library(tidyverse)
+library(stringr)
+library(tibble)
+library(leaflet)
+library(ggmap)
+library(readr)
+```
+
+Now we can start grabbing the data from the json document which can be found here [^1].
+
+```{r, message = FALSE, warning = FALSE}
+crimeLARaw <- fromJSON("https://data.lacity.org/resource/7fvc-faax.json")
+View(crimeLARaw)
+str(crimeLARaw)
+```
+
+We will now clean the data by just selecting certain columns.
+
+```{r, message = FALSE, warning = FALSE}
+crimeLARaw_tbl <- crimeLARaw %>% 
+  select(crm_cd_desc , premis_desc, time_occ, location_1)
+```
+
+I am having problems extracting the long/lat data without parentheses. So decided to take this dataframe, and copy and paste to an excel file. 
+In excel, with the find and replace function we can get easily rid of the "c(" and ")". We then save it as csv. 
+We can now return to R and continue data wrangling.
+
+```{r, message = FALSE, warning = FALSE}
+crimeLA <- read.csv("crimeLA.csv")
+```
+
+We split the coordinates column and convert variables to numeric and factor format.
+
+```{r, message = FALSE, warning = FALSE}
+crimeLA <- crimeLA %>% separate(cordinates, c("long", "lat"), sep = ", ")
+crimeLA$long <- as.numeric(crimeLA$long) 
+crimeLA$lat <- as.numeric(crimeLA$lat)
+crimeLA$crime_type <- as.factor(crimeLA$crime_type)
+levels(crimeLA$crime_type)
+```
+
+Last, we plot the long/lat info. We also create a palette that maps factor levels to colors.
+
+```{r, message = FALSE, warning = FALSE}
+pal <- colorFactor(c("gray","red","green3","blue","cyan","magenta","yellow","black"),
+                   domain = c("BURGLARY", "BURGLARY FROM VEHICLE","CHILD ANNOYING (17YRS & UNDER","CRUELTY TO ANIMALS","DISTURBING THE PEACE","EMBEZZLEMENT, GRAND THEFT ($950.01 & OVER","INDECENT EXPOSURE","OTHER ASSAULT"  ,"OTHER MISCELLANEOUS CRIME","THEFT PLAIN - PETTY ($950 & UNDER","VANDALISM - MISDEAMEANOR ($399 OR UNDER","VEHICLE - STOLEN" ))
+```
+
+```{r, echo = TRUE, message = FALSE, warning = FALSE}
+leaflet(data = crimeLA) %>% 
+  addTiles() %>%
+  addCircles(~long, ~lat) %>% 
+  addMarkers(popup = ~as.character(crime_type), label = ~as.character(crime_type)) %>%
+  addCircleMarkers(color = ~pal(crime_type)) %>%
+  addLegend(pal = pal, values = ~crime_type, opacity = 5)
+```
+
+Thats it. We now have a map that shows crime in LA. Happy blog!
+
+[^1]: [Link Youtube] (https://catalog.data.gov/dataset/crime-data-from-2010-to-present)
+
