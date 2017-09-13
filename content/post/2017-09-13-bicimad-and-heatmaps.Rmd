@@ -53,6 +53,7 @@ bicimad_rides <- bicimad_rides %>% select(DIA,`Usos bicis total`,`Usos total acu
 # Transform variable, create new columns and skip year 2014 
 bicimad_rides <- bicimad_rides %>%
   mutate(date = mdy(date)) %>%
+  mutate(month = month(date, label = TRUE, abbr = TRUE)) %>%
   mutate(weekday = wday(date, label=TRUE, abbr=TRUE)) %>%
   mutate(year = year(date)) %>%
   mutate(week=as.numeric(format(date,"%W"))) # Week 00-53 with Monday as first day of the week
@@ -60,11 +61,13 @@ bicimad_rides <- bicimad_rides %>%
 bicimad_rides <- bicimad_rides %>% filter(year != "2014") 
 
 # Aggregate data with summarise 
-bicimad_rides <- bicimad_rides %>% group_by(year,date,week, weekday)%>% summarise(numtrips=sum(daily_rides))
+bicimad_rides <- bicimad_rides %>% group_by(date,year, month, week, weekday) %>% summarise(numtrips=sum(daily_rides), accumulated=sum(accumulated))
 View(bicimad_rides)
 ```
 
-# Plot
+# Plot 
+
+### Heatmap
 
 Now we will use the handy dplyr::summarise to get our aggregated data for each day. Then we can plot.
 
@@ -84,6 +87,37 @@ ggplot(bicimad_rides, aes(x = week, y = weekday, fill = numtrips)) +
    theme_ipsum(grid="Y") 
 ```
 
-Thats it. We now have the heat map. Happy blog!
+### Growth
+
+Now, how has BiciMAD grown over the past years? 
+
+```{r, echo = TRUE, message = FALSE, warning = FALSE}
+weekly.rides <- bicimad_rides %>% group_by(year, week) %>% summarise(numtrips=sum(numtrips))
+View(weekly.rides)
+
+ggplot(weekly.rides,aes(x=week,y=numtrips,color=factor(year))) +
+  geom_line(alpha=.25) +
+  geom_smooth(se=F,method='loess',alpha=.35) +
+  theme_ipsum() +
+  labs(
+    title='Growth of BiciMAD',
+    subtitle='Count of BiciMAD rides by week from 2015-2017',
+    caption='Publicly available data from BiciMadrid\nhttp://datos.madrid.es/portal/site/egob/') +
+  theme(legend.title=element_blank()) +
+  scale_y_continuous(labels=scales::comma)
+```
+
+```{r, echo = TRUE, message = FALSE, warning = FALSE}
+bicimad_rides_year <- bicimad_rides %>% group_by(year) %>% summarise(numtrips=sum(numtrips))
+bicimad_rides_year
+
+year.rides <- data.frame( year = c(2015, 2016, 2017),
+                          accumulated = accounting(c(3075454, 2807137, 1779077), format = "d"))
+formattable(year.rides)
+```
+
+According to the figures, it looks like the user base has somewhat remained stagnant. Rise counts was probably highest in 2015. 2017 though seems to have slumped a bit specially in July ths year. Reasons? Other large bike-share services, roads not accomadated yet for cyclists, defectuos bykes and docking stations, etc...  
+
+Thats it. We now have the heat map and the growth chart!
 
 [^1]: [datosabiertos: used bitly to shorten the link] (http://bit.ly/2azyZ2O)
