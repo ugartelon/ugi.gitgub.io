@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Heatmap on A minimal Hugo website</title>
+    <link>https://www.storieswithdata.com/categories/heatmap/</link>
+    <description>Recent content in Heatmap on A minimal Hugo website</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 13 Sep 2017 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://www.storieswithdata.com/categories/heatmap/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>BiciMad and Heatmaps</title>
+      <link>https://www.storieswithdata.com/post/2017/09/13/bicimad-and-heatmaps/</link>
+      <pubDate>Wed, 13 Sep 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.storieswithdata.com/post/2017/09/13/bicimad-and-heatmaps/</guid>
+      <description>In this post we will analyze Madrid’s electric bike hire service, BiciMAD (in London Santander Cycles, in Paris Vélib, etc…). We will create calendar heatmaps and a growth chart using the publicly available data.
+ Libraries We first install and load the libraries.
+library(ggplot2) # For amazing charts library(tidyverse) # Data wrangling library(hrbrthemes) # Aesthetic defaults for ggplot2 charts library(readr) # Reading data from csv library(formattable) # Friendy data frame can be rendered as HTML table library(lubridate) # Makes it easier to work with dates and times  Importing data The data can be obtained from datosabiertos - the free and open data-sharing portal where anyone can access data relating to the Madrid 1.</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -3,7 +3,7 @@ title: BiciMad and Heatmaps
 author: Pablo
 date: '2017-09-13'
 slug: bicimad-and-heatmaps
-categories: []
+categories: [Heatmap]
 tags: []
 ---
 
