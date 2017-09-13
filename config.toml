@@ -1,8 +1,8 @@
-baseurl = "/"
+baseurl = "https://www.storieswithdata.com"
 languageCode = "en-us"
 title = "A minimal Hugo website"
 theme = "hugo-xmin"
-googleAnalytics = ""
+googleAnalytics = "UA-77339605-2"
 disqusShortname = ""
 ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
 preserveTaxonomyNames = true
@@ -24,14 +24,8 @@ footnotereturnlinkcontents = "↩"
     name = "Categories"
     url = "/categories/"
     weight = 3
-[[menu.main]]
-    name = "Tags"
-    url = "/tags/"
-    weight = 4
-[[menu.main]]
-    name = "Subscribe"
-    url = "/index.xml"
+
 
 [params]
     description = "A website built through Hugo and blogdown."
-    footer = "&copy; [Yihui Xie](https://yihui.name) 2017 | [Github](https://github.com/yihui) | [Twitter](https://twitter.com/xieyihui)"
+    footer = "&copy; Pablo Ugarte 2017 | [Linkedin](https://www.linkedin.com/in/pablo-ugarte-19b11232/)"
