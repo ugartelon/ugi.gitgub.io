@@ -69,6 +69,7 @@ bicimad_rides &lt;- bicimad_rides %&gt;% select(DIA,`Usos bicis total`,`Usos tot
 # Transform variable, create new columns and skip year 2014 
 bicimad_rides &lt;- bicimad_rides %&gt;%
   mutate(date = mdy(date)) %&gt;%
+  mutate(month = month(date, label = TRUE, abbr = TRUE)) %&gt;%
   mutate(weekday = wday(date, label=TRUE, abbr=TRUE)) %&gt;%
   mutate(year = year(date)) %&gt;%
   mutate(week=as.numeric(format(date,&quot;%W&quot;))) # Week 00-53 with Monday as first day of the week
@@ -76,11 +77,13 @@ bicimad_rides &lt;- bicimad_rides %&gt;%
 bicimad_rides &lt;- bicimad_rides %&gt;% filter(year != &quot;2014&quot;) 
 
 # Aggregate data with summarise 
-bicimad_rides &lt;- bicimad_rides %&gt;% group_by(year,date,week, weekday)%&gt;% summarise(numtrips=sum(daily_rides))
+bicimad_rides &lt;- bicimad_rides %&gt;% group_by(date,year, month, week, weekday) %&gt;% summarise(numtrips=sum(daily_rides), accumulated=sum(accumulated))
 View(bicimad_rides)</code></pre>
 </div>
 <div id="plot" class="section level1">
 <h1>Plot</h1>
+<div id="heatmap" class="section level3">
+<h3>Heatmap</h3>
 <p>Now we will use the handy dplyr::summarise to get our aggregated data for each day. Then we can plot.</p>
 <pre class="r"><code>ggplot(bicimad_rides, aes(x = week, y = weekday, fill = numtrips)) +
     viridis::scale_fill_viridis(name=&quot;BiciMad&quot;,
@@ -96,7 +99,76 @@ View(bicimad_rides)</code></pre>
                  &quot;Jul&quot;, &quot;Aug&quot;, &quot;Sep&quot;, &quot;Oct&quot;, &quot;Nov&quot;, &quot;Dec&quot;)) +
    theme_ipsum(grid=&quot;Y&quot;) </code></pre>
 <p><img src="/post/2017-09-13-bicimad-and-heatmaps_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
-<p>Thats it. We now the heat map. Happy blog!</p>
+</div>
+<div id="growth" class="section level3">
+<h3>Growth</h3>
+<p>Now, how has BiciMAD grown over the past years?</p>
+<pre class="r"><code>weekly.rides &lt;- bicimad_rides %&gt;% group_by(year, week) %&gt;% summarise(numtrips=sum(numtrips))
+View(weekly.rides)
+
+ggplot(weekly.rides,aes(x=week,y=numtrips,color=factor(year))) +
+  geom_line(alpha=.25) +
+  geom_smooth(se=F,method=&#39;loess&#39;,alpha=.35) +
+  theme_ipsum() +
+  labs(
+    title=&#39;Growth of BiciMAD&#39;,
+    subtitle=&#39;Count of BiciMAD rides by week from 2015-2017&#39;,
+    caption=&#39;Publicly available data from BiciMadrid\nhttp://datos.madrid.es/portal/site/egob/&#39;) +
+  theme(legend.title=element_blank()) +
+  scale_y_continuous(labels=scales::comma)</code></pre>
+<p><img src="/post/2017-09-13-bicimad-and-heatmaps_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<pre class="r"><code>bicimad_rides_year &lt;- bicimad_rides %&gt;% group_by(year) %&gt;% summarise(numtrips=sum(numtrips))
+bicimad_rides_year</code></pre>
+<pre><code>## # A tibble: 3 x 2
+##    year numtrips
+##   &lt;dbl&gt;    &lt;dbl&gt;
+## 1  2015  3075454
+## 2  2016  2807137
+## 3  2017  1779077</code></pre>
+<pre class="r"><code>year.rides &lt;- data.frame( year = c(2015, 2016, 2017),
+                          accumulated = accounting(c(3075454, 2807137, 1779077), format = &quot;d&quot;))
+formattable(year.rides)</code></pre>
+<table class="table table-condensed">
+<thead>
+<tr>
+<th style="text-align:right;">
+year
+</th>
+<th style="text-align:right;">
+accumulated
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+2015
+</td>
+<td style="text-align:right;">
+3,075,454
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2016
+</td>
+<td style="text-align:right;">
+2,807,137
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2017
+</td>
+<td style="text-align:right;">
+1,779,077
+</td>
+</tr>
+</tbody>
+</table>
+<p>According to the figures, it looks like the user base has somewhat remained stagnant. Rise counts was probably highest in 2015. 2017 though seems to have slumped a bit specially in July ths year. Reasons? Other large bike-share services, roads not accomadated yet for cyclists, defectuos bykes and docking stations, etc…</p>
+<p>Thats it. We now have the heat map and the growth chart!</p>
+</div>
 </div>
 <div class="footnotes">
 <hr />
@@ -112,6 +184,17 @@ View(bicimad_rides)</code></pre>
 <script async src="//cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
 
 <script async src="//yihui.name/js/center-img.js"></script>
+
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-77339605-2', 'auto');
+ga('send', 'pageview');
+</script>
+
 
   
   <hr/>
