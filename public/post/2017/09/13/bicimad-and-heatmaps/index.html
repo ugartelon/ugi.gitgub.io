@@ -116,14 +116,6 @@ ggplot(weekly.rides,aes(x=week,y=numtrips,color=factor(year))) +
   theme(legend.title=element_blank()) +
   scale_y_continuous(labels=scales::comma)</code></pre>
 <p><img src="/post/2017-09-13-bicimad-and-heatmaps_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
-<pre class="r"><code>bicimad_rides_year &lt;- bicimad_rides %&gt;% group_by(year) %&gt;% summarise(numtrips=sum(numtrips))
-bicimad_rides_year</code></pre>
-<pre><code>## # A tibble: 3 x 2
-##    year numtrips
-##   &lt;dbl&gt;    &lt;dbl&gt;
-## 1  2015  3075454
-## 2  2016  2807137
-## 3  2017  1779077</code></pre>
 <pre class="r"><code>year.rides &lt;- data.frame( year = c(2015, 2016, 2017),
                           accumulated = accounting(c(3075454, 2807137, 1779077), format = &quot;d&quot;))
 formattable(year.rides)</code></pre>

@@ -106,9 +106,8 @@ ggplot(weekly.rides,aes(x=week,y=numtrips,color=factor(year))) +
   scale_y_continuous(labels=scales::comma)
 ```
 
-```{r}
+```{r, echo = FALSE, message = FALSE, warning = FALSE}
 bicimad_rides_year <- bicimad_rides %>% group_by(year) %>% summarise(numtrips=sum(numtrips))
-bicimad_rides_year
 ```
 
 ```{r, echo = TRUE, message = FALSE, warning = FALSE}
