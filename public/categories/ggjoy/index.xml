@@ -17,7 +17,7 @@
       <pubDate>Mon, 11 Sep 2017 00:00:00 +0000</pubDate>
       
       <guid>https://www.storieswithdata.com/post/2017/09/11/ggjoy-hrbrthemes/</guid>
-      <description>Haven&amp;rsquo;t you run into articles with some data that makes you think, how can visualize the data in a different and possibly better way?
+      <description>Haven’t you run into articles with some data that makes you think, how can visualize the data in a different and possibly better way?
  We will be use Joyplots for this post. Joyplots are partially overlapping line plots that create the impression of a mountain range. They can be quite useful for visualizing changes in distributions over time or space1.
 The data that we will be looking at is 2016 temperatures in Lincoln, NE23.</description>
     </item>

@@ -6,21 +6,21 @@
     <description>Recent content in Leaflet on A minimal Hugo website</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 10 Sep 2017 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 12 Sep 2017 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://www.storieswithdata.com/categories/leaflet/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>JSON and mapping long/lat</title>
-      <link>https://www.storieswithdata.com/post/2017/09/10/json-and-mapping-long-lat/</link>
-      <pubDate>Sun, 10 Sep 2017 00:00:00 +0000</pubDate>
+      <link>https://www.storieswithdata.com/post/2017/09/12/json-and-mapping-long-lat/</link>
+      <pubDate>Tue, 12 Sep 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://www.storieswithdata.com/post/2017/09/10/json-and-mapping-long-lat/</guid>
+      <guid>https://www.storieswithdata.com/post/2017/09/12/json-and-mapping-long-lat/</guid>
       <description>Today we will extract information from a JSON document using the R package jsonlite and we will then plot lon/lat in a map using the R package leaflet.
 The data that we will be looking at is crime in LA.
 But first, we need to install and load libraries for this excercise.
-library(jsonlite) library(tidyverse) library(stringr) library(tibble) library(leaflet) library(ggmap) library(readr)  Now we can start grabbing the data from the json document which can be found here 1.</description>
+library(jsonlite) library(tidyverse) library(stringr) library(tibble) library(leaflet) library(ggmap) library(readr) Now we can start grabbing the data from the json document which can be found here 1.</description>
     </item>
     
   </channel>

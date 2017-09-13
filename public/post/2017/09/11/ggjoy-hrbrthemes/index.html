@@ -30,72 +30,56 @@
 </div>
 
 <main>
-
-
 <blockquote>
-<p>Haven&rsquo;t you run into articles with some data that makes you think, how can visualize the data in a different and possibly better way?</p>
+<p>Haven’t you run into articles with some data that makes you think, how can visualize the data in a different and possibly better way?</p>
 </blockquote>
-
-<p>We will be use Joyplots for this post. Joyplots are partially overlapping line plots that create the impression of a mountain range. They can be quite useful for visualizing changes in distributions over time or space<sup class="footnote-ref" id="fnref:1"><a rel="footnote" href="#fn:1">1</a></sup>.</p>
-
-<p>The data that we will be looking at is 2016 temperatures in Lincoln, NE<sup class="footnote-ref" id="fnref:2"><a rel="footnote" href="#fn:2">2</a></sup><sup class="footnote-ref" id="fnref:3"><a rel="footnote" href="#fn:3">3</a></sup>.</p>
-
-<h1 id="libraries">Libraries</h1>
-
+<p>We will be use Joyplots for this post. Joyplots are partially overlapping line plots that create the impression of a mountain range. They can be quite useful for visualizing changes in distributions over time or space<a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a>.</p>
+<p>The data that we will be looking at is 2016 temperatures in Lincoln, NE<a href="#fn2" class="footnoteRef" id="fnref2"><sup>2</sup></a><a href="#fn3" class="footnoteRef" id="fnref3"><sup>3</sup></a>.</p>
+<div id="libraries" class="section level1">
+<h1>Libraries</h1>
 <p>We first install and load the packages.</p>
-
-<pre><code class="language-r, message = FALSE, warning = FALSE">library(tidyverse) # Data wrangling
+<pre class="r"><code>library(tidyverse) # Data wrangling
 library(ggjoy) # calculates density estimates from the provided data and then plots those
 library(hrbrthemes) # Aesthetic defaults for ggplot2 charts
 library(readr) # Reading data from csv 
-library(ggplot2) # Creating charts
-</code></pre>
-
-<h1 id="importing-data">Importing data</h1>
-
-<pre><code class="language-r, message = FALSE, warning = FALSE">weather.raw &lt;- read_csv(&quot;nebraska.csv&quot;)
-</code></pre>
-
-<h1 id="cleaning-transforming">Cleaning/Transforming</h1>
-
+library(ggplot2) # Creating charts</code></pre>
+</div>
+<div id="importing-data" class="section level1">
+<h1>Importing data</h1>
+<pre class="r"><code>weather.raw &lt;- read_csv(&quot;nebraska.csv&quot;)</code></pre>
+</div>
+<div id="cleaningtransforming" class="section level1">
+<h1>Cleaning/Transforming</h1>
 <p>Then we cleanse the data that we want to plot, creating the year labels and the factor to help order the years.</p>
-
-<pre><code class="language-r, message = FALSE, warning = FALSE">weather.raw$month &lt;- months(as.Date(weather.raw$CST))
+<pre class="r"><code>weather.raw$month &lt;- months(as.Date(weather.raw$CST))
 weather.raw$months &lt;- factor(rev(weather.raw$month),levels=rev(unique(weather.raw$month)))
 
 #scales
 mins &lt;- min(weather.raw$`Min TemperatureF`)
 maxs &lt;- max(weather.raw$`Max TemperatureF`)
-View(weather.raw)
-</code></pre>
-
-<h1 id="plot">Plot</h1>
-
+View(weather.raw)</code></pre>
+</div>
+<div id="plot" class="section level1">
+<h1>Plot</h1>
 <p>To plot we will be using hrbrthemes::theme_ipsum. With a few lines of code we get a really nice looking joy plot.</p>
-
-<pre><code class="language-r, echo = TRUE, message = FALSE, warning = FALSE">ggplot(weather.raw,aes(x = `Mean TemperatureF`,y=months,height=..density..)) +
+<pre class="r"><code>ggplot(weather.raw,aes(x = `Mean TemperatureF`,y=months,height=..density..)) +
      geom_joy(scale=3) +
       scale_x_continuous(limits = c(mins,maxs)) +
   theme_ipsum(grid=F) +
   theme(axis.title.y=element_blank(),
         axis.ticks.y=element_blank(),
         strip.text.y = element_text(angle = 180, hjust = 1)) +
-  labs(title='Temperatures in Lincoln NE',
-       subtitle='Median temperatures (Fahrenheit) by month for 2016\nData: Original CSV from the Weather Underground')
-</code></pre>
-
+  labs(title=&#39;Temperatures in Lincoln NE&#39;,
+       subtitle=&#39;Median temperatures (Fahrenheit) by month for 2016\nData: Original CSV from the Weather Underground&#39;)</code></pre>
+<p><img src="/post/2017-09-13-joy-plots_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
 <p>Thats it. We now have a ggjoy map. Happy blog!</p>
+</div>
 <div class="footnotes">
-
 <hr />
-
 <ol>
-<li id="fn:1"><a href="https://cran.r-project.org/web/packages/ggjoy/vignettes/introduction.html">Link ggjoy</a>
- <a class="footnote-return" href="#fnref:1">↩</a></li>
-<li id="fn:2"><a href="https://drive.google.com/file/d/0ByOfjCmqEilLYndpOWJyZXhPVUk/view">Original CSV</a>
- <a class="footnote-return" href="#fnref:2">↩</a></li>
-<li id="fn:3"><a href="http://austinwehrwein.com/data-visualization/it-brings-me-ggjoy/">Source Blog</a>
- <a class="footnote-return" href="#fnref:3">↩</a></li>
+<li id="fn1"><p>[Link ggjoy] (<a href="https://cran.r-project.org/web/packages/ggjoy/vignettes/introduction.html" class="uri">https://cran.r-project.org/web/packages/ggjoy/vignettes/introduction.html</a>)<a href="#fnref1">↩</a></p></li>
+<li id="fn2"><p>[Original CSV] (<a href="https://drive.google.com/file/d/0ByOfjCmqEilLYndpOWJyZXhPVUk/view" class="uri">https://drive.google.com/file/d/0ByOfjCmqEilLYndpOWJyZXhPVUk/view</a>)<a href="#fnref2">↩</a></p></li>
+<li id="fn3"><p>[Source Blog] (<a href="http://austinwehrwein.com/data-visualization/it-brings-me-ggjoy/" class="uri">http://austinwehrwein.com/data-visualization/it-brings-me-ggjoy/</a>)<a href="#fnref3">↩</a></p></li>
 </ol>
 </div>
 

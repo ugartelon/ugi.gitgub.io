@@ -23,26 +23,26 @@ library(ggplot2) # For amazing charts library(tidyverse) # Data wrangling librar
     </item>
     
     <item>
+      <title>JSON and mapping long/lat</title>
+      <link>https://www.storieswithdata.com/post/2017/09/12/json-and-mapping-long-lat/</link>
+      <pubDate>Tue, 12 Sep 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.storieswithdata.com/post/2017/09/12/json-and-mapping-long-lat/</guid>
+      <description>Today we will extract information from a JSON document using the R package jsonlite and we will then plot lon/lat in a map using the R package leaflet.
+The data that we will be looking at is crime in LA.
+But first, we need to install and load libraries for this excercise.
+library(jsonlite) library(tidyverse) library(stringr) library(tibble) library(leaflet) library(ggmap) library(readr) Now we can start grabbing the data from the json document which can be found here 1.</description>
+    </item>
+    
+    <item>
       <title>Joyplots with ggjoy &#43; hrbrthemes</title>
       <link>https://www.storieswithdata.com/post/2017/09/11/ggjoy-hrbrthemes/</link>
       <pubDate>Mon, 11 Sep 2017 00:00:00 +0000</pubDate>
       
       <guid>https://www.storieswithdata.com/post/2017/09/11/ggjoy-hrbrthemes/</guid>
-      <description>Haven&amp;rsquo;t you run into articles with some data that makes you think, how can visualize the data in a different and possibly better way?
+      <description>Haven’t you run into articles with some data that makes you think, how can visualize the data in a different and possibly better way?
  We will be use Joyplots for this post. Joyplots are partially overlapping line plots that create the impression of a mountain range. They can be quite useful for visualizing changes in distributions over time or space1.
 The data that we will be looking at is 2016 temperatures in Lincoln, NE23.</description>
-    </item>
-    
-    <item>
-      <title>JSON and mapping long/lat</title>
-      <link>https://www.storieswithdata.com/post/2017/09/10/json-and-mapping-long-lat/</link>
-      <pubDate>Sun, 10 Sep 2017 00:00:00 +0000</pubDate>
-      
-      <guid>https://www.storieswithdata.com/post/2017/09/10/json-and-mapping-long-lat/</guid>
-      <description>Today we will extract information from a JSON document using the R package jsonlite and we will then plot lon/lat in a map using the R package leaflet.
-The data that we will be looking at is crime in LA.
-But first, we need to install and load libraries for this excercise.
-library(jsonlite) library(tidyverse) library(stringr) library(tibble) library(leaflet) library(ggmap) library(readr)  Now we can start grabbing the data from the json document which can be found here 1.</description>
     </item>
     
     <item>
