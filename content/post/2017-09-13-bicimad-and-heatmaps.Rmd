@@ -84,6 +84,6 @@ ggplot(bicimad_rides, aes(x = week, y = weekday, fill = numtrips)) +
    theme_ipsum(grid="Y") 
 ```
 
-Thats it. We now the heat map. Happy blog!
+Thats it. We now have the heat map. Happy blog!
 
 [^1]: [datosabiertos: used bitly to shorten the link] (http://bit.ly/2azyZ2O)
