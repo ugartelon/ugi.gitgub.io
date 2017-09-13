@@ -93,7 +93,6 @@ Now, how has BiciMAD grown over the past years?
 
 ```{r, echo = TRUE, message = FALSE, warning = FALSE}
 weekly.rides <- bicimad_rides %>% group_by(year, week) %>% summarise(numtrips=sum(numtrips))
-View(weekly.rides)
 
 ggplot(weekly.rides,aes(x=week,y=numtrips,color=factor(year))) +
   geom_line(alpha=.25) +
