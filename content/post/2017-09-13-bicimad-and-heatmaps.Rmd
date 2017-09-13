@@ -1,0 +1,89 @@
+---
+title: BiciMad and Heatmaps
+author: Pablo
+date: '2017-09-13'
+slug: bicimad-and-heatmaps
+categories: []
+tags: []
+---
+
+>In this post we will analyze Madrid's electric bike hire service, BiciMAD (in London Santander Cycles, in Paris Vélib, etc...). We will create calendar heatmaps and a growth chart using the publicly available data.
+
+# Libraries
+
+We first install and load the libraries.
+
+```{r, message = FALSE, warning = FALSE}
+library(ggplot2) # For amazing charts
+library(tidyverse) # Data wrangling
+library(hrbrthemes) # Aesthetic defaults for ggplot2 charts
+library(readr) # Reading data from csv 
+library(formattable) # Friendy data frame can be rendered as HTML table
+library(lubridate) # Makes it easier to work with dates and times
+```
+
+# Importing data
+
+The data can be obtained from datosabiertos - the free and open data-sharing portal where anyone can access data relating to the Madrid [^1]. 
+
+Steps to follow: 
+
+* Download "Usos acumulados por dia de abono anual y ocasional" excel table
+* Then export to csv
+* Remove "Usos julio 2017-Table 1" (we are not interested in this data)
+* Rename the remaining file to BiciMAD
+
+```{r, message = FALSE, warning = FALSE}
+bicimad_rides <- read_csv("BiciMAD.csv")
+```
+
+# Cleaning/Transforming
+
+Once we have all the rides loaded we can start cleansing the data and making the variables we are interested in:
+
+* Transforming date column from character/string to date
+* Adding two columns: weekday and year
+* Removing year 2014 (activity sirges in 2015, when people know about it)
+
+
+```{r, message = FALSE, warning = FALSE}
+# select columns interested and renamed them
+bicimad_rides <- bicimad_rides %>% select(DIA,`Usos bicis total`,`Usos total acumulado desde inicio`) %>% rename(date = DIA, daily_rides = `Usos bicis total`, accumulated = `Usos total acumulado desde inicio`) 
+
+# Transform variable, create new columns and skip year 2014 
+bicimad_rides <- bicimad_rides %>%
+  mutate(date = mdy(date)) %>%
+  mutate(weekday = wday(date, label=TRUE, abbr=TRUE)) %>%
+  mutate(year = year(date)) %>%
+  mutate(week=as.numeric(format(date,"%W"))) # Week 00-53 with Monday as first day of the week
+
+bicimad_rides <- bicimad_rides %>% filter(year != "2014") 
+
+# Aggregate data with summarise 
+bicimad_rides <- bicimad_rides %>% group_by(year,date,week, weekday)%>% summarise(numtrips=sum(daily_rides))
+View(bicimad_rides)
+```
+
+# Plot
+
+Now we will use the handy dplyr::summarise to get our aggregated data for each day. Then we can plot.
+
+```{r, echo = TRUE, message = FALSE, warning = FALSE}
+ggplot(bicimad_rides, aes(x = week, y = weekday, fill = numtrips)) +
+    viridis::scale_fill_viridis(name="BiciMad",
+                       option = 'C',
+                       direction = 1,
+                       na.value = "grey93") +
+    geom_tile(color = 'white', size = 0.1) +
+    facet_wrap('year', ncol = 1) +
+    scale_x_continuous(
+      expand = c(0, 0),
+      breaks = seq(1, 52, length = 12),
+      labels = c("Jan", "Feb", "Mar", "Apr", "May", "Jun",
+                 "Jul", "Aug", "Sep", "Oct", "Nov", "Dec")) +
+   theme_ipsum(grid="Y") 
+```
+
+Thats it. We now the heat map. Happy blog!
+
+[^1]: [datosabiertos: used bitly to shorten the link] (http://bit.ly/2azyZ2O)

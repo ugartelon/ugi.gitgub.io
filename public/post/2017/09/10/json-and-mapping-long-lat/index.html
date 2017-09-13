@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>JSON and mapping long/lat | A minimal Hugo website</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    
+  </head>
+
+  <body>
+    <nav>
+    <ul class="menu">
+      
+      <li><a href="/">Home</a></li>
+      
+      <li><a href="/about/">About</a></li>
+      
+      <li><a href="/categories/">Categories</a></li>
+      
+    </ul>
+    <hr/>
+    </nav>
+
+<div class="article-meta">
+<h1><span class="title">JSON and mapping long/lat</span></h1>
+<h2 class="author">Pablo Ugarte</h2>
+<h2 class="date">2017/09/10</h2>
+</div>
+
+<main>
+<p>Today we will extract information from a JSON document using the R package jsonlite and we will then plot lon/lat in a map using the R package leaflet.</p>
+
+<p>The data that we will be looking at is crime in LA.</p>
+
+<p>But first, we need to install and load libraries for this excercise.</p>
+
+<pre><code class="language-r">library(jsonlite)
+library(tidyverse)
+library(stringr)
+library(tibble)
+library(leaflet)
+library(ggmap)
+library(readr)
+</code></pre>
+
+<p>Now we can start grabbing the data from the json document which can be found here <sup class="footnote-ref" id="fnref:1"><a rel="footnote" href="#fn:1">1</a></sup>.</p>
+
+<pre><code class="language-r">crimeLARaw &lt;- fromJSON(&quot;https://data.lacity.org/resource/7fvc-faax.json&quot;)
+View(crimeLARaw)
+str(crimeLARaw)
+</code></pre>
+
+<p>We will now clean the data by just selecting certain columns.</p>
+
+<pre><code class="language-r">crimeLARaw_tbl &lt;- crimeLARaw %&gt;% 
+  select(crm_cd_desc , premis_desc, time_occ, location_1)
+</code></pre>
+
+<p>I am having problems extracting the long/lat data without parentheses. So decided to take this dataframe, and copy and paste to an excel file.
+In excel, with the find and replace function we can get easily rid of the &ldquo;c(&rdquo; and &ldquo;)&rdquo;. We then save it as csv.
+We can now return to R and continue data wrangling.</p>
+
+<pre><code class="language-r">crimeLA &lt;- read_csv(&quot;~/Documents/R Working Directory/crimeLA.csv&quot;)
+</code></pre>
+
+<p>We split the coordinates column and convert variables to numeric and factor format.</p>
+
+<pre><code class="language-r">crimeLA &lt;- crimeLA %&gt;% separate(cordinates, c(&quot;long&quot;, &quot;lat&quot;), sep = &quot;, &quot;)
+crimeLA$long &lt;- as.numeric(crimeLA$long) 
+crimeLA$lat &lt;- as.numeric(crimeLA$lat)
+crimeLA$crime_type &lt;- as.factor(crimeLA$crime_type)
+levels(crimeLA$crime_type)
+</code></pre>
+
+<p>Last, we plot the long/lat info. We also create a palette that maps factor levels to colors.</p>
+
+<pre><code class="language-r">pal &lt;- colorFactor(c(&quot;gray&quot;,&quot;red&quot;,&quot;green3&quot;,&quot;blue&quot;,&quot;cyan&quot;,&quot;magenta&quot;,&quot;yellow&quot;,&quot;black&quot;),
+                   domain = c(&quot;BURGLARY&quot;, &quot;BURGLARY FROM VEHICLE&quot;,&quot;CHILD ANNOYING (17YRS &amp; UNDER&quot;,&quot;CRUELTY TO ANIMALS&quot;,&quot;DISTURBING THE PEACE&quot;,&quot;EMBEZZLEMENT, GRAND THEFT ($950.01 &amp; OVER&quot;,&quot;INDECENT EXPOSURE&quot;,&quot;OTHER ASSAULT&quot;  ,&quot;OTHER MISCELLANEOUS CRIME&quot;,&quot;THEFT PLAIN - PETTY ($950 &amp; UNDER&quot;,&quot;VANDALISM - MISDEAMEANOR ($399 OR UNDER&quot;,&quot;VEHICLE - STOLEN&quot; ))
+
+leaflet(data = crimeLA) %&gt;% 
+  addTiles() %&gt;%
+  addCircles(~long, ~lat) %&gt;% 
+  addMarkers(popup = ~as.character(crime_type), label = ~as.character(crime_type)) %&gt;%
+  addCircleMarkers(color = ~pal(crime_type)) %&gt;%
+  addLegend(pal = pal, values = ~crime_type, opacity = 5)
+</code></pre>
+
+<p>Thats it. We now have a map that shows crime in LA. Happy blog!</p>
+<div class="footnotes">
+
+<hr />
+
+<ol>
+<li id="fn:1"><a href="https://catalog.data.gov/dataset/crime-data-from-2010-to-present">Link Youtube</a>
+ <a class="footnote-return" href="#fnref:1">↩</a></li>
+</ol>
+</div>
+
+</main>
+
+  <footer>
+  <script src="//yihui.name/js/math-code.js"></script>
+<script async src="//cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+<script async src="//yihui.name/js/center-img.js"></script>
+
+  
+  <hr/>
+  &copy; Pablo Ugarte 2017 | <a href="https://www.linkedin.com/in/pablo-ugarte-19b11232/">Linkedin</a>
+  
+  </footer>
+  </body>
+</html>
+

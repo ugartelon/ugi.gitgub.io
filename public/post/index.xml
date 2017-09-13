@@ -6,30 +6,43 @@
     <description>Recent content in Posts on A minimal Hugo website</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 14 Feb 2016 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 13 Sep 2017 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://www.storieswithdata.com/post/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>A Plain Markdown Post</title>
-      <link>https://www.storieswithdata.com/post/2016/02/14/a-plain-markdown-post/</link>
-      <pubDate>Sun, 14 Feb 2016 00:00:00 +0000</pubDate>
+      <title>BiciMad and Heatmaps</title>
+      <link>https://www.storieswithdata.com/post/2017/09/13/bicimad-and-heatmaps/</link>
+      <pubDate>Wed, 13 Sep 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://www.storieswithdata.com/post/2016/02/14/a-plain-markdown-post/</guid>
-      <description>This sample post is mainly for blogdown users. If you do not use blogdown, you can skip the first section.
-1. Markdown or R Markdown This is a post written in plain Markdown (*.md) instead of R Markdown (*.Rmd). The major differences are:
- You cannot run any R code in a plain Markdown document, whereas in an R Markdown document, you can embed R code chunks (```{r}); A plain Markdown post is rendered through Blackfriday, and an R Markdown document is compiled by rmarkdown and Pandoc.</description>
+      <guid>https://www.storieswithdata.com/post/2017/09/13/bicimad-and-heatmaps/</guid>
+      <description>In this post we will analyze Madrid’s electric bike hire service, BiciMAD (in London Santander Cycles, in Paris Vélib, etc…). We will create calendar heatmaps and a growth chart using the publicly available data.
+ Libraries We first install and load the libraries.
+library(ggplot2) # For amazing charts library(tidyverse) # Data wrangling library(hrbrthemes) # Aesthetic defaults for ggplot2 charts library(readr) # Reading data from csv library(formattable) # Friendy data frame can be rendered as HTML table library(lubridate) # Makes it easier to work with dates and times  Importing data The data can be obtained from datosabiertos - the free and open data-sharing portal where anyone can access data relating to the Madrid 1.</description>
     </item>
     
     <item>
-      <title>Lorem Ipsum</title>
-      <link>https://www.storieswithdata.com/post/2015/07/23/lorem-ipsum/</link>
-      <pubDate>Thu, 23 Jul 2015 00:00:00 +0000</pubDate>
+      <title>Joyplots with ggjoy &#43; hrbrthemes</title>
+      <link>https://www.storieswithdata.com/post/2017/09/11/ggjoy-hrbrthemes/</link>
+      <pubDate>Mon, 11 Sep 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://www.storieswithdata.com/post/2015/07/23/lorem-ipsum/</guid>
-      <description>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-Quisque mattis volutpat lorem vitae feugiat.</description>
+      <guid>https://www.storieswithdata.com/post/2017/09/11/ggjoy-hrbrthemes/</guid>
+      <description>Haven&amp;rsquo;t you run into articles with some data that makes you think, how can visualize the data in a different and possibly better way?
+ We will be use Joyplots for this post. Joyplots are partially overlapping line plots that create the impression of a mountain range. They can be quite useful for visualizing changes in distributions over time or space1.
+The data that we will be looking at is 2016 temperatures in Lincoln, NE23.</description>
+    </item>
+    
+    <item>
+      <title>JSON and mapping long/lat</title>
+      <link>https://www.storieswithdata.com/post/2017/09/10/json-and-mapping-long-lat/</link>
+      <pubDate>Sun, 10 Sep 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.storieswithdata.com/post/2017/09/10/json-and-mapping-long-lat/</guid>
+      <description>Today we will extract information from a JSON document using the R package jsonlite and we will then plot lon/lat in a map using the R package leaflet.
+The data that we will be looking at is crime in LA.
+But first, we need to install and load libraries for this excercise.
+library(jsonlite) library(tidyverse) library(stringr) library(tibble) library(leaflet) library(ggmap) library(readr)  Now we can start grabbing the data from the json document which can be found here 1.</description>
     </item>
     
   </channel>

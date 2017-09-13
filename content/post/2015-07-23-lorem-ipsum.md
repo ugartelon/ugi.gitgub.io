@@ -1,18 +1,69 @@
 ---
-title: Lorem Ipsum
-date: '2015-07-23'
+title: Joyplots with ggjoy + hrbrthemes
+author: Pablo
+date: '2017-09-11'
 categories:
-  - Example
-tags:
-  - Markdown
+  - ggjoy
+  - hrbrthemes
+slug: ggjoy-hrbrthemes
 ---
 
-**Lorem ipsum** dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore _magna aliqua_. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+>Haven't you run into articles with some data that makes you think, how can visualize the data in a different and possibly better way? 
 
-Quisque mattis volutpat lorem vitae feugiat. Praesent porta est quis porta imperdiet. Aenean porta, mi non cursus volutpat, mi est mollis libero, id suscipit orci urna a augue. In fringilla euismod lacus, vitae tristique massa ultricies vitae. Mauris accumsan ligula tristique, viverra nulla sed, porta sapien. Vestibulum facilisis nec nisl blandit convallis. Maecenas venenatis porta malesuada. Ut ac erat tortor. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nulla sodales quam sit amet tincidunt egestas. In et turpis at orci vestibulum ullamcorper. Aliquam sed ante libero. Sed hendrerit arcu lacus.
+We will be use Joyplots for this post. Joyplots are partially overlapping line plots that create the impression of a mountain range. They can be quite useful for visualizing changes in distributions over time or space[^1].
 
-> Sed luctus volutpat sem in dapibus. Ut pellentesque vitae magna ac mattis. Sed vestibulum, nulla at condimentum semper, magna quam posuere dui, quis sagittis enim nisi eget ex. Vivamus tempor erat a sem dapibus porta. Fusce varius dapibus tempus. Nam bibendum dignissim fringilla. Phasellus eu justo facilisis, ullamcorper urna in, feugiat mauris. Quisque dignissim purus vitae ullamcorper scelerisque. Sed at magna at nisi consequat euismod. Curabitur justo ex, efficitur in fermentum luctus, tincidunt nec lectus. Aliquam a neque metus. Etiam nulla nunc, tristique vitae accumsan ullamcorper, placerat eget nunc. Cras porta eleifend dolor maximus molestie. Etiam vitae pellentesque turpis, quis accumsan ligula. Mauris auctor, nisi nec ullamcorper pulvinar, libero magna sagittis enim, sollicitudin dignissim urna justo et tortor.
+The data that we will be looking at is 2016 temperatures in Lincoln, NE[^2][^3].
 
-Morbi non sem euismod, suscipit purus id, gravida velit. Quisque mollis luctus ligula non suscipit. Curabitur massa arcu, aliquam ac dolor a, pellentesque dignissim dui. Donec at vestibulum magna. Quisque fermentum, tortor id sodales egestas, ligula ligula interdum ipsum, et volutpat elit massa vitae nibh. Morbi eleifend libero quis pretium viverra. Etiam congue, velit ac vestibulum finibus, velit nibh fringilla purus, eu semper dui est eu nunc. Etiam feugiat scelerisque diam vitae sodales. Etiam luctus in urna eu lobortis. Nam vestibulum eros et nibh elementum ullamcorper. Nam tristique porttitor orci, nec pretium est vestibulum at. Quisque posuere semper orci, vel semper justo commodo sed. Nullam accumsan risus rhoncus fringilla porta. Morbi interdum condimentum pharetra. Donec eu elit quam. Vivamus eleifend posuere mi, vel accumsan urna sollicitudin ut.
+# Libraries
 
-Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nulla nec nunc felis. Sed bibendum vel leo id semper. Maecenas vitae iaculis ante. Nam ut tempor est, eu molestie augue. Quisque tincidunt sagittis odio sed tristique. Aenean et felis quis mi viverra consequat.
+We first install and load the packages.
+
+```{r, message = FALSE, warning = FALSE}
+library(tidyverse) # Data wrangling
+library(ggjoy) # calculates density estimates from the provided data and then plots those
+library(hrbrthemes) # Aesthetic defaults for ggplot2 charts
+library(readr) # Reading data from csv 
+library(ggplot2) # Creating charts
+```
+
+# Importing data
+
+```{r, message = FALSE, warning = FALSE}
+weather.raw <- read_csv("nebraska.csv")
+```
+
+# Cleaning/Transforming
+
+Then we cleanse the data that we want to plot, creating the year labels and the factor to help order the years.
+
+```{r, message = FALSE, warning = FALSE}
+weather.raw$month <- months(as.Date(weather.raw$CST))
+weather.raw$months <- factor(rev(weather.raw$month),levels=rev(unique(weather.raw$month)))
+
+#scales
+mins <- min(weather.raw$`Min TemperatureF`)
+maxs <- max(weather.raw$`Max TemperatureF`)
+View(weather.raw)
+```
+
+# Plot
+
+To plot we will be using hrbrthemes::theme_ipsum. With a few lines of code we get a really nice looking joy plot. 
+
+```{r, echo = TRUE, message = FALSE, warning = FALSE}
+ggplot(weather.raw,aes(x = `Mean TemperatureF`,y=months,height=..density..)) +
+     geom_joy(scale=3) +
+      scale_x_continuous(limits = c(mins,maxs)) +
+  theme_ipsum(grid=F) +
+  theme(axis.title.y=element_blank(),
+        axis.ticks.y=element_blank(),
+        strip.text.y = element_text(angle = 180, hjust = 1)) +
+  labs(title='Temperatures in Lincoln NE',
+       subtitle='Median temperatures (Fahrenheit) by month for 2016\nData: Original CSV from the Weather Underground')
+```
+
+Thats it. We now have a ggjoy map. Happy blog!
+
+[^1]: [Link ggjoy] (https://cran.r-project.org/web/packages/ggjoy/vignettes/introduction.html)
+[^2]: [Original CSV] (https://drive.google.com/file/d/0ByOfjCmqEilLYndpOWJyZXhPVUk/view)
+[^3]: [Source Blog] (http://austinwehrwein.com/data-visualization/it-brings-me-ggjoy/)

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>BiciMad and Heatmaps | A minimal Hugo website</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    
+  </head>
+
+  <body>
+    <nav>
+    <ul class="menu">
+      
+      <li><a href="/">Home</a></li>
+      
+      <li><a href="/about/">About</a></li>
+      
+      <li><a href="/categories/">Categories</a></li>
+      
+    </ul>
+    <hr/>
+    </nav>
+
+<div class="article-meta">
+<h1><span class="title">BiciMad and Heatmaps</span></h1>
+<h2 class="author">Pablo</h2>
+<h2 class="date">2017/09/13</h2>
+</div>
+
+<main>
+<blockquote>
+<p>In this post we will analyze Madrid’s electric bike hire service, BiciMAD (in London Santander Cycles, in Paris Vélib, etc…). We will create calendar heatmaps and a growth chart using the publicly available data.</p>
+</blockquote>
+<div id="libraries" class="section level1">
+<h1>Libraries</h1>
+<p>We first install and load the libraries.</p>
+<pre class="r"><code>library(ggplot2) # For amazing charts
+library(tidyverse) # Data wrangling
+library(hrbrthemes) # Aesthetic defaults for ggplot2 charts
+library(readr) # Reading data from csv 
+library(formattable) # Friendy data frame can be rendered as HTML table
+library(lubridate) # Makes it easier to work with dates and times</code></pre>
+</div>
+<div id="importing-data" class="section level1">
+<h1>Importing data</h1>
+<p>The data can be obtained from datosabiertos - the free and open data-sharing portal where anyone can access data relating to the Madrid <a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a>.</p>
+<p>Steps to follow:</p>
+<ul>
+<li>Download “Usos acumulados por dia de abono anual y ocasional” excel table</li>
+<li>Then export to csv</li>
+<li>Remove “Usos julio 2017-Table 1” (we are not interested in this data)</li>
+<li>Rename the remaining file to BiciMAD</li>
+</ul>
+<pre class="r"><code>bicimad_rides &lt;- read_csv(&quot;BiciMAD.csv&quot;)</code></pre>
+</div>
+<div id="cleaningtransforming" class="section level1">
+<h1>Cleaning/Transforming</h1>
+<p>Once we have all the rides loaded we can start cleansing the data and making the variables we are interested in:</p>
+<ul>
+<li>Transforming date column from character/string to date</li>
+<li>Adding two columns: weekday and year</li>
+<li>Removing year 2014 (activity sirges in 2015, when people know about it)</li>
+</ul>
+<pre class="r"><code># select columns interested and renamed them
+bicimad_rides &lt;- bicimad_rides %&gt;% select(DIA,`Usos bicis total`,`Usos total acumulado desde inicio`) %&gt;% rename(date = DIA, daily_rides = `Usos bicis total`, accumulated = `Usos total acumulado desde inicio`) 
+
+# Transform variable, create new columns and skip year 2014 
+bicimad_rides &lt;- bicimad_rides %&gt;%
+  mutate(date = mdy(date)) %&gt;%
+  mutate(weekday = wday(date, label=TRUE, abbr=TRUE)) %&gt;%
+  mutate(year = year(date)) %&gt;%
+  mutate(week=as.numeric(format(date,&quot;%W&quot;))) # Week 00-53 with Monday as first day of the week
+
+bicimad_rides &lt;- bicimad_rides %&gt;% filter(year != &quot;2014&quot;) 
+
+# Aggregate data with summarise 
+bicimad_rides &lt;- bicimad_rides %&gt;% group_by(year,date,week, weekday)%&gt;% summarise(numtrips=sum(daily_rides))
+View(bicimad_rides)</code></pre>
+</div>
+<div id="plot" class="section level1">
+<h1>Plot</h1>
+<p>Now we will use the handy dplyr::summarise to get our aggregated data for each day. Then we can plot.</p>
+<pre class="r"><code>ggplot(bicimad_rides, aes(x = week, y = weekday, fill = numtrips)) +
+    viridis::scale_fill_viridis(name=&quot;BiciMad&quot;,
+                       option = &#39;C&#39;,
+                       direction = 1,
+                       na.value = &quot;grey93&quot;) +
+    geom_tile(color = &#39;white&#39;, size = 0.1) +
+    facet_wrap(&#39;year&#39;, ncol = 1) +
+    scale_x_continuous(
+      expand = c(0, 0),
+      breaks = seq(1, 52, length = 12),
+      labels = c(&quot;Jan&quot;, &quot;Feb&quot;, &quot;Mar&quot;, &quot;Apr&quot;, &quot;May&quot;, &quot;Jun&quot;,
+                 &quot;Jul&quot;, &quot;Aug&quot;, &quot;Sep&quot;, &quot;Oct&quot;, &quot;Nov&quot;, &quot;Dec&quot;)) +
+   theme_ipsum(grid=&quot;Y&quot;) </code></pre>
+<p><img src="/post/2017-09-13-bicimad-and-heatmaps_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<p>Thats it. We now the heat map. Happy blog!</p>
+</div>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>[datosabiertos: used bitly to shorten the link] (<a href="http://bit.ly/2azyZ2O" class="uri">http://bit.ly/2azyZ2O</a>)<a href="#fnref1">↩</a></p></li>
+</ol>
+</div>
+
+</main>
+
+  <footer>
+  <script src="//yihui.name/js/math-code.js"></script>
+<script async src="//cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+<script async src="//yihui.name/js/center-img.js"></script>
+
+  
+  <hr/>
+  &copy; Pablo Ugarte 2017 | <a href="https://www.linkedin.com/in/pablo-ugarte-19b11232/">Linkedin</a>
+  
+  </footer>
+  </body>
+</html>
+

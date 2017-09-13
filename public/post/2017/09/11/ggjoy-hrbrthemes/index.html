@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Joyplots with ggjoy &#43; hrbrthemes | A minimal Hugo website</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    
+  </head>
+
+  <body>
+    <nav>
+    <ul class="menu">
+      
+      <li><a href="/">Home</a></li>
+      
+      <li><a href="/about/">About</a></li>
+      
+      <li><a href="/categories/">Categories</a></li>
+      
+    </ul>
+    <hr/>
+    </nav>
+
+<div class="article-meta">
+<h1><span class="title">Joyplots with ggjoy &#43; hrbrthemes</span></h1>
+<h2 class="author">Pablo</h2>
+<h2 class="date">2017/09/11</h2>
+</div>
+
+<main>
+
+
+<blockquote>
+<p>Haven&rsquo;t you run into articles with some data that makes you think, how can visualize the data in a different and possibly better way?</p>
+</blockquote>
+
+<p>We will be use Joyplots for this post. Joyplots are partially overlapping line plots that create the impression of a mountain range. They can be quite useful for visualizing changes in distributions over time or space<sup class="footnote-ref" id="fnref:1"><a rel="footnote" href="#fn:1">1</a></sup>.</p>
+
+<p>The data that we will be looking at is 2016 temperatures in Lincoln, NE<sup class="footnote-ref" id="fnref:2"><a rel="footnote" href="#fn:2">2</a></sup><sup class="footnote-ref" id="fnref:3"><a rel="footnote" href="#fn:3">3</a></sup>.</p>
+
+<h1 id="libraries">Libraries</h1>
+
+<p>We first install and load the packages.</p>
+
+<pre><code class="language-r, message = FALSE, warning = FALSE">library(tidyverse) # Data wrangling
+library(ggjoy) # calculates density estimates from the provided data and then plots those
+library(hrbrthemes) # Aesthetic defaults for ggplot2 charts
+library(readr) # Reading data from csv 
+library(ggplot2) # Creating charts
+</code></pre>
+
+<h1 id="importing-data">Importing data</h1>
+
+<pre><code class="language-r, message = FALSE, warning = FALSE">weather.raw &lt;- read_csv(&quot;nebraska.csv&quot;)
+</code></pre>
+
+<h1 id="cleaning-transforming">Cleaning/Transforming</h1>
+
+<p>Then we cleanse the data that we want to plot, creating the year labels and the factor to help order the years.</p>
+
+<pre><code class="language-r, message = FALSE, warning = FALSE">weather.raw$month &lt;- months(as.Date(weather.raw$CST))
+weather.raw$months &lt;- factor(rev(weather.raw$month),levels=rev(unique(weather.raw$month)))
+
+#scales
+mins &lt;- min(weather.raw$`Min TemperatureF`)
+maxs &lt;- max(weather.raw$`Max TemperatureF`)
+View(weather.raw)
+</code></pre>
+
+<h1 id="plot">Plot</h1>
+
+<p>To plot we will be using hrbrthemes::theme_ipsum. With a few lines of code we get a really nice looking joy plot.</p>
+
+<pre><code class="language-r, echo = TRUE, message = FALSE, warning = FALSE">ggplot(weather.raw,aes(x = `Mean TemperatureF`,y=months,height=..density..)) +
+     geom_joy(scale=3) +
+      scale_x_continuous(limits = c(mins,maxs)) +
+  theme_ipsum(grid=F) +
+  theme(axis.title.y=element_blank(),
+        axis.ticks.y=element_blank(),
+        strip.text.y = element_text(angle = 180, hjust = 1)) +
+  labs(title='Temperatures in Lincoln NE',
+       subtitle='Median temperatures (Fahrenheit) by month for 2016\nData: Original CSV from the Weather Underground')
+</code></pre>
+
+<p>Thats it. We now have a ggjoy map. Happy blog!</p>
+<div class="footnotes">
+
+<hr />
+
+<ol>
+<li id="fn:1"><a href="https://cran.r-project.org/web/packages/ggjoy/vignettes/introduction.html">Link ggjoy</a>
+ <a class="footnote-return" href="#fnref:1">↩</a></li>
+<li id="fn:2"><a href="https://drive.google.com/file/d/0ByOfjCmqEilLYndpOWJyZXhPVUk/view">Original CSV</a>
+ <a class="footnote-return" href="#fnref:2">↩</a></li>
+<li id="fn:3"><a href="http://austinwehrwein.com/data-visualization/it-brings-me-ggjoy/">Source Blog</a>
+ <a class="footnote-return" href="#fnref:3">↩</a></li>
+</ol>
+</div>
+
+</main>
+
+  <footer>
+  <script src="//yihui.name/js/math-code.js"></script>
+<script async src="//cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+<script async src="//yihui.name/js/center-img.js"></script>
+
+  
+  <hr/>
+  &copy; Pablo Ugarte 2017 | <a href="https://www.linkedin.com/in/pablo-ugarte-19b11232/">Linkedin</a>
+  
+  </footer>
+  </body>
+</html>
+

@@ -3,70 +3,69 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://www.storieswithdata.com/note/2017/09/12/a-quick-note/</loc>
-    <lastmod>2017-09-12T00:00:00+00:00</lastmod>
+    <loc>https://www.storieswithdata.com/post/2017/09/13/bicimad-and-heatmaps/</loc>
+    <lastmod>2017-09-13T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://www.storieswithdata.com/post/2016/02/14/a-plain-markdown-post/</loc>
-    <lastmod>2016-02-14T00:00:00+00:00</lastmod>
+    <loc>https://www.storieswithdata.com/post/2017/09/11/ggjoy-hrbrthemes/</loc>
+    <lastmod>2017-09-11T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://www.storieswithdata.com/post/2015/07/23/lorem-ipsum/</loc>
-    <lastmod>2015-07-23T00:00:00+00:00</lastmod>
+    <loc>https://www.storieswithdata.com/post/2017/09/10/json-and-mapping-long-lat/</loc>
+    <lastmod>2017-09-10T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://www.storieswithdata.com/tags/blogdown/</loc>
-    <lastmod>2016-02-14T00:00:00+00:00</lastmod>
-    <priority>0</priority>
+    <loc>https://www.storieswithdata.com/note/2017/09/09/a-quick-note/</loc>
+    <lastmod>2017-09-09T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://www.storieswithdata.com/categories/blogdown/</loc>
-    <lastmod>2017-09-12T00:00:00+00:00</lastmod>
+    <lastmod>2017-09-09T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://www.storieswithdata.com/categories/</loc>
-    <lastmod>2017-09-12T00:00:00+00:00</lastmod>
+    <lastmod>2017-09-09T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://www.storieswithdata.com/categories/example/</loc>
-    <lastmod>2016-02-14T00:00:00+00:00</lastmod>
+    <loc>https://www.storieswithdata.com/categories/ggjoy/</loc>
+    <lastmod>2017-09-11T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://www.storieswithdata.com/</loc>
-    <lastmod>2017-09-12T00:00:00+00:00</lastmod>
+    <lastmod>2017-09-13T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://www.storieswithdata.com/categories/hugo/</loc>
-    <lastmod>2016-02-14T00:00:00+00:00</lastmod>
+    <loc>https://www.storieswithdata.com/categories/hrbrthemes/</loc>
+    <lastmod>2017-09-11T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://www.storieswithdata.com/tags/markdown/</loc>
-    <lastmod>2016-02-14T00:00:00+00:00</lastmod>
+    <loc>https://www.storieswithdata.com/categories/json/</loc>
+    <lastmod>2017-09-10T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://www.storieswithdata.com/tags/mathjax/</loc>
-    <lastmod>2016-02-14T00:00:00+00:00</lastmod>
+    <loc>https://www.storieswithdata.com/categories/leaflet/</loc>
+    <lastmod>2017-09-10T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://www.storieswithdata.com/note/</loc>
-    <lastmod>2017-09-12T00:00:00+00:00</lastmod>
+    <lastmod>2017-09-09T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -75,26 +74,13 @@
   </url>
   
   <url>
-    <loc>https://www.storieswithdata.com/tags/pandoc/</loc>
-    <lastmod>2016-02-14T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>https://www.storieswithdata.com/post/</loc>
-    <lastmod>2016-02-14T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.storieswithdata.com/tags/rstudio/</loc>
-    <lastmod>2016-02-14T00:00:00+00:00</lastmod>
+    <lastmod>2017-09-13T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://www.storieswithdata.com/tags/</loc>
-    <lastmod>2016-02-14T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   

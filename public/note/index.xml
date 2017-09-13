@@ -6,17 +6,17 @@
     <description>Recent content in Notes on A minimal Hugo website</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 12 Sep 2017 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 09 Sep 2017 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://www.storieswithdata.com/note/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>A Quick Note on Building Websites</title>
-      <link>https://www.storieswithdata.com/note/2017/09/12/a-quick-note/</link>
-      <pubDate>Tue, 12 Sep 2017 00:00:00 +0000</pubDate>
+      <link>https://www.storieswithdata.com/note/2017/09/09/a-quick-note/</link>
+      <pubDate>Sat, 09 Sep 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://www.storieswithdata.com/note/2017/09/12/a-quick-note/</guid>
+      <guid>https://www.storieswithdata.com/note/2017/09/09/a-quick-note/</guid>
       <description>Note: Thanks to those who share their ideas and help others make things happen seamlessly.
  Finally! I now have a blog. All thanks to the R package Blogdown. With Blogdown you can creat a personal website.
  After reading many articles, watching videos and multiple failed attempts, I was able to get my picked Hugo theme up and running with R Studio and Blogdown.

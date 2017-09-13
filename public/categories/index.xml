@@ -6,7 +6,7 @@
     <description>Recent content in Categories on A minimal Hugo website</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 12 Sep 2017 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 09 Sep 2017 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://www.storieswithdata.com/categories/index.xml" rel="self" type="application/rss+xml" />
     
@@ -14,27 +14,45 @@
     <item>
       <title>Blogdown</title>
       <link>https://www.storieswithdata.com/categories/blogdown/</link>
-      <pubDate>Tue, 12 Sep 2017 00:00:00 +0000</pubDate>
+      <pubDate>Sat, 09 Sep 2017 00:00:00 +0000</pubDate>
       
       <guid>https://www.storieswithdata.com/categories/blogdown/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Example</title>
-      <link>https://www.storieswithdata.com/categories/example/</link>
-      <pubDate>Sun, 14 Feb 2016 00:00:00 +0000</pubDate>
+      <title>Ggjoy</title>
+      <link>https://www.storieswithdata.com/categories/ggjoy/</link>
+      <pubDate>Mon, 11 Sep 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://www.storieswithdata.com/categories/example/</guid>
+      <guid>https://www.storieswithdata.com/categories/ggjoy/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Hugo</title>
-      <link>https://www.storieswithdata.com/categories/hugo/</link>
-      <pubDate>Sun, 14 Feb 2016 00:00:00 +0000</pubDate>
+      <title>Hrbrthemes</title>
+      <link>https://www.storieswithdata.com/categories/hrbrthemes/</link>
+      <pubDate>Mon, 11 Sep 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://www.storieswithdata.com/categories/hugo/</guid>
+      <guid>https://www.storieswithdata.com/categories/hrbrthemes/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Json</title>
+      <link>https://www.storieswithdata.com/categories/json/</link>
+      <pubDate>Sun, 10 Sep 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.storieswithdata.com/categories/json/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Leaflet</title>
+      <link>https://www.storieswithdata.com/categories/leaflet/</link>
+      <pubDate>Sun, 10 Sep 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.storieswithdata.com/categories/leaflet/</guid>
       <description></description>
     </item>
     
