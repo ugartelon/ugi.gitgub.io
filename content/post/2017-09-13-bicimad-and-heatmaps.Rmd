@@ -107,10 +107,12 @@ ggplot(weekly.rides,aes(x=week,y=numtrips,color=factor(year))) +
   scale_y_continuous(labels=scales::comma)
 ```
 
-```{r, echo = TRUE, message = FALSE, warning = FALSE}
+```{r}
 bicimad_rides_year <- bicimad_rides %>% group_by(year) %>% summarise(numtrips=sum(numtrips))
 bicimad_rides_year
+```
 
+```{r, echo = TRUE, message = FALSE, warning = FALSE}
 year.rides <- data.frame( year = c(2015, 2016, 2017),
                           accumulated = accounting(c(3075454, 2807137, 1779077), format = "d"))
 formattable(year.rides)
