@@ -1,0 +1,75 @@
+---
+title: "Electric car revolution and evolution of metal prices"
+author: "Pablo Uagarte"
+date: '2017-09-14'
+slug: electric-car-revolution-and-evolution-of-metal-prices
+tags: []
+categories: Quandl
+---
+
+>In this post we will analyze the evolution of metal prices on the back of the Electric car revolution
+
+# Background
+
+The electric vehicles industry is creating winners and losers within the world’s biggest metals markets. 
+
+In this regard, Cobalt is essential for lithium-ion batteries powering anything from Tesla Inc.’s cars to Apple Inc.’s iPhones and iPads. [^1]
+
+# Libraries
+
+We first install and load the libraries.
+
+```{r, message = FALSE, warning = FALSE}
+library(ggplot2) # For amazing charts
+library(dplyr) # Data wrangling
+library(hrbrthemes) # Aesthetic defaults for ggplot2 charts
+library(Quandl) # Get financial data
+library(magrittr)
+library(tidyverse)
+```
+
+# Importing data
+
+We start by getting the prices for Cobalt, Nickel, Aluminium and Copper. [^2] 
+
+* Normalize = growth from 100
+* rdiff = percentage changes,
+
+```{r, message = FALSE, warning = FALSE}
+start <- as.Date("2010-01-01")
+end <- as.Date("2017-09-14")
+metals <- Quandl::Quandl(code = c("LME/PR_CO.1","LME/PR_NI.1","LME/PR_AL.1","LME/PR_CU.1"),
+                         start_date=start, end_date=end, transform="normalize")
+```
+
+# Cleaning/Transforming
+
+Once we have all the time series prices for these metals:
+
+* Rename specific columns
+* Gather each metal within one column variable and also gather the values associated with each metal in a second column variable.
+
+```{r, message = FALSE, warning = FALSE}
+metals <- metals %>% 
+  rename(date = Date, Cobalt = `LME.PR_CO - Cash Buyer`, Nickel = `LME.PR_NI - Cash Buyer`, Aluminum = `LME.PR_AL - Cash Buyer`, Copper = `LME.PR_CU - Cash Buyer`)
+metals <- metals %>% gather(metals, price, Cobalt:Copper)
+```
+
+# Plot 
+
+```{r, echo = TRUE, message = FALSE, warning = FALSE}
+ggplot(metals,aes(x=date,y=price,color=metals,frame=date)) +
+  geom_line(alpha=1) + # Thickness of line
+  theme_ipsum(grid_col = "white") + # Gridline white
+  labs(
+    title='Electric car revolution is shaking up the biggest metals markets',
+    subtitle='Prices for a selection of metals from 2010-2017',
+    caption='LME prices are reported in US Dollars per metric tonne') +
+  scale_y_continuous(labels=scales::comma) + # Commas to make it easier to read large numbers
+  scale_x_date(date_labels = "%Y", date_breaks = "1 year") + # Distance between breaks 1 year
+  theme(legend.title=element_blank()) + # Remove title for all legends
+  theme(plot.background = element_rect(fill = "#cddee7")) 
+```
+
+[^1] Bloomberg (https://www.bloomberg.com/news/articles/2017-08-08/billionaire-who-made-killing-on-cobalt-bets-on-electric-car-fund)
+[^2] Quandle Codes (https://blog.quandl.com/api-for-commodity-data)

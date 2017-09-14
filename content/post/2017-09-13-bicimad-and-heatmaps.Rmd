@@ -120,4 +120,4 @@ According to the figures, it looks like the user base has somewhat remained stag
 
 Thats it. We now have the heat map and the growth chart!
 
-[^1]: [datosabiertos: used bitly to shorten the link] (http://bit.ly/2azyZ2O)
+[^1]: datosabiertos: used bitly to shorten the link (http://bit.ly/2azyZ2O)
