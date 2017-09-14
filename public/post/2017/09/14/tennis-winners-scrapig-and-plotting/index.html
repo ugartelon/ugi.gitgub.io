@@ -261,6 +261,29 @@ ggplot(data=winners7, aes(x=reorder(winner, wins), y=wins, fill=wins)) +
   theme(axis.title.x=element_blank())</code></pre>
 <p><img src="/post/2017-09-14-tennis-winners-scrapig-and-plotting_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
 </div>
+<div id="wins-by-tournament" class="section level2">
+<h2>Wins by tournament</h2>
+<p>Now we will plot total wins by tournament for each winner.</p>
+<ul>
+<li>Using facet_grid to display each tournament wins</li>
+<li>To compare each champions’ performance for each tournament, we will be grouping by tournament and winner</li>
+</ul>
+<pre class="r"><code>total.wins.trn &lt;- tbls_xml %&gt;% filter(winner %in% winners7$winner) %&gt;% group_by(tournament, winner) %&gt;% summarise(wins=n()) %&gt;% arrange(desc(wins)) 
+
+ggplot(data=total.wins.trn, aes(x=reorder(winner, wins), y=wins, fill=wins)) +
+  geom_bar(stat=&#39;identity&#39;) +
+  ggtitle(&quot;Men&#39;s Grand Slam Title Winners&quot;) +
+  coord_flip() + 
+  facet_grid(.~tournament) + 
+  guides(fill=FALSE) +
+  scale_y_continuous(breaks = seq(0, 10, 2))+
+  scale_fill_gradientn(colours = the_colours) + 
+  theme(legend.title=element_blank()) +
+  theme(axis.title.y=element_blank()) +
+  theme(axis.title.x=element_blank()) </code></pre>
+<p><img src="/post/2017-09-14-tennis-winners-scrapig-and-plotting_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p>[^1] ESPN Men’s Grand Slam Title Winners (<a href="http://www.espn.com/tennis/history" class="uri">http://www.espn.com/tennis/history</a>)</p>
+</div>
 </div>
 
 </main>
