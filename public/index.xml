@@ -6,10 +6,23 @@
     <description>Recent content in Home on A minimal Hugo website</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 13 Sep 2017 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 14 Sep 2017 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://www.storieswithdata.com/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Electric car revolution and evolution of metal prices</title>
+      <link>https://www.storieswithdata.com/post/2017/09/14/electric-car-revolution-and-evolution-of-metal-prices/</link>
+      <pubDate>Thu, 14 Sep 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.storieswithdata.com/post/2017/09/14/electric-car-revolution-and-evolution-of-metal-prices/</guid>
+      <description>In this post we will analyze the evolution of metal prices on the back of the Electric car revolution
+ Background The electric vehicles industry is creating winners and losers within the world’s biggest metals markets.
+In this regard, Cobalt is essential for lithium-ion batteries powering anything from Tesla Inc.’s cars to Apple Inc.’s iPhones and iPads. [^1]
+ Libraries We first install and load the libraries.
+library(ggplot2) # For amazing charts library(dplyr) # Data wrangling library(hrbrthemes) # Aesthetic defaults for ggplot2 charts library(Quandl) # Get financial data library(magrittr) library(tidyverse)  Importing data We start by getting the prices for Cobalt, Nickel, Aluminium and Copper.</description>
+    </item>
     
     <item>
       <title>BiciMad and Heatmaps</title>
