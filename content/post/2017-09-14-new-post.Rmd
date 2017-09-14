@@ -3,13 +3,13 @@ title: Visualizing Tennis Grand Slam Winners Performances
 author: Pablo Ugarte
 date: '2017-09-14'
 slug: new-post
-categories: []
+categories: [scraping]
 tags: []
 ---
 
 # Intro
 
-In this tutorial, we will be plotting tennis players Grand Slam Tournament wins. 
+>In this tutorial, we will be plotting tennis players Grand Slam Tournament wins. 
 
 The data comes from the Tennis Grand Slam Tournaments results from the ESP website. [^1] 
 
