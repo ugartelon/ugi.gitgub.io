@@ -12,8 +12,8 @@ categories: Quandl
 <blockquote>
 <p>In this post we will analyze the evolution of metal prices on the back of the Electric car revolution</p>
 </blockquote>
-<div id="background" class="section level1">
-<h1>Background</h1>
+<div id="intro" class="section level1">
+<h1>Intro</h1>
 <p>The electric vehicles industry is creating winners and losers within the world’s biggest metals markets.</p>
 <p>In this regard, Cobalt is essential for lithium-ion batteries powering anything from Tesla Inc.’s cars to Apple Inc.’s iPhones and iPads. [^1]</p>
 </div>
@@ -24,8 +24,8 @@ categories: Quandl
 library(dplyr) # Data wrangling
 library(hrbrthemes) # Aesthetic defaults for ggplot2 charts
 library(Quandl) # Get financial data
-library(magrittr)
-library(tidyverse)</code></pre>
+library(magrittr) # Pipes %&gt;% 
+library(tidyverse) # Data wrangling packages</code></pre>
 </div>
 <div id="importing-data" class="section level1">
 <h1>Importing data</h1>
@@ -45,7 +45,7 @@ View(metals)</code></pre>
 <p>Once we have all the time series prices for these metals:</p>
 <ul>
 <li>Rename specific columns</li>
-<li>Gather each metal within one column variable and also gather the values associated with each metal in a second column variable.</li>
+<li>Gather each metal within one column variable and also gather the values associated with each metal in a second column variable</li>
 </ul>
 <pre class="r"><code>metals &lt;- metals %&gt;% 
   rename(date = Date, Cobalt = `LME.PR_CO - Cash Buyer`, Nickel = `LME.PR_NI - Cash Buyer`, Aluminum = `LME.PR_AL - Cash Buyer`, Copper = `LME.PR_CU - Cash Buyer`)

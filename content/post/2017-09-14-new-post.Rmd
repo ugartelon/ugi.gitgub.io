@@ -1,10 +1,10 @@
 ---
-title: Visualizing Tennis Grand Slam Winners Performances
-author: Pablo Ugarte
+title: "Visualizing Tennis Grand Slam Winners Performances"
+author: "Pablo Ugarte"
 date: '2017-09-14'
 slug: new-post
-categories: [scraping]
 tags: []
+categories: scraping
 ---
 
 # Intro
@@ -62,6 +62,10 @@ We will create a barplot filtered by champions who won at least seven Tennis Gra
 
 ```{r, echo = TRUE, message = FALSE, warning = FALSE}
 winners7 <- total.wins %>% filter(wins >= 7)
+
+the_colours = c("#FF4000FF", "#FF8000FF", "#FFFF00FF", "#80FF00FF",
+                "#00FF00FF", "#00FF80FF", "#00FFFFFF", "#0080FFFF",
+                "#FF00FFFF", "#000000FF", "#0000FFFF")
 
 ggplot(data=winners7, aes(x=reorder(winner, wins), y=wins, fill=wins)) +
   geom_bar(stat='identity') +
