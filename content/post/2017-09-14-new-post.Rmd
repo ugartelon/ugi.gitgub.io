@@ -1,0 +1,9 @@
+---
+title: New Post
+author: Pablo Ugarte
+date: '2017-09-14'
+slug: new-post
+categories: []
+tags: []
+---
+
