@@ -1,10 +1,12 @@
 ---
-title: "Visualizing Tennis Grand Slam Winners Performances"
-author: "Pablo Ugarte"
+title: "Tennis winners- scrapig and plotting"
+author: "Pablo"
 date: '2017-09-14'
-slug: new-post
+slug: tennis-winners-scrapig-and-plotting
 tags: []
-categories: scraping
+categories:
+- scraping
+- ggtheme
 ---
 
 # Intro
@@ -78,31 +80,3 @@ ggplot(data=winners7, aes(x=reorder(winner, wins), y=wins, fill=wins)) +
   theme(axis.title.y=element_blank()) +
   theme(axis.title.x=element_blank())
 ```
-
-
-## Wins by tournament
-
-Now we will plot total wins by tournament for each winner. 
-
-* Using facet_grid to display each tournament wins
-* To compare each champions’ performance for each tournament, we will be grouping by tournament and winner
-
-```{r, echo = TRUE, message = FALSE, warning = FALSE}
-total.wins.trn <- tbls_xml %>% filter(winner %in% winners7$winner) %>% group_by(tournament, winner) %>% summarise(wins=n()) %>% arrange(desc(wins)) 
-
-ggplot(data=total.wins.trn, aes(x=reorder(winner, wins), y=wins, fill=wins)) +
-  geom_bar(stat='identity') +
-  ggtitle("Men's Grand Slam Title Winners") +
-  coord_flip() + 
-  facet_grid(.~tournament) + 
-  guides(fill=FALSE) +
-  scale_y_continuous(breaks = seq(0, 10, 2))+
-  scale_fill_gradientn(colours = the_colours) + 
-  theme(legend.title=element_blank()) +
-  theme(axis.title.y=element_blank()) +
-  theme(axis.title.x=element_blank()) 
-```
-
-
-
-[^1] ESPN Men's Grand Slam Title Winners (http://www.espn.com/tennis/history)
