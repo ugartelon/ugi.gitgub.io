@@ -9,7 +9,7 @@ categories: Quandl
 
 >In this post we will analyze the evolution of metal prices on the back of the Electric car revolution
 
-# Background
+# Intro
 
 The electric vehicles industry is creating winners and losers within the world’s biggest metals markets. 
 
@@ -24,8 +24,8 @@ library(ggplot2) # For amazing charts
 library(dplyr) # Data wrangling
 library(hrbrthemes) # Aesthetic defaults for ggplot2 charts
 library(Quandl) # Get financial data
-library(magrittr)
-library(tidyverse)
+library(magrittr) # Pipes %>% 
+library(tidyverse) # Data wrangling packages
 ```
 
 # Importing data
@@ -48,7 +48,7 @@ View(metals)
 Once we have all the time series prices for these metals:
 
 * Rename specific columns
-* Gather each metal within one column variable and also gather the values associated with each metal in a second column variable.
+* Gather each metal within one column variable and also gather the values associated with each metal in a second column variable
 
 ```{r, message = FALSE, warning = FALSE}
 metals <- metals %>% 

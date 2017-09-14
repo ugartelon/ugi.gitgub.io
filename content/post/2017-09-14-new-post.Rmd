@@ -1,5 +1,5 @@
 ---
-title: New Post
+title: Visualizing Tennis Grand Slam Winners Performances
 author: Pablo Ugarte
 date: '2017-09-14'
 slug: new-post
@@ -7,5 +7,98 @@ categories: []
 tags: []
 ---
 
-# New Post
-This a new post
+# Intro
+
+In this tutorial, we will be plotting tennis players Grand Slam Tournament wins. 
+
+The data comes from the Tennis Grand Slam Tournaments results from the ESP website. [^1] 
+
+We will scrape the data and continue with the visualization thereafter.
+
+# Libraries
+
+Overall, we are going to use the following R packages:
+
+```{r, message = FALSE, warning = FALSE}
+library(XML) # for web scraping
+library(rvest) # for web scraping
+library(dplyr) # for dataset manipulation
+library(knitr) # for nice dataset printing
+library(hrbrthemes) # Aesthetic defaults for ggplot2 charts
+library(ggthemes) # Themes ggplot2
+library(ggplot2) # Charts
+library(stringr) # Manipulating strings
+
+url <- "http://www.espn.com/tennis/history"
+
+# Read in HTML data
+tbls_xml <- readHTMLTable(url, which = 1)
+```
+
+```{r, message = FALSE, warning = FALSE}
+# Rename table headings and remove line 1
+# Minor fix - naming for the Australian Open tournament (recode - dplyr package)
+colnames(tbls_xml) <- c("year", "tournament", "winner","runner-up")
+tbls_xml <- tbls_xml %>% slice(2:n())
+tbls_xml <- tbls_xml %>% 
+  mutate(tournament = str_replace(tournament, "Australian Open (Jan)", "Australian Open")) %>%    mutate(tournament = str_replace(tournament, "Australian Open (Dec)", "Australian Open"))
+```
+
+# Plot 
+
+## Total wins
+
+Here we will group by winner and summarise the number of wins. 
+
+```{r, echo = TRUE, message = FALSE, warning = FALSE}
+total.wins <- tbls_xml %>% group_by(winner) %>% summarise(wins=n()) %>% arrange(desc(wins))
+kable(head(total.wins, 40))
+```
+
+We will create a barplot filtered by champions who won at least seven Tennis Grand Slam tournaments. 
+
+* Order the bar plot in descending order -using the function reorder as a solution for this 
+* We will be using the ggthemes package (theme and color palettes based on the pander package)
+
+```{r, echo = TRUE, message = FALSE, warning = FALSE}
+winners7 <- total.wins %>% filter(wins >= 7)
+
+ggplot(data=winners7, aes(x=reorder(winner, wins), y=wins, fill=wins)) +
+  geom_bar(stat='identity') +
+  ggtitle("Men's Grand Slam Title Winners") +
+  theme_pander() +
+  coord_flip() + 
+  guides(fill=FALSE) +
+  scale_fill_gradientn(colours = the_colours) + 
+  theme(legend.title=element_blank()) +
+  theme(axis.title.y=element_blank()) +
+  theme(axis.title.x=element_blank())
+```
+
+
+## Wins by tournament
+
+Now we will plot total wins by tournament for each winner. 
+
+* Using facet_grid to display each tournament wins
+* To compare each champions’ performance for each tournament, we will be grouping by tournament and winner
+
+```{r, echo = TRUE, message = FALSE, warning = FALSE}
+total.wins.trn <- tbls_xml %>% filter(winner %in% winners7$winner) %>% group_by(tournament, winner) %>% summarise(wins=n()) %>% arrange(desc(wins)) 
+
+ggplot(data=total.wins.trn, aes(x=reorder(winner, wins), y=wins, fill=wins)) +
+  geom_bar(stat='identity') +
+  ggtitle("Men's Grand Slam Title Winners") +
+  coord_flip() + 
+  facet_grid(.~tournament) + 
+  guides(fill=FALSE) +
+  scale_y_continuous(breaks = seq(0, 10, 2))+
+  scale_fill_gradientn(colours = the_colours) + 
+  theme(legend.title=element_blank()) +
+  theme(axis.title.y=element_blank()) +
+  theme(axis.title.x=element_blank()) 
+```
+
+
+
+[^1] ESPN Men's Grand Slam Title Winners (http://www.espn.com/tennis/history)
