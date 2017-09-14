@@ -2,7 +2,7 @@
 title: "Electric cars and metal prices"
 author: "Pablo Uagarte"
 date: '2017-09-14'
-slug: electric-car-revolution-and-evolution-of-metal-prices
+slug: electric-cars-and-metal-prices
 tags: []
 categories: Quandl
 ---
