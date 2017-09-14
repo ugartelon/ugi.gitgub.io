@@ -1,5 +1,5 @@
 ---
-title: "Electric car revolution and evolution of metal prices"
+title: "Electric cars and metal prices"
 author: "Pablo Uagarte"
 date: '2017-09-14'
 slug: electric-car-revolution-and-evolution-of-metal-prices
