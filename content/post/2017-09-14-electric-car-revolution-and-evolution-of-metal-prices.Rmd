@@ -40,6 +40,7 @@ start <- as.Date("2010-01-01")
 end <- as.Date("2017-09-14")
 metals <- Quandl::Quandl(code = c("LME/PR_CO.1","LME/PR_NI.1","LME/PR_AL.1","LME/PR_CU.1"),
                          start_date=start, end_date=end, transform="normalize")
+View(metals)
 ```
 
 # Cleaning/Transforming
