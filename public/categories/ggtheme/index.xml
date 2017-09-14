@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Ggtheme on A minimal Hugo website</title>
+    <link>https://www.storieswithdata.com/categories/ggtheme/</link>
+    <description>Recent content in Ggtheme on A minimal Hugo website</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 14 Sep 2017 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://www.storieswithdata.com/categories/ggtheme/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Tennis winners- scrapig and plotting</title>
+      <link>https://www.storieswithdata.com/post/2017/09/14/tennis-winners-scrapig-and-plotting/</link>
+      <pubDate>Thu, 14 Sep 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.storieswithdata.com/post/2017/09/14/tennis-winners-scrapig-and-plotting/</guid>
+      <description>Intro  In this tutorial, we will be plotting tennis players Grand Slam Tournament wins.
+ The data comes from the Tennis Grand Slam Tournaments results from the ESP website. [^1]
+We will scrape the data and continue with the visualization thereafter.
+ Libraries Overall, we are going to use the following R packages:
+library(XML) # for web scraping library(rvest) # for web scraping library(dplyr) # for dataset manipulation library(knitr) # for nice dataset printing library(hrbrthemes) # Aesthetic defaults for ggplot2 charts library(ggthemes) # Themes ggplot2 library(ggplot2) # Charts library(stringr) # Manipulating strings url &amp;lt;- &amp;quot;http://www.</description>
+    </item>
+    
+  </channel>
+</rss>
