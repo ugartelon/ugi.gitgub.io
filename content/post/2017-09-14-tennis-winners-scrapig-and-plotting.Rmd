@@ -13,7 +13,7 @@ categories:
 
 >In this tutorial, we will be plotting tennis players Grand Slam Tournament wins. 
 
-The data comes from the Tennis Grand Slam Tournaments results from the ESP website. [^1] 
+The data comes from the Tennis Grand Slam Tournaments results from the ESP website [^1].
 
 We will scrape the data and continue with the visualization thereafter.
 
@@ -116,4 +116,4 @@ ggplot(data=total.wins.trn, aes(x=reorder(winner, wins), y=wins, fill=wins)) +
 
 
 
-[^1] ESPN Men's Grand Slam Title Winners (http://www.espn.com/tennis/history)
+[^1]: ESPN Men's Grand Slam Title Winners (http://www.espn.com/tennis/history)

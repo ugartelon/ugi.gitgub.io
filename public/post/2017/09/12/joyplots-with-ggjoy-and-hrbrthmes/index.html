@@ -33,8 +33,9 @@
 <blockquote>
 <p>Haven’t you run into articles with some data that makes you think, how can visualize the data in a different and possibly better way?</p>
 </blockquote>
-<p>We will be use Joyplots for this post. Joyplots are partially overlapping line plots that create the impression of a mountain range. They can be quite useful for visualizing changes in distributions over time or space[^1].</p>
-<p>The data that we will be looking at is 2016 temperatures in Lincoln, NE[^2][^3].</p>
+<p>We will be use Joyplots for this post.</p>
+<p>Joyplots are partially overlapping line plots that create the impression of a mountain range. They can be quite useful for visualizing changes in distributions over time or space <a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a>.</p>
+<p>The data that we will be looking at is 2016 temperatures in Lincoln, NE <a href="#fn2" class="footnoteRef" id="fnref2"><sup>2</sup></a><a href="#fn3" class="footnoteRef" id="fnref3"><sup>3</sup></a>.</p>
 <div id="libraries" class="section level1">
 <h1>Libraries</h1>
 <p>We first install and load the packages.</p>
@@ -72,6 +73,14 @@ View(weather.raw)</code></pre>
   labs(title=&#39;Temperatures in Lincoln NE&#39;,
        subtitle=&#39;Median temperatures (Fahrenheit) by month for 2016\nData: Original CSV from the Weather Underground&#39;)</code></pre>
 <p><img src="/post/2017-09-12-joyplots-with-ggjoy-and-hrbrthmes_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+</div>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>Package ggjoy (<a href="https://cran.r-project.org/web/packages/ggjoy/vignettes/introduction.html" class="uri">https://cran.r-project.org/web/packages/ggjoy/vignettes/introduction.html</a>)<a href="#fnref1">↩</a></p></li>
+<li id="fn2"><p>Original source (<a href="http://austinwehrwein.com/data-visualization/it-brings-me-ggjoy/" class="uri">http://austinwehrwein.com/data-visualization/it-brings-me-ggjoy/</a>)<a href="#fnref2">↩</a></p></li>
+<li id="fn3"><p>Dataset (<a href="https://drive.google.com/file/d/0ByOfjCmqEilLYndpOWJyZXhPVUk/view" class="uri">https://drive.google.com/file/d/0ByOfjCmqEilLYndpOWJyZXhPVUk/view</a>)<a href="#fnref3">↩</a></p></li>
+</ol>
 </div>
 
 </main>

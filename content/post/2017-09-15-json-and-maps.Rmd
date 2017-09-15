@@ -73,5 +73,5 @@ leaflet(data = crimeLA) %>%
 
 Thats it. We now have a map that shows crime in LA. Happy blog!
 
-[^1]: [Link Youtube] (https://catalog.data.gov/dataset/crime-data-from-2010-to-present)
+[^1]: Link Youtube (https://catalog.data.gov/dataset/crime-data-from-2010-to-present)
 

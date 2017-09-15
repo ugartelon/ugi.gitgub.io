@@ -9,9 +9,11 @@ categories: ggjoy
 
 >Haven't you run into articles with some data that makes you think, how can visualize the data in a different and possibly better way? 
 
-We will be use Joyplots for this post. Joyplots are partially overlapping line plots that create the impression of a mountain range. They can be quite useful for visualizing changes in distributions over time or space[^1].
+We will be use Joyplots for this post. 
 
-The data that we will be looking at is 2016 temperatures in Lincoln, NE[^2][^3].
+Joyplots are partially overlapping line plots that create the impression of a mountain range. They can be quite useful for visualizing changes in distributions over time or space [^1].
+
+The data that we will be looking at is 2016 temperatures in Lincoln, NE [^2][^3].
 
 # Libraries
 
@@ -59,3 +61,8 @@ ggplot(weather.raw,aes(x = `Mean TemperatureF`,y=months,height=..density..)) +
         strip.text.y = element_text(angle = 180, hjust = 1)) +
   labs(title='Temperatures in Lincoln NE',
        subtitle='Median temperatures (Fahrenheit) by month for 2016\nData: Original CSV from the Weather Underground')
+```
+
+[^1]: Package ggjoy (https://cran.r-project.org/web/packages/ggjoy/vignettes/introduction.html)
+[^2]: Original source (http://austinwehrwein.com/data-visualization/it-brings-me-ggjoy/)
+[^3]: Dataset (https://drive.google.com/file/d/0ByOfjCmqEilLYndpOWJyZXhPVUk/view)

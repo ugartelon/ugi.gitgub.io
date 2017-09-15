@@ -111,13 +111,12 @@ geom_line(alpha=1) +
 theme_ipsum(grid_col = "white") + 
 labs(
     title='Labor maarket',
-    caption='Public data INE') +
+    caption='Source: INE') +
 scale_y_continuous(labels=scales::percent) +
 scale_x_date(date_labels = "%Y", date_breaks = "2 years")  +
 theme_wsj() + 
 scale_colour_wsj("colors6", "") + 
-theme(legend.title=element_blank()) +
-theme(plot.background = element_rect(fill = "#cddee7")) 
+theme(legend.title=element_blank())
 ```
 
 Unemployment rate in Spain is going down but remains alarmingly high - of the highest unemployment rate in Europe and youth particularly (unfortunately I am today one of them - should have stayed in London? :).
@@ -129,7 +128,7 @@ geom_line(alpha=1) +
 theme_ipsum(grid_col = "white") +
 labs(
     title='Unemployment rate',
-    caption='Public data INE') +
+    caption='Source: INE') +
 scale_y_continuous(labels=scales::percent) +
 theme_wsj() + 
 scale_colour_wsj("colors6", "") +

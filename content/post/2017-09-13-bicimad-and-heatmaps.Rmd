@@ -1,10 +1,10 @@
 ---
-title: BiciMad and Heatmaps
-author: Pablo
+title: "BiciMad and Heatmaps"
+author: "Pablo"
 date: '2017-09-13'
 slug: bicimad-and-heatmaps
-categories: [Heatmap]
 tags: []
+categories: Heatmap
 ---
 
 >In this post we will analyze Madrid's electric bike hire service, BiciMAD (in London Santander Cycles, in Paris Vélib, etc...). We will create calendar heatmaps and a growth chart using the publicly available data.
@@ -120,4 +120,4 @@ According to the figures, it looks like the user base has somewhat remained stag
 
 Thats it. We now have the heat map and the growth chart!
 
-[^1]: datosabiertos: used bitly to shorten the link (http://bit.ly/2azyZ2O)
+[^1]: datosabiertos - used bitly to shorten the link (http://bit.ly/2azyZ2O)

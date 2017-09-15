@@ -106,13 +106,12 @@ geom_line(alpha=1) +
 theme_ipsum(grid_col = &quot;white&quot;) + 
 labs(
     title=&#39;Labor maarket&#39;,
-    caption=&#39;Public data INE&#39;) +
+    caption=&#39;Source: INE&#39;) +
 scale_y_continuous(labels=scales::percent) +
 scale_x_date(date_labels = &quot;%Y&quot;, date_breaks = &quot;2 years&quot;)  +
 theme_wsj() + 
 scale_colour_wsj(&quot;colors6&quot;, &quot;&quot;) + 
-theme(legend.title=element_blank()) +
-theme(plot.background = element_rect(fill = &quot;#cddee7&quot;)) </code></pre>
+theme(legend.title=element_blank())</code></pre>
 <p><img src="/post/2017-09-15-unemployment-in-spain_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
 <p>Unemployment rate in Spain is going down but remains alarmingly high - of the highest unemployment rate in Europe and youth particularly (unfortunately I am today one of them - should have stayed in London? :).</p>
 <pre class="r"><code>particpation &lt;- tbl_ine %&gt;% filter(metric == &quot;Unemployment Rate&quot;)
@@ -121,7 +120,7 @@ geom_line(alpha=1) +
 theme_ipsum(grid_col = &quot;white&quot;) +
 labs(
     title=&#39;Unemployment rate&#39;,
-    caption=&#39;Public data INE&#39;) +
+    caption=&#39;Source: INE&#39;) +
 scale_y_continuous(labels=scales::percent) +
 theme_wsj() + 
 scale_colour_wsj(&quot;colors6&quot;, &quot;&quot;) +

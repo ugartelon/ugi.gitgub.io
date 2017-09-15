@@ -13,7 +13,7 @@ categories: Quandl
 
 The electric vehicles industry is creating winners and losers within the world’s biggest metals markets. 
 
-In this regard, Cobalt is essential for lithium-ion batteries powering anything from Tesla Inc.’s cars to Apple Inc.’s iPhones and iPads. [^1]
+In this regard, Cobalt is essential for lithium-ion batteries powering anything from Tesla Inc.’s cars to Apple Inc.’s iPhones and iPads [^1].
 
 # Libraries
 
@@ -30,7 +30,7 @@ library(tidyverse) # Data wrangling packages
 
 # Importing data
 
-We start by getting the prices for Cobalt, Nickel, Aluminium and Copper. [^2] 
+We start by getting the prices for Cobalt, Nickel, Aluminium and Copper [^2].
 
 * Normalize = growth from 100
 * rdiff = percentage changes,
@@ -72,5 +72,5 @@ ggplot(metals,aes(x=date,y=price,color=metals)) +
   theme(plot.background = element_rect(fill = "#cddee7")) 
 ```
 
-[^1] Bloomberg (https://www.bloomberg.com/news/articles/2017-08-08/billionaire-who-made-killing-on-cobalt-bets-on-electric-car-fund)
-[^2] Quandle Codes (https://blog.quandl.com/api-for-commodity-data)
+[^1]: Bloomberg (https://www.bloomberg.com/news/articles/2017-08-08/billionaire-who-made-killing-on-cobalt-bets-on-electric-car-fund)
+[^2]: Quandle Codes (https://blog.quandl.com/api-for-commodity-data)

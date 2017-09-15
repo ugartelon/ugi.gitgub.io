@@ -35,7 +35,7 @@
 <blockquote>
 <p>In this tutorial, we will be plotting tennis players Grand Slam Tournament wins.</p>
 </blockquote>
-<p>The data comes from the Tennis Grand Slam Tournaments results from the ESP website. [^1]</p>
+<p>The data comes from the Tennis Grand Slam Tournaments results from the ESP website <a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a>.</p>
 <p>We will scrape the data and continue with the visualization thereafter.</p>
 </div>
 <div id="libraries" class="section level1">
@@ -289,8 +289,13 @@ ggplot(data=total.wins.trn, aes(x=reorder(winner, wins), y=wins, fill=wins)) +
   theme(axis.title.y=element_blank()) +
   theme(axis.title.x=element_blank()) </code></pre>
 <p><img src="/post/2017-09-14-tennis-winners-scrapig-and-plotting_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
-<p>[^1] ESPN Men’s Grand Slam Title Winners (<a href="http://www.espn.com/tennis/history" class="uri">http://www.espn.com/tennis/history</a>)</p>
 </div>
+</div>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>ESPN Men’s Grand Slam Title Winners (<a href="http://www.espn.com/tennis/history" class="uri">http://www.espn.com/tennis/history</a>)<a href="#fnref1">↩</a></p></li>
+</ol>
 </div>
 
 </main>

@@ -36,7 +36,7 @@
 <div id="intro" class="section level1">
 <h1>Intro</h1>
 <p>The electric vehicles industry is creating winners and losers within the world’s biggest metals markets.</p>
-<p>In this regard, Cobalt is essential for lithium-ion batteries powering anything from Tesla Inc.’s cars to Apple Inc.’s iPhones and iPads. [^1]</p>
+<p>In this regard, Cobalt is essential for lithium-ion batteries powering anything from Tesla Inc.’s cars to Apple Inc.’s iPhones and iPads <a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a>.</p>
 </div>
 <div id="libraries" class="section level1">
 <h1>Libraries</h1>
@@ -50,7 +50,7 @@ library(tidyverse) # Data wrangling packages</code></pre>
 </div>
 <div id="importing-data" class="section level1">
 <h1>Importing data</h1>
-<p>We start by getting the prices for Cobalt, Nickel, Aluminium and Copper. [^2]</p>
+<p>We start by getting the prices for Cobalt, Nickel, Aluminium and Copper <a href="#fn2" class="footnoteRef" id="fnref2"><sup>2</sup></a>.</p>
 <ul>
 <li>Normalize = growth from 100</li>
 <li>rdiff = percentage changes,</li>
@@ -86,7 +86,13 @@ metals &lt;- metals %&gt;% gather(metals, price, Cobalt:Copper)</code></pre>
   theme(legend.title=element_blank()) + # Remove title for all legends
   theme(plot.background = element_rect(fill = &quot;#cddee7&quot;)) </code></pre>
 <p><img src="/post/2017-09-14-electric-car-revolution-and-evolution-of-metal-prices_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
-<p>[^1] Bloomberg (<a href="https://www.bloomberg.com/news/articles/2017-08-08/billionaire-who-made-killing-on-cobalt-bets-on-electric-car-fund" class="uri">https://www.bloomberg.com/news/articles/2017-08-08/billionaire-who-made-killing-on-cobalt-bets-on-electric-car-fund</a>) [^2] Quandle Codes (<a href="https://blog.quandl.com/api-for-commodity-data" class="uri">https://blog.quandl.com/api-for-commodity-data</a>)</p>
+</div>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>Bloomberg (<a href="https://www.bloomberg.com/news/articles/2017-08-08/billionaire-who-made-killing-on-cobalt-bets-on-electric-car-fund" class="uri">https://www.bloomberg.com/news/articles/2017-08-08/billionaire-who-made-killing-on-cobalt-bets-on-electric-car-fund</a>)<a href="#fnref1">↩</a></p></li>
+<li id="fn2"><p>Quandle Codes (<a href="https://blog.quandl.com/api-for-commodity-data" class="uri">https://blog.quandl.com/api-for-commodity-data</a>)<a href="#fnref2">↩</a></p></li>
+</ol>
 </div>
 
 </main>
