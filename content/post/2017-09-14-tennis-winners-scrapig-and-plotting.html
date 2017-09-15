@@ -1,5 +1,5 @@
 ---
-title: "Tennis winners- scrapig and plotting"
+title: "Tennis winners - scraping and plotting"
 author: "Pablo"
 date: '2017-09-14'
 slug: tennis-winners-scrapig-and-plotting
@@ -33,7 +33,7 @@ library(stringr) # Manipulating strings
 
 url &lt;- &quot;http://www.espn.com/tennis/history&quot;
 
-# Read in HTML data
+# Read in HTML data only parsing the 1st table
 tbls_xml &lt;- readHTMLTable(url, which = 1)</code></pre>
 <pre class="r"><code># Rename table headings and remove line 1
 # Minor fix - naming for the Australian Open tournament (recode - dplyr package)

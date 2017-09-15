@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Tennis winners- scrapig and plotting | A minimal Hugo website</title>
+    <title>Tennis winners - scraping and plotting | A minimal Hugo website</title>
     <link rel="stylesheet" href="/css/style.css" />
     <link rel="stylesheet" href="/css/fonts.css" />
     
@@ -24,7 +24,7 @@
     </nav>
 
 <div class="article-meta">
-<h1><span class="title">Tennis winners- scrapig and plotting</span></h1>
+<h1><span class="title">Tennis winners - scraping and plotting</span></h1>
 <h2 class="author">Pablo</h2>
 <h2 class="date">2017/09/14</h2>
 </div>
@@ -52,7 +52,7 @@ library(stringr) # Manipulating strings
 
 url &lt;- &quot;http://www.espn.com/tennis/history&quot;
 
-# Read in HTML data
+# Read in HTML data only parsing the 1st table
 tbls_xml &lt;- readHTMLTable(url, which = 1)</code></pre>
 <pre class="r"><code># Rename table headings and remove line 1
 # Minor fix - naming for the Australian Open tournament (recode - dplyr package)
