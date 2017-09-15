@@ -12,20 +12,6 @@
     
     
     <item>
-      <title>CV</title>
-      <link>https://www.storieswithdata.com/cv/</link>
-      <pubDate>Fri, 15 Sep 2017 00:00:00 +0000</pubDate>
-      
-      <guid>https://www.storieswithdata.com/cv/</guid>
-      <description>Johnny Coder   1 MyAddress email@example.com  MyTown 1000 @twitter_handle  MyCountry 1800 my-phone-nr    Education  2010-2014 (expected) PhD, Computer Science; Awesome University (MyTown)
-Thesis title: Deep Learning Approaches to the Self-Awesomeness Estimation Problem
- 2007-2010 BSc, Computer Science and Electrical Engineering; University of HomeTown (HomeTown)
-Minor: Awesomeology
-   Experience Your Most Recent Work Experience:
-Short text containing the type of work done, results obtained, lessons learned and other remarks.</description>
-    </item>
-    
-    <item>
       <title>Unemployment in Spain</title>
       <link>https://www.storieswithdata.com/post/2017/09/15/unemployment-in-spain/</link>
       <pubDate>Fri, 15 Sep 2017 00:00:00 +0000</pubDate>
@@ -35,6 +21,17 @@ Short text containing the type of work done, results obtained, lessons learned a
  The data comes from the Instituto Nacional de Estadistica (INE) website 1.
  Libraries Overall, we are going to use the following R packages:
 library(XML) # For web scraping library(rvest) # For web scraping library(dplyr) # For dataset manipulation library(hrbrthemes) # Aesthetic defaults for ggplot2 charts library(ggthemes) # Themes ggplot2 library(ggplot2) # Charts library(stringr) # Manipulating strings library(tidyverse) # Data wrangling packages gather, spread.</description>
+    </item>
+    
+    <item>
+      <title>cv</title>
+      <link>https://www.storieswithdata.com/cv/</link>
+      <pubDate>Fri, 15 Sep 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.storieswithdata.com/cv/</guid>
+      <description>Pablo Ugarte 900 N. Atherton St. | State College, PA 16802
+(315) 267-6700 | craigeley@gmail.com
+Education  Ph.D. American Studies, University of Iowa, 2013 M.A. American Studies, University of Iowa, 2010 B.Phil. Interdisciplinary Studies, Miami University, 2004 B.A. American Studies, Miami University, 2004  Research interests History of recorded sound; American environmental history; history of science and technologies; theories of sound, listening, and the voice; American cultural history; green cultural studies and ecocriticism; sound art and experimental music; public and digital humanities</description>
     </item>
     
     <item>
