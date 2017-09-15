@@ -1,8 +1,8 @@
 ---
-title: JSON and mapping long/lat
+title: Plotting long/lat in a map from a json document
 author: Pablo Ugarte
 date: '2017-09-12'
-slug: json-and-mapping-long-lat
+slug: plotting-long-lat-in-a-map-from-a-json-document
 categories:
   - json
   - leaflet
@@ -75,3 +75,4 @@ leaflet(data = crimeLA) %>%
 Thats it. We now have a map that shows crime in LA. Happy blog!
 
 [^1]: [Link Youtube] (https://catalog.data.gov/dataset/crime-data-from-2010-to-present)
+
