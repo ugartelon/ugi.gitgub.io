@@ -1,16 +1,35 @@
----
-title: "Tennis winners - scraping and plotting"
-author: "Pablo"
-date: '2017-09-10'
-slug: tennis-winners-scrapig-and-plotting
-tags: []
-categories:
-- scraping
-- ggtheme
----
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Tennis winners - scraping and plotting | A minimal Hugo website</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    
+  </head>
 
+  <body>
+    <nav>
+    <ul class="menu">
+      
+      <li><a href="/">Home</a></li>
+      
+      <li><a href="/about/">About</a></li>
+      
+      <li><a href="/categories/">Categories</a></li>
+      
+    </ul>
+    <hr/>
+    </nav>
 
+<div class="article-meta">
+<h1><span class="title">Tennis winners - scraping and plotting</span></h1>
+<h2 class="author">Pablo</h2>
+<h2 class="date">2017/09/10</h2>
+</div>
 
+<main>
 <div id="intro" class="section level1">
 <h1>Intro</h1>
 <blockquote>
@@ -273,3 +292,31 @@ ggplot(data=total.wins.trn, aes(x=reorder(winner, wins), y=wins, fill=wins)) +
 <p>[^1] ESPN Men’s Grand Slam Title Winners (<a href="http://www.espn.com/tennis/history" class="uri">http://www.espn.com/tennis/history</a>)</p>
 </div>
 </div>
+
+</main>
+
+  <footer>
+  <script src="//yihui.name/js/math-code.js"></script>
+<script async src="//cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+<script async src="//yihui.name/js/center-img.js"></script>
+
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-77339605-2', 'auto');
+ga('send', 'pageview');
+</script>
+
+
+  
+  <hr/>
+  &copy; Pablo Ugarte 2017 | <a href="https://www.linkedin.com/in/pablo-ugarte-19b11232/">Linkedin</a>
+  
+  </footer>
+  </body>
+</html>
+

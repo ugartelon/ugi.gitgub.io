@@ -1,14 +1,14 @@
 ---
-title: JSON and Maps
-author: Pablo Ugarte
-date: '2017-09-15'
+title: "JSON and Maps"
+author: "Pablo Ugarte"
+date: '2017-09-09'
 slug: json-and-maps
-categories:
-  - json
-  - jsonlite
-  - Heatmap
-  - leaflet
 tags: []
+categories:
+- json
+- jsonlite
+- Heatmap
+- leaflet
 ---
 
 Today we will extract information from a JSON document using the R package jsonlite and we will then plot lon/lat in a map using the R package leaflet.

@@ -3,22 +3,12 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://www.storieswithdata.com/post/2017/09/15/json-and-maps/</loc>
-    <lastmod>2017-09-15T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://www.storieswithdata.com/post/2017/09/15/unemployment-in-spain/</loc>
     <lastmod>2017-09-15T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://www.storieswithdata.com/post/2017/09/14/electric-cars-and-metal-prices/</loc>
-    <lastmod>2017-09-14T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://www.storieswithdata.com/post/2017/09/14/tennis-winners-scrapig-and-plotting/</loc>
     <lastmod>2017-09-14T00:00:00+00:00</lastmod>
   </url>
   
@@ -33,7 +23,17 @@
   </url>
   
   <url>
+    <loc>https://www.storieswithdata.com/post/2017/09/10/tennis-winners-scrapig-and-plotting/</loc>
+    <lastmod>2017-09-10T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://www.storieswithdata.com/note/2017/09/09/a-quick-note/</loc>
+    <lastmod>2017-09-09T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.storieswithdata.com/post/2017/09/09/json-and-maps/</loc>
     <lastmod>2017-09-09T00:00:00+00:00</lastmod>
   </url>
   
@@ -63,7 +63,7 @@
   
   <url>
     <loc>https://www.storieswithdata.com/categories/heatmap/</loc>
-    <lastmod>2017-09-15T00:00:00+00:00</lastmod>
+    <lastmod>2017-09-13T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -80,19 +80,19 @@
   
   <url>
     <loc>https://www.storieswithdata.com/categories/json/</loc>
-    <lastmod>2017-09-15T00:00:00+00:00</lastmod>
+    <lastmod>2017-09-09T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://www.storieswithdata.com/categories/jsonlite/</loc>
-    <lastmod>2017-09-15T00:00:00+00:00</lastmod>
+    <lastmod>2017-09-09T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://www.storieswithdata.com/categories/leaflet/</loc>
-    <lastmod>2017-09-15T00:00:00+00:00</lastmod>
+    <lastmod>2017-09-09T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   

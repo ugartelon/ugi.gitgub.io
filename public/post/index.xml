@@ -12,18 +12,6 @@
     
     
     <item>
-      <title>JSON and Maps</title>
-      <link>https://www.storieswithdata.com/post/2017/09/15/json-and-maps/</link>
-      <pubDate>Fri, 15 Sep 2017 00:00:00 +0000</pubDate>
-      
-      <guid>https://www.storieswithdata.com/post/2017/09/15/json-and-maps/</guid>
-      <description>Today we will extract information from a JSON document using the R package jsonlite and we will then plot lon/lat in a map using the R package leaflet.
-The data that we will be looking at is crime in LA.
-But first, we need to install and load libraries for this excercise.
-library(jsonlite) library(tidyverse) library(stringr) library(tibble) library(leaflet) library(ggmap) library(readr) Now we can start grabbing the data from the json document which can be found here 1.</description>
-    </item>
-    
-    <item>
       <title>Unemployment in Spain</title>
       <link>https://www.storieswithdata.com/post/2017/09/15/unemployment-in-spain/</link>
       <pubDate>Fri, 15 Sep 2017 00:00:00 +0000</pubDate>
@@ -49,19 +37,6 @@ library(ggplot2) # For amazing charts library(dplyr) # Data wrangling library(hr
     </item>
     
     <item>
-      <title>Tennis winners - scraping and plotting</title>
-      <link>https://www.storieswithdata.com/post/2017/09/14/tennis-winners-scrapig-and-plotting/</link>
-      <pubDate>Thu, 14 Sep 2017 00:00:00 +0000</pubDate>
-      
-      <guid>https://www.storieswithdata.com/post/2017/09/14/tennis-winners-scrapig-and-plotting/</guid>
-      <description>Intro  In this tutorial, we will be plotting tennis players Grand Slam Tournament wins.
- The data comes from the Tennis Grand Slam Tournaments results from the ESP website. [^1]
-We will scrape the data and continue with the visualization thereafter.
- Libraries Overall, we are going to use the following R packages:
-library(XML) # for web scraping library(rvest) # for web scraping library(dplyr) # for dataset manipulation library(knitr) # for nice dataset printing library(hrbrthemes) # Aesthetic defaults for ggplot2 charts library(ggthemes) # Themes ggplot2 library(ggplot2) # Charts library(stringr) # Manipulating strings  Scraping We will be scraping HTML Table with the XML package.</description>
-    </item>
-    
-    <item>
       <title>BiciMad and Heatmaps</title>
       <link>https://www.storieswithdata.com/post/2017/09/13/bicimad-and-heatmaps/</link>
       <pubDate>Wed, 13 Sep 2017 00:00:00 +0000</pubDate>
@@ -81,6 +56,31 @@ library(ggplot2) # For amazing charts library(tidyverse) # Data wrangling librar
       <description>Haven’t you run into articles with some data that makes you think, how can visualize the data in a different and possibly better way?
  We will be use Joyplots for this post. Joyplots are partially overlapping line plots that create the impression of a mountain range. They can be quite useful for visualizing changes in distributions over time or space1.
 The data that we will be looking at is 2016 temperatures in Lincoln, NE23.</description>
+    </item>
+    
+    <item>
+      <title>Tennis winners - scraping and plotting</title>
+      <link>https://www.storieswithdata.com/post/2017/09/10/tennis-winners-scrapig-and-plotting/</link>
+      <pubDate>Sun, 10 Sep 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.storieswithdata.com/post/2017/09/10/tennis-winners-scrapig-and-plotting/</guid>
+      <description>Intro  In this tutorial, we will be plotting tennis players Grand Slam Tournament wins.
+ The data comes from the Tennis Grand Slam Tournaments results from the ESP website. [^1]
+We will scrape the data and continue with the visualization thereafter.
+ Libraries Overall, we are going to use the following R packages:
+library(XML) # for web scraping library(rvest) # for web scraping library(dplyr) # for dataset manipulation library(knitr) # for nice dataset printing library(hrbrthemes) # Aesthetic defaults for ggplot2 charts library(ggthemes) # Themes ggplot2 library(ggplot2) # Charts library(stringr) # Manipulating strings  Scraping We will be scraping HTML Table with the XML package.</description>
+    </item>
+    
+    <item>
+      <title>JSON and Maps</title>
+      <link>https://www.storieswithdata.com/post/2017/09/09/json-and-maps/</link>
+      <pubDate>Sat, 09 Sep 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.storieswithdata.com/post/2017/09/09/json-and-maps/</guid>
+      <description>Today we will extract information from a JSON document using the R package jsonlite and we will then plot lon/lat in a map using the R package leaflet.
+The data that we will be looking at is crime in LA.
+But first, we need to install and load libraries for this excercise.
+library(jsonlite) library(tidyverse) library(stringr) library(tibble) library(leaflet) library(ggmap) library(readr) Now we can start grabbing the data from the json document which can be found here 1.</description>
     </item>
     
   </channel>
