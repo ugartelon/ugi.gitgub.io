@@ -104,8 +104,6 @@ About 41% of the population is not actively engaged in the labor force, taking u
 
 It's important to keep in mind that individuals in this category include for example retired, full-time students or stay at home mom’s/dad's.
 
-## Labor Force Participation Rate
-
 ```{r, message = FALSE, warning = FALSE}
 particpation <- tbl_ine %>% filter(metric != "Unemployment Rate")
 ggplot(particpation,aes(x=date,y=ratio,color=metric)) +
@@ -117,13 +115,10 @@ labs(
 scale_y_continuous(labels=scales::percent) +
 scale_x_date(date_labels = "%Y", date_breaks = "2 years")  +
 theme_wsj() + 
-scale_colour_wsj("colors6", "")
+scale_colour_wsj("colors6", "") + 
 theme(legend.title=element_blank()) +
 theme(plot.background = element_rect(fill = "#cddee7")) 
 ```
-
-
-## Unemployment rate
 
 Unemployment rate in Spain is going down but remains alarmingly high - of the highest unemployment rate in Europe and youth particularly (unfortunately I am today one of them - should have stayed in London? :).
 

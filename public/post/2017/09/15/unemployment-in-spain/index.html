@@ -118,8 +118,6 @@ tbl_ine$date &lt;- dmy(tbl_ine$date)</code></pre>
 <h1>Plot</h1>
 <p>About 41% of the population is not actively engaged in the labor force, taking us back to 2007 levels.</p>
 <p>It’s important to keep in mind that individuals in this category include for example retired, full-time students or stay at home mom’s/dad’s.</p>
-<div id="labor-force-participation-rate" class="section level2">
-<h2>Labor Force Participation Rate</h2>
 <pre class="r"><code>particpation &lt;- tbl_ine %&gt;% filter(metric != &quot;Unemployment Rate&quot;)
 ggplot(particpation,aes(x=date,y=ratio,color=metric)) +
 geom_line(alpha=1) + 
@@ -130,26 +128,10 @@ labs(
 scale_y_continuous(labels=scales::percent) +
 scale_x_date(date_labels = &quot;%Y&quot;, date_breaks = &quot;2 years&quot;)  +
 theme_wsj() + 
-scale_colour_wsj(&quot;colors6&quot;, &quot;&quot;)</code></pre>
-<p><img src="/post/2017-09-15-unemployment-in-spain_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
-<pre class="r"><code>theme(legend.title=element_blank()) +
+scale_colour_wsj(&quot;colors6&quot;, &quot;&quot;) + 
+theme(legend.title=element_blank()) +
 theme(plot.background = element_rect(fill = &quot;#cddee7&quot;)) </code></pre>
-<pre><code>## List of 2
-##  $ legend.title   : list()
-##   ..- attr(*, &quot;class&quot;)= chr [1:2] &quot;element_blank&quot; &quot;element&quot;
-##  $ plot.background:List of 5
-##   ..$ fill         : chr &quot;#cddee7&quot;
-##   ..$ colour       : NULL
-##   ..$ size         : NULL
-##   ..$ linetype     : NULL
-##   ..$ inherit.blank: logi FALSE
-##   ..- attr(*, &quot;class&quot;)= chr [1:2] &quot;element_rect&quot; &quot;element&quot;
-##  - attr(*, &quot;class&quot;)= chr [1:2] &quot;theme&quot; &quot;gg&quot;
-##  - attr(*, &quot;complete&quot;)= logi FALSE
-##  - attr(*, &quot;validate&quot;)= logi TRUE</code></pre>
-</div>
-<div id="unemployment-rate" class="section level2">
-<h2>Unemployment rate</h2>
+<p><img src="/post/2017-09-15-unemployment-in-spain_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
 <p>Unemployment rate in Spain is going down but remains alarmingly high - of the highest unemployment rate in Europe and youth particularly (unfortunately I am today one of them - should have stayed in London? :).</p>
 <pre class="r"><code>particpation &lt;- tbl_ine %&gt;% filter(metric == &quot;Unemployment Rate&quot;)
 ggplot(particpation,aes(x=date,y=ratio,color=metric)) +
@@ -165,7 +147,6 @@ scale_x_date(date_labels = &quot;%Y&quot;, date_breaks = &quot;2 years&quot;)  +
 theme(legend.title=element_blank()) </code></pre>
 <p><img src="/post/2017-09-15-unemployment-in-spain_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
 <p>That’s it - a simple post showing the labor market in Spain!</p>
-</div>
 </div>
 <div class="footnotes">
 <hr />
