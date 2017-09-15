@@ -29,7 +29,6 @@ footnotereturnlinkcontents = "↩"
     url = "/cv/"
     weight = 4
 
-
 [params]
     description = "A website built through Hugo and blogdown."
     footer = "&copy; Pablo Ugarte 2017 | [Linkedin](https://www.linkedin.com/in/pablo-ugarte-19b11232/)"
