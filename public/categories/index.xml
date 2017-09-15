@@ -32,7 +32,7 @@
     <item>
       <title>Ggtheme</title>
       <link>https://www.storieswithdata.com/categories/ggtheme/</link>
-      <pubDate>Thu, 14 Sep 2017 00:00:00 +0000</pubDate>
+      <pubDate>Fri, 15 Sep 2017 00:00:00 +0000</pubDate>
       
       <guid>https://www.storieswithdata.com/categories/ggtheme/</guid>
       <description></description>
@@ -80,6 +80,15 @@
       <pubDate>Thu, 14 Sep 2017 00:00:00 +0000</pubDate>
       
       <guid>https://www.storieswithdata.com/categories/quandl/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Rvest</title>
+      <link>https://www.storieswithdata.com/categories/rvest/</link>
+      <pubDate>Fri, 15 Sep 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.storieswithdata.com/categories/rvest/</guid>
       <description></description>
     </item>
     

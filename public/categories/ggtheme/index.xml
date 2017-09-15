@@ -6,10 +6,22 @@
     <description>Recent content in Ggtheme on A minimal Hugo website</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 14 Sep 2017 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 15 Sep 2017 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://www.storieswithdata.com/categories/ggtheme/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Unemployment in Spain</title>
+      <link>https://www.storieswithdata.com/post/2017/09/15/unemployment-in-spain/</link>
+      <pubDate>Fri, 15 Sep 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.storieswithdata.com/post/2017/09/15/unemployment-in-spain/</guid>
+      <description>Intro  In this post, we scrape data and data wrangle to get an overall picute of the job market.
+ The data comes from the Instituto Nacional de Estadistica (INE) website 1.
+ Libraries Overall, we are going to use the following R packages:
+library(XML) # For web scraping library(rvest) # For web scraping library(dplyr) # For dataset manipulation library(hrbrthemes) # Aesthetic defaults for ggplot2 charts library(ggthemes) # Themes ggplot2 library(ggplot2) # Charts library(stringr) # Manipulating strings library(tidyverse) # Data wrangling packages gather, spread.</description>
+    </item>
     
     <item>
       <title>Tennis winners - scraping and plotting</title>

@@ -4,7 +4,10 @@ author: "Pablo Ugarte"
 date: '2017-09-15'
 slug: unemployment-in-spain
 tags: []
-categories: scraping
+categories:
+- scraping
+- ggtheme
+- rvest
 ---
 
 # Intro
@@ -38,7 +41,6 @@ With the rvest package we can scrape the content of the table.
 * To parse the HTML table data we use html_table(), which would create a list
 * We coerce the list to dataframe to be able to work with the data manipulaton
 
-
 ```{r, message = FALSE, warning = FALSE}
 webpage <- read_html("http://www.ine.es/prensa/epa_tabla.htm")
 
@@ -51,7 +53,6 @@ tbl_ine <- webpage %>%
 # Coerce list to dataframe
 tbl_ine <- as.data.frame(tbl_ine)
 ```
-
 
 # Cleansing
 
