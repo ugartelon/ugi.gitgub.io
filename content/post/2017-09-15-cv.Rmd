@@ -1,9 +1,0 @@
----
-title: "CV"
-author: "Pablo Ugarte"
-date: '2017-09-15'
-slug: cv
-aliases: /content/vitae/
----
-Pablo
-
