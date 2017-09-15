@@ -1,11 +1,10 @@
 ---
-title: cv
+title: "cv"
 author: ''
 date: '2017-09-15'
 slug: cv
-categories: []
 tags: []
-aliases: /posts/cv/
+categories: []
 ---
 
 # Pablo Ugarte
@@ -65,4 +64,3 @@ Colegio Nuestra Señ ora del Recuerdo (Jesuitas)          1987 - 2000
 
 IT: R, Bloomberg, Dealogic, Microsoft Office, Google Analytics y Tableau
 Información adicional: Deporte, lectura, cine, documentales y viajar
-
