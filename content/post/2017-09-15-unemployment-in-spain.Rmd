@@ -17,7 +17,6 @@ The data comes from the Instituto Nacional de Estadistica (INE) website [^1].
 
 Overall, we are going to use the following R packages:
 
-
 ```{r, message = FALSE, warning = FALSE}
 library(XML) # For web scraping
 library(rvest) # For web scraping
@@ -28,8 +27,8 @@ library(ggplot2) # Charts
 library(stringr) # Manipulating strings
 library(tidyverse) # Data wrangling packages gather, spread...
 library(lubridate) # To work with dates
+library(ggthemes) # Themes ggplot
 ```
-
 
 # Scraping
 
@@ -54,7 +53,7 @@ tbl_ine <- as.data.frame(tbl_ine)
 ```
 
 
-# Cleansing/Transforming
+# Cleansing
 
 For instance, if you look at tbl_ine, readHTMLTable has stripped and replaced the headings with generic names because R does not know which variable names should align with each column. We can correct for this with the following:
 
@@ -67,7 +66,6 @@ For instance, if you look at tbl_ine, readHTMLTable has stripped and replaced th
 * Gather each metric variable ("Labor Participation Rate", "Unemployment Rate") within one column variable and also gather the values associated with each metal in a second column variable
 * Divide by 100 for % in plot y axis
 * Convert to date
-
 
 ```{r, message = FALSE, warning = FALSE}
 colnames(tbl_ine) <- c("date", "activos", "ocupados",
@@ -99,7 +97,6 @@ tbl_ine <- tbl_ine %>%
 tbl_ine$date <- dmy(tbl_ine$date)
 ```
 
-
 # Plot 
 
 About 41% of the population is not actively engaged in the labor force, taking us back to 2007 levels.
@@ -108,17 +105,18 @@ It's important to keep in mind that individuals in this category include for exa
 
 ## Labor Force Participation Rate
 
-
 ```{r, message = FALSE, warning = FALSE}
 particpation <- tbl_ine %>% filter(metric != "Unemployment Rate")
 ggplot(particpation,aes(x=date,y=ratio,color=metric)) +
-geom_line(alpha=1) + # Thickness of line
-theme_ipsum(grid_col = "white") + # Gridline white
+geom_line(alpha=1) + 
+theme_ipsum(grid_col = "white") + 
 labs(
-    title='Labor participation rate 2001-2017',
+    title='Labor maarket',
     caption='Public data INE') +
 scale_y_continuous(labels=scales::percent) +
 scale_x_date(date_labels = "%Y", date_breaks = "2 years")  +
+theme_wsj() + 
+scale_colour_wsj("colors6", "")
 theme(legend.title=element_blank()) +
 theme(plot.background = element_rect(fill = "#cddee7")) 
 ```
@@ -128,23 +126,23 @@ theme(plot.background = element_rect(fill = "#cddee7"))
 
 Unemployment rate in Spain is going down but remains alarmingly high - of the highest unemployment rate in Europe and youth particularly (unfortunately I am today one of them - should have stayed in London? :).
 
-
 ```{r, message = FALSE, warning = FALSE}
 particpation <- tbl_ine %>% filter(metric == "Unemployment Rate")
 ggplot(particpation,aes(x=date,y=ratio,color=metric)) +
-geom_line(alpha=1) + # Thickness of line
-theme_ipsum(grid_col = "white") + # Gridline white
+geom_line(alpha=1) + 
+theme_ipsum(grid_col = "white") +
 labs(
-    title='Unemployment rate 2001-2017',
+    title='Unemployment rate',
     caption='Public data INE') +
 scale_y_continuous(labels=scales::percent) +
+theme_wsj() + 
+scale_colour_wsj("colors6", "") +
 scale_x_date(date_labels = "%Y", date_breaks = "2 years")  +
-theme(legend.title=element_blank()) +
-theme(plot.background = element_rect(fill = "#cddee7")) 
+theme(legend.title=element_blank()) 
 ```
 
 
-That's it - a simple post showing the labour market in Spain!
+That's it - a simple post showing the labor market in Spain!
 
 
 [^1]: INE (http://www.ine.es/prensa/epa_tabla.htm)

@@ -27,7 +27,8 @@ library(ggthemes) # Themes ggplot2
 library(ggplot2) # Charts
 library(stringr) # Manipulating strings
 library(tidyverse) # Data wrangling packages gather, spread...
-library(lubridate) # To work with dates</code></pre>
+library(lubridate) # To work with dates
+library(ggthemes) # Themes ggplot</code></pre>
 </div>
 <div id="scraping" class="section level1">
 <h1>Scraping</h1>
@@ -50,8 +51,8 @@ tbl_ine &lt;- webpage %&gt;%
 # Coerce list to dataframe
 tbl_ine &lt;- as.data.frame(tbl_ine)</code></pre>
 </div>
-<div id="cleansingtransforming" class="section level1">
-<h1>Cleansing/Transforming</h1>
+<div id="cleansing" class="section level1">
+<h1>Cleansing</h1>
 <p>For instance, if you look at tbl_ine, readHTMLTable has stripped and replaced the headings with generic names because R does not know which variable names should align with each column. We can correct for this with the following:</p>
 <ul>
 <li>Rename column names</li>
@@ -100,33 +101,49 @@ tbl_ine$date &lt;- dmy(tbl_ine$date)</code></pre>
 <h2>Labor Force Participation Rate</h2>
 <pre class="r"><code>particpation &lt;- tbl_ine %&gt;% filter(metric != &quot;Unemployment Rate&quot;)
 ggplot(particpation,aes(x=date,y=ratio,color=metric)) +
-geom_line(alpha=1) + # Thickness of line
-theme_ipsum(grid_col = &quot;white&quot;) + # Gridline white
+geom_line(alpha=1) + 
+theme_ipsum(grid_col = &quot;white&quot;) + 
 labs(
-    title=&#39;Labor participation rate 2001-2017&#39;,
+    title=&#39;Labor maarket&#39;,
     caption=&#39;Public data INE&#39;) +
 scale_y_continuous(labels=scales::percent) +
 scale_x_date(date_labels = &quot;%Y&quot;, date_breaks = &quot;2 years&quot;)  +
-theme(legend.title=element_blank()) +
-theme(plot.background = element_rect(fill = &quot;#cddee7&quot;)) </code></pre>
+theme_wsj() + 
+scale_colour_wsj(&quot;colors6&quot;, &quot;&quot;)</code></pre>
 <p><img src="/post/2017-09-15-unemployment-in-spain_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<pre class="r"><code>theme(legend.title=element_blank()) +
+theme(plot.background = element_rect(fill = &quot;#cddee7&quot;)) </code></pre>
+<pre><code>## List of 2
+##  $ legend.title   : list()
+##   ..- attr(*, &quot;class&quot;)= chr [1:2] &quot;element_blank&quot; &quot;element&quot;
+##  $ plot.background:List of 5
+##   ..$ fill         : chr &quot;#cddee7&quot;
+##   ..$ colour       : NULL
+##   ..$ size         : NULL
+##   ..$ linetype     : NULL
+##   ..$ inherit.blank: logi FALSE
+##   ..- attr(*, &quot;class&quot;)= chr [1:2] &quot;element_rect&quot; &quot;element&quot;
+##  - attr(*, &quot;class&quot;)= chr [1:2] &quot;theme&quot; &quot;gg&quot;
+##  - attr(*, &quot;complete&quot;)= logi FALSE
+##  - attr(*, &quot;validate&quot;)= logi TRUE</code></pre>
 </div>
 <div id="unemployment-rate" class="section level2">
 <h2>Unemployment rate</h2>
 <p>Unemployment rate in Spain is going down but remains alarmingly high - of the highest unemployment rate in Europe and youth particularly (unfortunately I am today one of them - should have stayed in London? :).</p>
 <pre class="r"><code>particpation &lt;- tbl_ine %&gt;% filter(metric == &quot;Unemployment Rate&quot;)
 ggplot(particpation,aes(x=date,y=ratio,color=metric)) +
-geom_line(alpha=1) + # Thickness of line
-theme_ipsum(grid_col = &quot;white&quot;) + # Gridline white
+geom_line(alpha=1) + 
+theme_ipsum(grid_col = &quot;white&quot;) +
 labs(
-    title=&#39;Unemployment rate 2001-2017&#39;,
+    title=&#39;Unemployment rate&#39;,
     caption=&#39;Public data INE&#39;) +
 scale_y_continuous(labels=scales::percent) +
+theme_wsj() + 
+scale_colour_wsj(&quot;colors6&quot;, &quot;&quot;) +
 scale_x_date(date_labels = &quot;%Y&quot;, date_breaks = &quot;2 years&quot;)  +
-theme(legend.title=element_blank()) +
-theme(plot.background = element_rect(fill = &quot;#cddee7&quot;)) </code></pre>
+theme(legend.title=element_blank()) </code></pre>
 <p><img src="/post/2017-09-15-unemployment-in-spain_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
-<p>That’s it - a simple post showing the labour market in Spain!</p>
+<p>That’s it - a simple post showing the labor market in Spain!</p>
 </div>
 </div>
 <div class="footnotes">
