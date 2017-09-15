@@ -73,4 +73,4 @@ ggplot(metals,aes(x=date,y=price,color=metals)) +
 ```
 
 [^1]: Bloomberg (https://www.bloomberg.com/news/articles/2017-08-08/billionaire-who-made-killing-on-cobalt-bets-on-electric-car-fund)
-[^2]: Quandle Codes (https://blog.quandl.com/api-for-commodity-data)
+[^2]: Quandle codes (https://blog.quandl.com/api-for-commodity-data)
