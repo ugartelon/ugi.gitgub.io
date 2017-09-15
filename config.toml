@@ -24,6 +24,10 @@ footnotereturnlinkcontents = "↩"
     name = "Categories"
     url = "/categories/"
     weight = 3
+[[menu.main]]
+    name = "CV"
+    url = "/CV/"
+    weight = 4
 
 
 [params]
