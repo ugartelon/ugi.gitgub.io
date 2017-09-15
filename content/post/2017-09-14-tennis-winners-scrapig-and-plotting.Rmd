@@ -30,12 +30,22 @@ library(hrbrthemes) # Aesthetic defaults for ggplot2 charts
 library(ggthemes) # Themes ggplot2
 library(ggplot2) # Charts
 library(stringr) # Manipulating strings
+```
 
+# Scraping
+
+We will be scraping HTML Table with the XML package. By passing the URL to readHTMLTable() we extract data from HTML tables in HTML documents. The data in each table is read and stored as a data frame. We can use the which argument in readHTMLTable() to import only those tables specified numerically.
+
+```{r, message = FALSE, warning = FALSE}
 url <- "http://www.espn.com/tennis/history"
 
 # Read in HTML data only parsing the 1st table
 tbls_xml <- readHTMLTable(url, which = 1)
 ```
+
+# Cleansing/Transforming
+
+We create the column names, eliminate the first two rows of the table and make some minor fix replacing Australian Open (Jan) and Australian Open (Dec) with Australian Open.
 
 ```{r, message = FALSE, warning = FALSE}
 # Rename table headings and remove line 1

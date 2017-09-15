@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Unemployment in Spain | A minimal Hugo website</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    
+  </head>
+
+  <body>
+    <nav>
+    <ul class="menu">
+      
+      <li><a href="/">Home</a></li>
+      
+      <li><a href="/about/">About</a></li>
+      
+      <li><a href="/categories/">Categories</a></li>
+      
+    </ul>
+    <hr/>
+    </nav>
+
+<div class="article-meta">
+<h1><span class="title">Unemployment in Spain</span></h1>
+<h2 class="author">Pablo Ugarte</h2>
+<h2 class="date">2017/09/15</h2>
+</div>
+
+<main>
+
+</main>
+
+  <footer>
+  <script src="//yihui.name/js/math-code.js"></script>
+<script async src="//cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+<script async src="//yihui.name/js/center-img.js"></script>
+
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-77339605-2', 'auto');
+ga('send', 'pageview');
+</script>
+
+
+  
+  <hr/>
+  &copy; Pablo Ugarte 2017 | <a href="https://www.linkedin.com/in/pablo-ugarte-19b11232/">Linkedin</a>
+  
+  </footer>
+  </body>
+</html>
+
+es gather, spread...
+library(lubridate) # To work with dates</code></pre>
+</div>
+<div id="scraping" class="section level1">
+<h1>Scraping</h1>
+<p>With the rvest package we can scrape the content of the table.</p>
+<ul>
+<li>We first use the html_nodes() function to select the
+<table>
+nodes</li>
+<li>To parse the HTML table data we use html_table(), which would create a list</li>
+<li>We coerce the list to dataframe to be able to work with the data manipulaton</li>
+</ul>
+<pre class="r"><code>webpage &lt;- read_html(&quot;http://www.ine.es/prensa/epa_tabla.htm&quot;)
+
+# Only parse the table interested
+tbl_ine &lt;- webpage %&gt;%
+        html_nodes(&quot;table&quot;) %&gt;%
+        .[2] %&gt;%
+        html_table(fill = TRUE)
+
+# Coerce list to dataframe
+tbl_ine &lt;- as.data.frame(tbl_ine)</code></pre>
+</div>
+<div id="cleansingtransforming" class="section level1">
+<h1>Cleansing/Transforming</h1>
+<p>For instance, if you look at tbl_ine, readHTMLTable has stripped and replaced the headings with generic names because R does not know which variable names should align with each column. We can correct for this with the following:</p>
+<ul>
+<li>Rename column names</li>
+<li>Replace the “,” with “.”</li>
+<li>Select Labor Participation Rate and Unemployment Rate</li>
+<li>Remove first rows with no meaningfull data</li>
+<li>Convert character to numeric</li>
+<li>Add column “Non-participation Rate”</li>
+<li>Gather each metric variable (“Labor Participation Rate”, “Unemployment Rate”) within one column variable and also gather the values associated with each metal in a second column variable</li>
+<li>Divide by 100 for % in plot y axis</li>
+<li>Convert to date</li>
+</ul>
+<pre class="r"><code>colnames(tbl_ine) &lt;- c(&quot;date&quot;, &quot;activos&quot;, &quot;ocupados&quot;,
+                            &quot;parados&quot;, &quot;Labor Participation Rate&quot;, &quot;Unemployment Rate&quot;)
+
+tbl_ine &lt;- tbl_ine %&gt;% 
+    mutate(`Labor Participation Rate` = str_replace(`Labor Participation Rate`, &quot;,&quot;, &quot;.&quot;)) %&gt;%
+    mutate(`Unemployment Rate` = str_replace(`Unemployment Rate`, &quot;,&quot;, &quot;.&quot;))
+
+tbl_ine &lt;- tbl_ine %&gt;% 
+           select(1,5,6) %&gt;% 
+           slice(3:n())
+
+tbl_ine$`Labor Participation Rate` &lt;- as.numeric(tbl_ine$`Labor Participation Rate`) 
+tbl_ine$`Unemployment Rate` &lt;- as.numeric(tbl_ine$`Unemployment Rate`) 
+
+tbl_ine &lt;- tbl_ine %&gt;% 
+    mutate(`Non-participation Rate` = 100 - `Labor Participation Rate`) %&gt;% 
+    gather(metric, ratio, 2:4)
+
+tbl_ine &lt;- tbl_ine %&gt;% mutate(ratio = ratio/100)
+
+tbl_ine &lt;- tbl_ine %&gt;% 
+    mutate(date = str_replace(date, &quot;1T &quot;, &quot;01-03-&quot;),
+    date = str_replace(date, &quot;2T &quot;, &quot;01-06-&quot;),
+    date = str_replace(date, &quot;3T &quot;, &quot;01-09-&quot;),
+    date = str_replace(date, &quot;4T &quot;, &quot;01-12-&quot;))
+
+tbl_ine$date &lt;- dmy(tbl_ine$date)</code></pre>
+</div>
+<div id="plot" class="section level1">
+<h1>Plot</h1>
+<p>About 41% of the population is not actively engaged in the labor force, taking us back to 2007 levels.</p>
+<p>It’s important to keep in mind that individuals in this category include for example retired, full-time students or stay at home mom’s/dad’s.</p>
+<div id="labor-force-participation-rate" class="section level2">
+<h2>Labor Force Participation Rate</h2>
+<pre class="r"><code>particpation &lt;- tbl_ine %&gt;% filter(metric != &quot;Unemployment Rate&quot;)
+ggplot(particpation,aes(x=date,y=ratio,color=metric)) +
+geom_line(alpha=1) + # Thickness of line
+theme_ipsum(grid_col = &quot;white&quot;) + # Gridline white
+labs(
+    title=&#39;Labor participation rate 2001-2017&#39;,
+    caption=&#39;Public data INE&#39;) +
+scale_y_continuous(labels=scales::percent) +
+scale_x_date(date_labels = &quot;%Y&quot;, date_breaks = &quot;2 years&quot;)  +
+theme(legend.title=element_blank()) +
+theme(plot.background = element_rect(fill = &quot;#cddee7&quot;)) </code></pre>
+<p><img src="/post/2017-09-15-unemployment-in-spain_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+</div>
+<div id="unemployment-rate" class="section level2">
+<h2>Unemployment rate</h2>
+<p>Unemployment rate in Spain is going down but remains alarmingly high - of the highest unemployment rate in Europe and youth particularly (unfortunately I am today one of them - should have stayed in London? :).</p>
+<pre class="r"><code>particpation &lt;- tbl_ine %&gt;% filter(metric == &quot;Unemployment Rate&quot;)
+ggplot(particpation,aes(x=date,y=ratio,color=metric)) +
+geom_line(alpha=1) + # Thickness of line
+theme_ipsum(grid_col = &quot;white&quot;) + # Gridline white
+labs(
+    title=&#39;Unemployment rate 2001-2017&#39;,
+    caption=&#39;Public data INE&#39;) +
+scale_y_continuous(labels=scales::percent) +
+scale_x_date(date_labels = &quot;%Y&quot;, date_breaks = &quot;2 years&quot;)  +
+theme(legend.title=element_blank()) +
+theme(plot.background = element_rect(fill = &quot;#cddee7&quot;)) </code></pre>
+<p><img src="/post/2017-09-15-unemployment-in-spain_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p>That’s it - a simple post showing the labour market in Spain!</p>
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>INE (<a href="http://www.ine.es/prensa/epa_tabla.htm" class="uri">http://www.ine.es/prensa/epa_tabla.htm</a>)<a href="#fnref1">↩</a></p></li>
+</ol>
+</div>
+
+</main>
+
+  <footer>
+  <script src="//yihui.name/js/math-code.js"></script>
+<script async src="//cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+<script async src="//yihui.name/js/center-img.js"></script>
+
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-77339605-2', 'auto');
+ga('send', 'pageview');
+</script>
+
+
+  
+  <hr/>
+  &copy; Pablo Ugarte 2017 | <a href="https://www.linkedin.com/in/pablo-ugarte-19b11232/">Linkedin</a>
+  
+  </footer>
+  </body>
+</html>
+

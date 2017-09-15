@@ -59,7 +59,7 @@ metals <- metals %>% gather(metals, price, Cobalt:Copper)
 # Plot 
 
 ```{r, echo = TRUE, message = FALSE, warning = FALSE}
-ggplot(metals,aes(x=date,y=price,color=metals,frame=date)) +
+ggplot(metals,aes(x=date,y=price,color=metals)) +
   geom_line(alpha=1) + # Thickness of line
   theme_ipsum(grid_col = "white") + # Gridline white
   labs(

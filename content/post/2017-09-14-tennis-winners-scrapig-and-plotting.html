@@ -29,12 +29,19 @@ library(knitr) # for nice dataset printing
 library(hrbrthemes) # Aesthetic defaults for ggplot2 charts
 library(ggthemes) # Themes ggplot2
 library(ggplot2) # Charts
-library(stringr) # Manipulating strings
-
-url &lt;- &quot;http://www.espn.com/tennis/history&quot;
+library(stringr) # Manipulating strings</code></pre>
+</div>
+<div id="scraping" class="section level1">
+<h1>Scraping</h1>
+<p>We will be scraping HTML Table with the XML package. By passing the URL to readHTMLTable() we extract data from HTML tables in HTML documents. The data in each table is read and stored as a data frame. We can use the which argument in readHTMLTable() to import only those tables specified numerically.</p>
+<pre class="r"><code>url &lt;- &quot;http://www.espn.com/tennis/history&quot;
 
 # Read in HTML data only parsing the 1st table
 tbls_xml &lt;- readHTMLTable(url, which = 1)</code></pre>
+</div>
+<div id="cleansingtransforming" class="section level1">
+<h1>Cleansing/Transforming</h1>
+<p>We create the column names, eliminate the first two rows of the table and make some minor fix replacing Australian Open (Jan) and Australian Open (Dec) with Australian Open.</p>
 <pre class="r"><code># Rename table headings and remove line 1
 # Minor fix - naming for the Australian Open tournament (recode - dplyr package)
 colnames(tbls_xml) &lt;- c(&quot;year&quot;, &quot;tournament&quot;, &quot;winner&quot;,&quot;runner-up&quot;)
@@ -240,7 +247,7 @@ ggplot(data=winners7, aes(x=reorder(winner, wins), y=wins, fill=wins)) +
   theme(legend.title=element_blank()) +
   theme(axis.title.y=element_blank()) +
   theme(axis.title.x=element_blank())</code></pre>
-<p><img src="/post/2017-09-14-tennis-winners-scrapig-and-plotting_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<p><img src="/post/2017-09-14-tennis-winners-scrapig-and-plotting_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
 </div>
 <div id="wins-by-tournament" class="section level2">
 <h2>Wins by tournament</h2>
@@ -262,7 +269,7 @@ ggplot(data=total.wins.trn, aes(x=reorder(winner, wins), y=wins, fill=wins)) +
   theme(legend.title=element_blank()) +
   theme(axis.title.y=element_blank()) +
   theme(axis.title.x=element_blank()) </code></pre>
-<p><img src="/post/2017-09-14-tennis-winners-scrapig-and-plotting_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p><img src="/post/2017-09-14-tennis-winners-scrapig-and-plotting_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
 <p>[^1] ESPN Men’s Grand Slam Title Winners (<a href="http://www.espn.com/tennis/history" class="uri">http://www.espn.com/tennis/history</a>)</p>
 </div>
 </div>

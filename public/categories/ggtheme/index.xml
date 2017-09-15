@@ -21,7 +21,7 @@
  The data comes from the Tennis Grand Slam Tournaments results from the ESP website. [^1]
 We will scrape the data and continue with the visualization thereafter.
  Libraries Overall, we are going to use the following R packages:
-library(XML) # for web scraping library(rvest) # for web scraping library(dplyr) # for dataset manipulation library(knitr) # for nice dataset printing library(hrbrthemes) # Aesthetic defaults for ggplot2 charts library(ggthemes) # Themes ggplot2 library(ggplot2) # Charts library(stringr) # Manipulating strings url &amp;lt;- &amp;quot;http://www.</description>
+library(XML) # for web scraping library(rvest) # for web scraping library(dplyr) # for dataset manipulation library(knitr) # for nice dataset printing library(hrbrthemes) # Aesthetic defaults for ggplot2 charts library(ggthemes) # Themes ggplot2 library(ggplot2) # Charts library(stringr) # Manipulating strings  Scraping We will be scraping HTML Table with the XML package.</description>
     </item>
     
   </channel>

@@ -53,7 +53,7 @@ metals &lt;- metals %&gt;% gather(metals, price, Cobalt:Copper)</code></pre>
 </div>
 <div id="plot" class="section level1">
 <h1>Plot</h1>
-<pre class="r"><code>ggplot(metals,aes(x=date,y=price,color=metals,frame=date)) +
+<pre class="r"><code>ggplot(metals,aes(x=date,y=price,color=metals)) +
   geom_line(alpha=1) + # Thickness of line
   theme_ipsum(grid_col = &quot;white&quot;) + # Gridline white
   labs(
