@@ -25,15 +25,11 @@ library(XML) # For web scraping library(rvest) # For web scraping library(dplyr)
     
     <item>
       <title>cv</title>
-      <link>https://www.storieswithdata.com/cv/</link>
+      <link>https://www.storieswithdata.com/post/2017/09/15/cv/</link>
       <pubDate>Fri, 15 Sep 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://www.storieswithdata.com/cv/</guid>
-      <description>Pablo Ugarte ✉ : ugartelon@gmail.com
-✆ : (+34) 656 45 17 17
-EXPERIENCIA LABORAL &amp;lt;MASTER IN DATA ANALYTICS ISDI, MADRID
- Octubre 2016 – Agosto 2017:  Resolución de problemas y situaciones de negocio a partir del aná lisis de la información Uso de herramientas de analı́tica en el aná lisis de datos (Google Analytics, R y Tableau)
- BANK OF ENGLAND - THE FINANCIAL SERVICES AUTHORITY, LONDRES Marzo 2009 – Septiembre 2016 Resolución de problemas y situaciones de negocio a partir del aná lisis de la información Análisis de estados financieros y planes estrat gicos de las mayores entidades britá nicas Análisis de sensibilidad del sistema bancario británico mediante pruebas de resistencia – stress testing Preparación de informes y estadı́sticas para el Financial Policy Committee (FPC) Representante de la divisió n Financial Stability, Strategy &amp;amp; Risk (FSSR) en asuntos relacionados con FinTech Análisis financiero de las solicitudes para constituirse como banco en UK</description>
+      <guid>https://www.storieswithdata.com/post/2017/09/15/cv/</guid>
+      <description></description>
     </item>
     
     <item>
