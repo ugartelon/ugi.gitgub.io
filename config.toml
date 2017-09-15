@@ -28,6 +28,7 @@ footnotereturnlinkcontents = "↩"
     name = "CV"
     url = "/cv/"
     weight = 4
+    
 
 [params]
     description = "A website built through Hugo and blogdown."
