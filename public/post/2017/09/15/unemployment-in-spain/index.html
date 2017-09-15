@@ -19,6 +19,8 @@
       
       <li><a href="/categories/">Categories</a></li>
       
+      <li><a href="/cv/">CV</a></li>
+      
     </ul>
     <hr/>
     </nav>
@@ -123,7 +125,7 @@ ggplot(particpation,aes(x=date,y=ratio,color=metric)) +
 geom_line(alpha=1) + 
 theme_ipsum(grid_col = &quot;white&quot;) + 
 labs(
-    title=&#39;Labor maarket&#39;,
+    title=&#39;Labor market&#39;,
     caption=&#39;Source: INE&#39;) +
 scale_y_continuous(labels=scales::percent) +
 scale_x_date(date_labels = &quot;%Y&quot;, date_breaks = &quot;2 years&quot;)  +
