@@ -60,10 +60,10 @@ The data that we will be looking at is 2016 temperatures in Lincoln, NE[^2][^3].
     
     <item>
       <title>Tennis winners - scraping and plotting</title>
-      <link>https://www.storieswithdata.com/post/2017/09/10/tennis-winners-scrapig-and-plotting/</link>
-      <pubDate>Sun, 10 Sep 2017 00:00:00 +0000</pubDate>
+      <link>https://www.storieswithdata.com/post/2017/09/11/tennis-winners-scrapig-and-plotting/</link>
+      <pubDate>Mon, 11 Sep 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://www.storieswithdata.com/post/2017/09/10/tennis-winners-scrapig-and-plotting/</guid>
+      <guid>https://www.storieswithdata.com/post/2017/09/11/tennis-winners-scrapig-and-plotting/</guid>
       <description>Intro  In this tutorial, we will be plotting tennis players Grand Slam Tournament wins.
  The data comes from the Tennis Grand Slam Tournaments results from the ESP website. [^1]
 We will scrape the data and continue with the visualization thereafter.
@@ -73,10 +73,10 @@ library(XML) # for web scraping library(rvest) # for web scraping library(dplyr)
     
     <item>
       <title>JSON and Maps</title>
-      <link>https://www.storieswithdata.com/post/2017/09/09/json-and-maps/</link>
-      <pubDate>Sat, 09 Sep 2017 00:00:00 +0000</pubDate>
+      <link>https://www.storieswithdata.com/post/2017/09/10/json-and-maps/</link>
+      <pubDate>Sun, 10 Sep 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://www.storieswithdata.com/post/2017/09/09/json-and-maps/</guid>
+      <guid>https://www.storieswithdata.com/post/2017/09/10/json-and-maps/</guid>
       <description>Today we will extract information from a JSON document using the R package jsonlite and we will then plot lon/lat in a map using the R package leaflet.
 The data that we will be looking at is crime in LA.
 But first, we need to install and load libraries for this excercise.
@@ -85,10 +85,10 @@ library(jsonlite) library(tidyverse) library(stringr) library(tibble) library(le
     
     <item>
       <title>A Quick Note on Building Websites</title>
-      <link>https://www.storieswithdata.com/post/2017/09/08/a-quick-note-on-building-websites/</link>
-      <pubDate>Fri, 08 Sep 2017 00:00:00 +0000</pubDate>
+      <link>https://www.storieswithdata.com/post/2017/09/09/a-quick-note-on-building-websites/</link>
+      <pubDate>Sat, 09 Sep 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://www.storieswithdata.com/post/2017/09/08/a-quick-note-on-building-websites/</guid>
+      <guid>https://www.storieswithdata.com/post/2017/09/09/a-quick-note-on-building-websites/</guid>
       <description>Note: Thanks to those who share their ideas and help others make things happen seamlessly.
  Finally! I now have a blog. All thanks to the R package Blogdown. With Blogdown you can creat a personal website.
  After reading many articles, watching videos and multiple failed attempts, I was able to get my picked Hugo theme up and running with R Studio and Blogdown.
