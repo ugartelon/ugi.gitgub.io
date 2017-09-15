@@ -3,7 +3,7 @@ author:
 date: 2017-09-16
 slug: cv
 status: draft
-title: CV
+title: cv
 categories:
   - r
 ---
