@@ -110,7 +110,7 @@ ggplot(particpation,aes(x=date,y=ratio,color=metric)) +
 geom_line(alpha=1) + 
 theme_ipsum(grid_col = "white") + 
 labs(
-    title='Labor maarket',
+    title='Labor market',
     caption='Source: INE') +
 scale_y_continuous(labels=scales::percent) +
 scale_x_date(date_labels = "%Y", date_breaks = "2 years")  +
