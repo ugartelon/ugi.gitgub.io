@@ -5,6 +5,7 @@ date: '2017-09-15'
 slug: cv
 categories: []
 tags: []
+aliases: /cv/
 ---
 ## Pablo Ugarte
 
