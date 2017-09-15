@@ -6,24 +6,14 @@
     <description>Recent content in Categories on A minimal Hugo website</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 09 Sep 2017 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://www.storieswithdata.com/categories/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>Blogdown</title>
-      <link>https://www.storieswithdata.com/categories/blogdown/</link>
-      <pubDate>Sat, 09 Sep 2017 00:00:00 +0000</pubDate>
-      
-      <guid>https://www.storieswithdata.com/categories/blogdown/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>Ggjoy</title>
       <link>https://www.storieswithdata.com/categories/ggjoy/</link>
-      <pubDate>Mon, 11 Sep 2017 00:00:00 +0000</pubDate>
+      <pubDate>Tue, 12 Sep 2017 00:00:00 +0000</pubDate>
       
       <guid>https://www.storieswithdata.com/categories/ggjoy/</guid>
       <description></description>
@@ -44,15 +34,6 @@
       <pubDate>Wed, 13 Sep 2017 00:00:00 +0000</pubDate>
       
       <guid>https://www.storieswithdata.com/categories/heatmap/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Hrbrthemes</title>
-      <link>https://www.storieswithdata.com/categories/hrbrthemes/</link>
-      <pubDate>Mon, 11 Sep 2017 00:00:00 +0000</pubDate>
-      
-      <guid>https://www.storieswithdata.com/categories/hrbrthemes/</guid>
       <description></description>
     </item>
     

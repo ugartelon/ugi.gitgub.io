@@ -6,20 +6,20 @@
     <description>Recent content in Ggjoy on A minimal Hugo website</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 11 Sep 2017 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 12 Sep 2017 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://www.storieswithdata.com/categories/ggjoy/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>Joyplots with ggjoy &#43; hrbrthemes</title>
-      <link>https://www.storieswithdata.com/post/2017/09/11/ggjoy-hrbrthemes/</link>
-      <pubDate>Mon, 11 Sep 2017 00:00:00 +0000</pubDate>
+      <title>Joyplots with ggjoy and hrbrthmes</title>
+      <link>https://www.storieswithdata.com/post/2017/09/12/joyplots-with-ggjoy-and-hrbrthmes/</link>
+      <pubDate>Tue, 12 Sep 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://www.storieswithdata.com/post/2017/09/11/ggjoy-hrbrthemes/</guid>
+      <guid>https://www.storieswithdata.com/post/2017/09/12/joyplots-with-ggjoy-and-hrbrthmes/</guid>
       <description>Haven’t you run into articles with some data that makes you think, how can visualize the data in a different and possibly better way?
- We will be use Joyplots for this post. Joyplots are partially overlapping line plots that create the impression of a mountain range. They can be quite useful for visualizing changes in distributions over time or space1.
-The data that we will be looking at is 2016 temperatures in Lincoln, NE23.</description>
+ We will be use Joyplots for this post. Joyplots are partially overlapping line plots that create the impression of a mountain range. They can be quite useful for visualizing changes in distributions over time or space[^1].
+The data that we will be looking at is 2016 temperatures in Lincoln, NE[^2][^3].</description>
     </item>
     
   </channel>

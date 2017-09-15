@@ -2,9 +2,9 @@
 title: A Quick Note on Building Websites
 author: Pablo Ugarte
 date: '2017-09-08'
-categories:
-  - Blogdown
-slug: a-quick-note
+slug: a-quick-note-on-building-websites
+categories: []
+tags: []
 ---
 
 Note: Thanks to those who share their ideas and help others make things happen seamlessly.
@@ -28,4 +28,3 @@ Here are briefly the main steps one has to follow:
 The link I recommend you to watch shows all the steps except for installing, configuting Git. The bit that I probably found most difficult but, in reality is not, is ensuring the path to the Git executable from R Studio is correct. Plenty of videos and articles on the topic through out the internet though.
 
 Happy Blog!Hope so!
-

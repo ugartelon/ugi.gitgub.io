@@ -48,14 +48,14 @@ library(ggplot2) # For amazing charts library(tidyverse) # Data wrangling librar
     </item>
     
     <item>
-      <title>Joyplots with ggjoy &#43; hrbrthemes</title>
-      <link>https://www.storieswithdata.com/post/2017/09/11/ggjoy-hrbrthemes/</link>
-      <pubDate>Mon, 11 Sep 2017 00:00:00 +0000</pubDate>
+      <title>Joyplots with ggjoy and hrbrthmes</title>
+      <link>https://www.storieswithdata.com/post/2017/09/12/joyplots-with-ggjoy-and-hrbrthmes/</link>
+      <pubDate>Tue, 12 Sep 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://www.storieswithdata.com/post/2017/09/11/ggjoy-hrbrthemes/</guid>
+      <guid>https://www.storieswithdata.com/post/2017/09/12/joyplots-with-ggjoy-and-hrbrthmes/</guid>
       <description>Haven’t you run into articles with some data that makes you think, how can visualize the data in a different and possibly better way?
- We will be use Joyplots for this post. Joyplots are partially overlapping line plots that create the impression of a mountain range. They can be quite useful for visualizing changes in distributions over time or space1.
-The data that we will be looking at is 2016 temperatures in Lincoln, NE23.</description>
+ We will be use Joyplots for this post. Joyplots are partially overlapping line plots that create the impression of a mountain range. They can be quite useful for visualizing changes in distributions over time or space[^1].
+The data that we will be looking at is 2016 temperatures in Lincoln, NE[^2][^3].</description>
     </item>
     
     <item>
@@ -72,18 +72,6 @@ library(XML) # for web scraping library(rvest) # for web scraping library(dplyr)
     </item>
     
     <item>
-      <title>A Quick Note on Building Websites</title>
-      <link>https://www.storieswithdata.com/note/2017/09/09/a-quick-note/</link>
-      <pubDate>Sat, 09 Sep 2017 00:00:00 +0000</pubDate>
-      
-      <guid>https://www.storieswithdata.com/note/2017/09/09/a-quick-note/</guid>
-      <description>Note: Thanks to those who share their ideas and help others make things happen seamlessly.
- Finally! I now have a blog. All thanks to the R package Blogdown. With Blogdown you can creat a personal website.
- After reading many articles, watching videos and multiple failed attempts, I was able to get my picked Hugo theme up and running with R Studio and Blogdown.
-There are many articles on the topic but the place I strongly recommend you visit is a youtube video by John Muschelli:</description>
-    </item>
-    
-    <item>
       <title>JSON and Maps</title>
       <link>https://www.storieswithdata.com/post/2017/09/09/json-and-maps/</link>
       <pubDate>Sat, 09 Sep 2017 00:00:00 +0000</pubDate>
@@ -93,6 +81,18 @@ There are many articles on the topic but the place I strongly recommend you visi
 The data that we will be looking at is crime in LA.
 But first, we need to install and load libraries for this excercise.
 library(jsonlite) library(tidyverse) library(stringr) library(tibble) library(leaflet) library(ggmap) library(readr) Now we can start grabbing the data from the json document which can be found here 1.</description>
+    </item>
+    
+    <item>
+      <title>A Quick Note on Building Websites</title>
+      <link>https://www.storieswithdata.com/post/2017/09/08/a-quick-note-on-building-websites/</link>
+      <pubDate>Fri, 08 Sep 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.storieswithdata.com/post/2017/09/08/a-quick-note-on-building-websites/</guid>
+      <description>Note: Thanks to those who share their ideas and help others make things happen seamlessly.
+ Finally! I now have a blog. All thanks to the R package Blogdown. With Blogdown you can creat a personal website.
+ After reading many articles, watching videos and multiple failed attempts, I was able to get my picked Hugo theme up and running with R Studio and Blogdown.
+There are many articles on the topic but the place I strongly recommend you visit is a youtube video by John Muschelli:</description>
     </item>
     
     <item>
