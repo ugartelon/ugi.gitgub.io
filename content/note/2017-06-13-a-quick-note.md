@@ -1,7 +1,7 @@
 ---
 title: A Quick Note on Building Websites
 author: Pablo Ugarte
-date: '2017-09-09'
+date: '2017-09-08'
 categories:
   - Blogdown
 slug: a-quick-note

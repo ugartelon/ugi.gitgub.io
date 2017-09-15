@@ -1,11 +1,10 @@
 ---
-title: Joyplots with ggjoy + hrbrthemes
-author: Pablo
-date: '2017-09-11'
-categories:
-  - ggjoy
-  - hrbrthemes
-slug: ggjoy-hrbrthemes
+title: "Joyplots with ggjoy and hrbrthmes"
+author: "Pablo Ugarte"
+date: '2017-09-12'
+slug: joyplots-with-ggjoy-and-hrbrthmes
+tags: []
+categories: ggjoy
 ---
 
 >Haven't you run into articles with some data that makes you think, how can visualize the data in a different and possibly better way? 
@@ -60,10 +59,3 @@ ggplot(weather.raw,aes(x = `Mean TemperatureF`,y=months,height=..density..)) +
         strip.text.y = element_text(angle = 180, hjust = 1)) +
   labs(title='Temperatures in Lincoln NE',
        subtitle='Median temperatures (Fahrenheit) by month for 2016\nData: Original CSV from the Weather Underground')
-```
-
-Thats it. We now have a ggjoy map. Happy blog!
-
-[^1]: [Link ggjoy] (https://cran.r-project.org/web/packages/ggjoy/vignettes/introduction.html)
-[^2]: [Original CSV] (https://drive.google.com/file/d/0ByOfjCmqEilLYndpOWJyZXhPVUk/view)
-[^3]: [Source Blog] (http://austinwehrwein.com/data-visualization/it-brings-me-ggjoy/)
