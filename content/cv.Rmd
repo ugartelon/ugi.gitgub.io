@@ -2,9 +2,10 @@
 title: "cv"
 author: ''
 date: '2017-09-15'
+categories: []
 slug: cv
 tags: []
-categories: []
+aliases: /cv/
 ---
 
 ## Pablo Ugarte
