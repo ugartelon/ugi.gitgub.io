@@ -6,7 +6,6 @@ slug: cv
 categories: []
 tags: []
 ---
-
 ## Pablo Ugarte
 
  ✉ : ugartelon@gmail.com 
@@ -57,7 +56,7 @@ Noviembre 2005 – Febrero 2007
 información financiera y estadı́stica de la entidad
 * Seguimiento perió dico de la calidad de la deuda de las entidades analizadas
 
-###EDUCACIÓN Y FORMACIÓN
+### EDUCACIÓN Y FORMACIÓN
 
 * Master in Data Analytics ISDI                                2016 - 2017
 * CertificaciónGoogleAnalytics(GAIQ)                           2017
@@ -65,7 +64,7 @@ información financiera y estadı́stica de la entidad
 * Licenciado en Ciencias Empresariales ICADE (E2)              2000 - 2005
 * Colegio Nuestra Señ ora del Recuerdo (Jesuitas)              1987 - 2000
 
-###APTITUDES Y AFICIONES
+### APTITUDES Y AFICIONES
 
 * IT: R, Bloomberg, Dealogic, Microsoft Office, Google Analytics y Tableau
 * Información adicional: Deporte, lectura, cine, documentales y viajar
