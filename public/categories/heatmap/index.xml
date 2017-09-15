@@ -6,10 +6,22 @@
     <description>Recent content in Heatmap on A minimal Hugo website</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 13 Sep 2017 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 15 Sep 2017 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://www.storieswithdata.com/categories/heatmap/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>JSON and Maps</title>
+      <link>https://www.storieswithdata.com/post/2017/09/15/json-and-maps/</link>
+      <pubDate>Fri, 15 Sep 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.storieswithdata.com/post/2017/09/15/json-and-maps/</guid>
+      <description>Today we will extract information from a JSON document using the R package jsonlite and we will then plot lon/lat in a map using the R package leaflet.
+The data that we will be looking at is crime in LA.
+But first, we need to install and load libraries for this excercise.
+library(jsonlite) library(tidyverse) library(stringr) library(tibble) library(leaflet) library(ggmap) library(readr) Now we can start grabbing the data from the json document which can be found here 1.</description>
+    </item>
     
     <item>
       <title>BiciMad and Heatmaps</title>

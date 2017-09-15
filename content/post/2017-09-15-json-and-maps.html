@@ -1,10 +1,12 @@
 ---
-title: Plotting long/lat in a map from a json document
+title: JSON and Maps
 author: Pablo Ugarte
-date: '2017-09-12'
-slug: plotting-long-lat-in-a-map-from-a-json-document
+date: '2017-09-15'
+slug: json-and-maps
 categories:
   - json
+  - jsonlite
+  - Heatmap
   - leaflet
 tags: []
 ---
@@ -32,142 +34,7 @@ library(leaflet)
 library(ggmap)
 library(readr)</code></pre>
 <p>Now we can start grabbing the data from the json document which can be found here <a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a>.</p>
-<pre class="r"><code>crimeLARaw &lt;- fromJSON(&quot;https://data.lacity.org/resource/7fvc-faax.json&quot;)
-View(crimeLARaw)
-str(crimeLARaw)</code></pre>
-<pre><code>## &#39;data.frame&#39;:    1000 obs. of  30 variables:
-##  $ :@computed_region_2dna_qi2s: chr  &quot;19&quot; &quot;45&quot; &quot;93&quot; &quot;21&quot; ...
-##  $ :@computed_region_k96s_3jcv: chr  &quot;676&quot; &quot;800&quot; &quot;366&quot; &quot;156&quot; ...
-##  $ :@computed_region_kqwf_mjcx: chr  &quot;12&quot; &quot;14&quot; &quot;9&quot; &quot;3&quot; ...
-##  $ :@computed_region_qz3q_ghft: chr  &quot;23080&quot; &quot;22352&quot; &quot;23673&quot; &quot;19335&quot; ...
-##  $ :@computed_region_tatf_ua23: chr  &quot;897&quot; &quot;358&quot; &quot;1435&quot; &quot;1058&quot; ...
-##  $ area_id                    : chr  &quot;20&quot; &quot;18&quot; &quot;11&quot; &quot;16&quot; ...
-##  $ area_name                  : chr  &quot;Olympic&quot; &quot;Southeast&quot; &quot;Northeast&quot; &quot;Foothill&quot; ...
-##  $ crm_cd                     : chr  &quot;510&quot; &quot;510&quot; &quot;510&quot; &quot;510&quot; ...
-##  $ crm_cd_1                   : chr  &quot;510&quot; &quot;510&quot; &quot;510&quot; &quot;510&quot; ...
-##  $ crm_cd_desc                : chr  &quot;VEHICLE - STOLEN&quot; &quot;VEHICLE - STOLEN&quot; &quot;VEHICLE - STOLEN&quot; &quot;VEHICLE - STOLEN&quot; ...
-##  $ cross_street               : chr  &quot;15TH&quot; &quot;WALL&quot; &quot;AVENUE 51&quot; &quot;TRUESDALE&quot; ...
-##  $ date_occ                   : chr  &quot;2010-01-22T00:00:00.000&quot; &quot;2010-11-10T00:00:00.000&quot; &quot;2010-01-27T00:00:00.000&quot; &quot;2010-11-07T00:00:00.000&quot; ...
-##  $ date_rptd                  : chr  &quot;2010-01-25T00:00:00.000&quot; &quot;2010-11-11T00:00:00.000&quot; &quot;2010-01-28T00:00:00.000&quot; &quot;2010-11-11T00:00:00.000&quot; ...
-##  $ dr_no                      : chr  &quot;102005556&quot; &quot;101822289&quot; &quot;101105609&quot; &quot;101620051&quot; ...
-##  $ location                   : chr  &quot;VAN NESS&quot; &quot;88TH&quot; &quot;YORK&quot; &quot;EL DORADO&quot; ...
-##  $ location_1                 :&#39;data.frame&#39;: 1000 obs. of  2 variables:
-##   ..$ type       : chr  &quot;Point&quot; &quot;Point&quot; &quot;Point&quot; &quot;Point&quot; ...
-##   ..$ coordinates:List of 1000
-##   .. ..$ : num  -118 34
-##   .. ..$ : num  -118 34
-##   .. ..$ : num  -118.2 34.1
-##   .. ..$ : num  -118.4 34.2
-##   .. ..$ : num  -118.5 34.3
-##   .. ..$ : num  -118.5 34.2
-##   .. ..$ : num  -118 34
-##   .. ..$ : num  -118.5 34.2
-##   .. ..$ : num  -118.2 34.1
-##   .. ..$ : num  -118.4 34.3
-##   .. ..$ : num  -118 34
-##   .. ..$ : num  -118.2 34.1
-##   .. ..$ : num  -118.2 34.1
-##   .. ..$ : num  -118.2 34.1
-##   .. ..$ : num  -118 34
-##   .. ..$ : num  -118 34
-##   .. ..$ : num  -118 34
-##   .. ..$ : num  -118 34
-##   .. ..$ : num  -118 34
-##   .. ..$ : num  -118 34
-##   .. ..$ : num  -118 34
-##   .. ..$ : num  -118 34
-##   .. ..$ : num  -118 34
-##   .. ..$ : num  -118 34
-##   .. ..$ : num  -118 34
-##   .. ..$ : num  -118 34
-##   .. ..$ : num  -118 34
-##   .. ..$ : num  -118 34
-##   .. ..$ : num  -118 34
-##   .. ..$ : num  -118 34
-##   .. ..$ : num  -118 34
-##   .. ..$ : num  -118 34
-##   .. ..$ : num  -118 34
-##   .. ..$ : num  -118.4 33.9
-##   .. ..$ : num  -118 34
-##   .. ..$ : num  -118 34
-##   .. ..$ : num  -118 34
-##   .. ..$ : num  -118 34
-##   .. ..$ : num  -118.4 34.2
-##   .. ..$ : num  -118.4 34.2
-##   .. ..$ : num  -118.4 34.2
-##   .. ..$ : num  -118.4 34.3
-##   .. ..$ : num  -118.4 34.3
-##   .. ..$ : num  -118.4 34.2
-##   .. ..$ : num  -118 34
-##   .. ..$ : num  -118.2 34.1
-##   .. ..$ : num  -118 34
-##   .. ..$ : num  -118.6 34.2
-##   .. ..$ : num  -118.4 34.3
-##   .. ..$ : num  -118.6 34.3
-##   .. ..$ : num  -118.5 34.2
-##   .. ..$ : num  -118.5 34.2
-##   .. ..$ : num  -118.3 33.9
-##   .. ..$ : num  -118.5 34.3
-##   .. ..$ : num  -118.5 34.2
-##   .. ..$ : num  -118 34
-##   .. ..$ : num  -118.3 33.9
-##   .. ..$ : num  -118.2 33.9
-##   .. ..$ : num  -118.3 33.9
-##   .. ..$ : num  -118.5 34.2
-##   .. ..$ : num  -118.4 34.2
-##   .. ..$ : num  -118.4 34.2
-##   .. ..$ : num  -118.5 34.2
-##   .. ..$ : num  -118.3 34.1
-##   .. ..$ : num  -118.3 34.1
-##   .. ..$ : num  -118.3 34.1
-##   .. ..$ : num  -118.3 34.1
-##   .. ..$ : num  -118.6 34.2
-##   .. ..$ : num  -118 34
-##   .. ..$ : num  -118 34
-##   .. ..$ : num  -118 34
-##   .. ..$ : num  -118 34
-##   .. ..$ : num  -118.2 34.1
-##   .. ..$ : num  -118.5 34.2
-##   .. ..$ : num  -118.3 34.1
-##   .. ..$ : num  -118.2 34.1
-##   .. ..$ : num  -118.3 34.1
-##   .. ..$ : num  -118 34
-##   .. ..$ : num  -118 34
-##   .. ..$ : num  -118 34
-##   .. ..$ : num  -118 34
-##   .. ..$ : num  -118 34
-##   .. ..$ : num  -118 34
-##   .. ..$ : num  -118.4 34.3
-##   .. ..$ : num  -118.4 34.2
-##   .. ..$ : num  -118.4 34.2
-##   .. ..$ : num  -118.4 34.2
-##   .. ..$ : num  -118.4 34.2
-##   .. ..$ : num  -118.4 34.1
-##   .. ..$ : num  -118.5 34.2
-##   .. ..$ : num  -118.4 34.2
-##   .. ..$ : num  -118.5 34.3
-##   .. ..$ : num  -118.4 34.2
-##   .. ..$ : num  -118.4 34.2
-##   .. ..$ : num  -118 34
-##   .. ..$ : num  -118.3 34.3
-##   .. ..$ : num  -118.3 34.3
-##   .. ..$ : num  -118.4 34.3
-##   .. ..$ : num  -118.4 34.2
-##   .. .. [list output truncated]
-##  $ premis_cd                  : chr  &quot;101&quot; &quot;101&quot; &quot;108&quot; &quot;101&quot; ...
-##  $ premis_desc                : chr  &quot;STREET&quot; &quot;STREET&quot; &quot;PARKING LOT&quot; &quot;STREET&quot; ...
-##  $ rpt_dist_no                : chr  &quot;2071&quot; &quot;1803&quot; &quot;1125&quot; &quot;1641&quot; ...
-##  $ status                     : chr  &quot;IC&quot; &quot;IC&quot; &quot;IC&quot; &quot;IC&quot; ...
-##  $ status_desc                : chr  &quot;Invest Cont&quot; &quot;Invest Cont&quot; &quot;Invest Cont&quot; &quot;Invest Cont&quot; ...
-##  $ time_occ                   : chr  &quot;2300&quot; &quot;1800&quot; &quot;2230&quot; &quot;1600&quot; ...
-##  $ :@computed_region_ur2y_g4cx: chr  NA &quot;7&quot; NA NA ...
-##  $ mocodes                    : chr  NA NA NA NA ...
-##  $ vict_age                   : chr  NA NA NA NA ...
-##  $ vict_descent               : chr  NA NA NA NA ...
-##  $ vict_sex                   : chr  NA NA NA NA ...
-##  $ crm_cd_2                   : chr  NA NA NA NA ...
-##  $ weapon_desc                : chr  NA NA NA NA ...
-##  $ weapon_used_cd             : chr  NA NA NA NA ...</code></pre>
+<pre class="r"><code>crimeLARaw &lt;- fromJSON(&quot;https://data.lacity.org/resource/7fvc-faax.json&quot;)</code></pre>
 <p>We will now clean the data by just selecting certain columns.</p>
 <pre class="r"><code>crimeLARaw_tbl &lt;- crimeLARaw %&gt;% 
   select(crm_cd_desc , premis_desc, time_occ, location_1)</code></pre>
@@ -177,20 +44,7 @@ str(crimeLARaw)</code></pre>
 <pre class="r"><code>crimeLA &lt;- crimeLA %&gt;% separate(cordinates, c(&quot;long&quot;, &quot;lat&quot;), sep = &quot;, &quot;)
 crimeLA$long &lt;- as.numeric(crimeLA$long) 
 crimeLA$lat &lt;- as.numeric(crimeLA$lat)
-crimeLA$crime_type &lt;- as.factor(crimeLA$crime_type)
-levels(crimeLA$crime_type)</code></pre>
-<pre><code>##  [1] &quot;BURGLARY&quot;                                 
-##  [2] &quot;BURGLARY FROM VEHICLE&quot;                    
-##  [3] &quot;CHILD ANNOYING (17YRS &amp; UNDER&quot;            
-##  [4] &quot;CRUELTY TO ANIMALS&quot;                       
-##  [5] &quot;DISTURBING THE PEACE&quot;                     
-##  [6] &quot;EMBEZZLEMENT, GRAND THEFT ($950.01 &amp; OVER&quot;
-##  [7] &quot;INDECENT EXPOSURE&quot;                        
-##  [8] &quot;OTHER ASSAULT&quot;                            
-##  [9] &quot;OTHER MISCELLANEOUS CRIME&quot;                
-## [10] &quot;THEFT PLAIN - PETTY ($950 &amp; UNDER&quot;        
-## [11] &quot;VANDALISM - MISDEAMEANOR ($399 OR UNDER&quot;  
-## [12] &quot;VEHICLE - STOLEN&quot;</code></pre>
+crimeLA$crime_type &lt;- as.factor(crimeLA$crime_type)</code></pre>
 <p>Last, we plot the long/lat info. We also create a palette that maps factor levels to colors.</p>
 <pre class="r"><code>pal &lt;- colorFactor(c(&quot;gray&quot;,&quot;red&quot;,&quot;green3&quot;,&quot;blue&quot;,&quot;cyan&quot;,&quot;magenta&quot;,&quot;yellow&quot;,&quot;black&quot;),
                    domain = c(&quot;BURGLARY&quot;, &quot;BURGLARY FROM VEHICLE&quot;,&quot;CHILD ANNOYING (17YRS &amp; UNDER&quot;,&quot;CRUELTY TO ANIMALS&quot;,&quot;DISTURBING THE PEACE&quot;,&quot;EMBEZZLEMENT, GRAND THEFT ($950.01 &amp; OVER&quot;,&quot;INDECENT EXPOSURE&quot;,&quot;OTHER ASSAULT&quot;  ,&quot;OTHER MISCELLANEOUS CRIME&quot;,&quot;THEFT PLAIN - PETTY ($950 &amp; UNDER&quot;,&quot;VANDALISM - MISDEAMEANOR ($399 OR UNDER&quot;,&quot;VEHICLE - STOLEN&quot; ))

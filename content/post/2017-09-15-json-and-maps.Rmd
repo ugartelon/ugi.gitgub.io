@@ -1,10 +1,12 @@
 ---
-title: Plotting long/lat in a map from a json document
+title: JSON and Maps
 author: Pablo Ugarte
-date: '2017-09-12'
-slug: plotting-long-lat-in-a-map-from-a-json-document
+date: '2017-09-15'
+slug: json-and-maps
 categories:
   - json
+  - jsonlite
+  - Heatmap
   - leaflet
 tags: []
 ---
@@ -29,8 +31,6 @@ Now we can start grabbing the data from the json document which can be found her
 
 ```{r, message = FALSE, warning = FALSE}
 crimeLARaw <- fromJSON("https://data.lacity.org/resource/7fvc-faax.json")
-View(crimeLARaw)
-str(crimeLARaw)
 ```
 
 We will now clean the data by just selecting certain columns.
@@ -55,7 +55,6 @@ crimeLA <- crimeLA %>% separate(cordinates, c("long", "lat"), sep = ", ")
 crimeLA$long <- as.numeric(crimeLA$long) 
 crimeLA$lat <- as.numeric(crimeLA$lat)
 crimeLA$crime_type <- as.factor(crimeLA$crime_type)
-levels(crimeLA$crime_type)
 ```
 
 Last, we plot the long/lat info. We also create a palette that maps factor levels to colors.
