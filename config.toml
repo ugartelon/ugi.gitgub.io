@@ -26,7 +26,7 @@ footnotereturnlinkcontents = "↩"
     weight = 3
 [[menu.main]]
     name = "CV"
-    url = "/vitae/"
+    url = "/cv/"
     weight = 4
 
 
