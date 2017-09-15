@@ -12,11 +12,11 @@
     
     
     <item>
-      <title>JSON and mapping long/lat</title>
-      <link>https://www.storieswithdata.com/post/2017/09/12/json-and-mapping-long-lat/</link>
+      <title>Plotting long/lat in a map from a json document</title>
+      <link>https://www.storieswithdata.com/post/2017/09/12/plotting-long-lat-in-a-map-from-a-json-document/</link>
       <pubDate>Tue, 12 Sep 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://www.storieswithdata.com/post/2017/09/12/json-and-mapping-long-lat/</guid>
+      <guid>https://www.storieswithdata.com/post/2017/09/12/plotting-long-lat-in-a-map-from-a-json-document/</guid>
       <description>Today we will extract information from a JSON document using the R package jsonlite and we will then plot lon/lat in a map using the R package leaflet.
 The data that we will be looking at is crime in LA.
 But first, we need to install and load libraries for this excercise.
