@@ -24,20 +24,6 @@ library(XML) # For web scraping library(rvest) # For web scraping library(dplyr)
     </item>
     
     <item>
-      <title>cv</title>
-      <link>https://www.storieswithdata.com/cv/</link>
-      <pubDate>Fri, 15 Sep 2017 00:00:00 +0000</pubDate>
-      
-      <guid>https://www.storieswithdata.com/cv/</guid>
-      <description>Pablo Ugarte ✉ : ugartelon@gmail.com
-✆ : (+34) 656 45 17 17
-EXPERIENCIA LABORAL
- MASTER IN DATA ANALYTICS ISDI, MADRID Octubre 2016 – Agosto 2017
- Resolución de problemas y situaciones de negocio a partir del aná lisis de la información Uso de herramientas de analı́tica en el aná lisis de datos (Google Analytics, R y Tableau)
- BANK OF ENGLAND - THE FINANCIAL SERVICES AUTHORITY, LONDRES Marzo 2009 – Septiembre 2016</description>
-    </item>
-    
-    <item>
       <title>Electric cars and metal prices</title>
       <link>https://www.storieswithdata.com/post/2017/09/14/electric-cars-and-metal-prices/</link>
       <pubDate>Thu, 14 Sep 2017 00:00:00 +0000</pubDate>
