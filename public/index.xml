@@ -6,10 +6,23 @@
     <description>Recent content in Home on A minimal Hugo website</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 15 Sep 2017 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 16 Sep 2017 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://www.storieswithdata.com/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>cv</title>
+      <link>https://www.storieswithdata.com/cv/</link>
+      <pubDate>Sat, 16 Sep 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.storieswithdata.com/cv/</guid>
+      <description>Pablo Ugarte ✉ : ugartelon@gmail.com
+✆ : (+34) 656 45 17 17
+EXPERIENCIA LABORAL MASTER IN DATA ANALYTICS ISDI, MADRID
+-Octubre 2016 – Agosto 2017
+ Resolución de problemas y situaciones de negocio a partir del aná lisis de la información Uso de herramientas de analı́tica en el aná lisis de datos (Google Analytics, R y Tableau)  BANK OF ENGLAND - THE FINANCIAL SERVICES AUTHORITY, LONDRES -Marzo 2009 – Septiembre 2016</description>
+    </item>
     
     <item>
       <title>Unemployment in Spain</title>
