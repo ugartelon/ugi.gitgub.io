@@ -20,12 +20,13 @@ tags: []
 #### MASTER IN DATA ANALYTICS ISDI, MADRID (Octubre 2016 – Agosto 2017)
 
 * Resolución de problemas y situaciones de negocio a partir del aná lisis de la información
-* Uso de herramientas de analı́tica en el análisis de datos (Google Analytics, R y Tableau)
+* Uso de herramientas de analıtica en el ánalisis de datos (R, Google Analytics y Tableau) 
+
 
 #### BANK OF ENGLAND - THE FINANCIAL SERVICES AUTHORITY, LONDRES (Marzo 2009 – Septiembre 2016)
 
 * Resolución de problemas y situaciones de negocio a partir del análisis de la información
-* Análisis de estados financieros y planes estrat gicos de las mayores entidades británicas
+* Análisis de estados financieros y planes estratégicos de las mayores entidades británicas
 * Análisis de sensibilidad del sistema bancario británico mediante pruebas de resistencia –
 stress testing
 * Preparación de informes y estadı́sticas para el Financial Policy Committee (FPC)
