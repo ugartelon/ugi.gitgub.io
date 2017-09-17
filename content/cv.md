@@ -13,7 +13,7 @@ tags: []
  
  ✆ : (+34) 656 45 17 17  
  
-
+***
 #### EXPERIENCIA LABORAL
 ***
 
@@ -24,7 +24,7 @@ Octubre 2016 – Agosto 2017
 * Uso de herramientas de analı́tica en el aná lisis de datos (Google Analytics, R y Tableau)
 
 ##### BANK OF ENGLAND - THE FINANCIAL SERVICES AUTHORITY, LONDRES  
-Marzo 2009 – Septiembre 2016</right> 
+Marzo 2009 – Septiembre 2016
 
 * Resolución de problemas y situaciones de negocio a partir del aná lisis de la información
 * Análisis de estados financieros y planes estrat gicos de las mayores entidades britá nicas
@@ -58,7 +58,7 @@ información financiera y estadı́stica de la entidad
 información financiera y estadı́stica de la entidad
 * Seguimiento perió dico de la calidad de la deuda de las entidades analizadas
 
-
+***
 #### EDUCACIÓN Y FORMACIÓN
 ***
 
@@ -68,7 +68,7 @@ información financiera y estadı́stica de la entidad
 * Licenciado en Ciencias Empresariales ICADE (E2) (2000 - 2005)
 * Colegio Nuestra Señ ora del Recuerdo (Jesuitas) (1987 - 2000)
 
-
+***
 #### APTITUDES Y AFICIONES
 ***
 
