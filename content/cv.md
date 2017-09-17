@@ -20,7 +20,7 @@ tags: []
 #### MASTER IN DATA ANALYTICS ISDI, MADRID (Octubre 2016 – Agosto 2017)
 
 * Resolución de problemas y situaciones de negocio a partir del aná lisis de la información
-* Uso de herramientas de analıtica en el ánalisis de datos (R, Google Analytics y Tableau) 
+* Uso de herramientas de analítica en el ánalisis de datos (R, Google Analytics y Tableau) 
 
 
 #### BANK OF ENGLAND - THE FINANCIAL SERVICES AUTHORITY, LONDRES (Marzo 2009 – Septiembre 2016)
