@@ -20,12 +20,12 @@ tags: []
 #### MASTER IN DATA ANALYTICS ISDI, MADRID (Octubre 2016 – Agosto 2017)
 
 * Resolución de problemas y situaciones de negocio a partir del aná lisis de la información
-* Uso de herramientas de analı́tica en el aná lisis de datos (Google Analytics, R y Tableau)
+* Uso de herramientas de analı́tica en el análisis de datos (Google Analytics, R y Tableau)
 
 #### BANK OF ENGLAND - THE FINANCIAL SERVICES AUTHORITY, LONDRES (Marzo 2009 – Septiembre 2016)
 
-* Resolución de problemas y situaciones de negocio a partir del aná lisis de la información
-* Análisis de estados financieros y planes estrat gicos de las mayores entidades britá nicas
+* Resolución de problemas y situaciones de negocio a partir del análisis de la información
+* Análisis de estados financieros y planes estrat gicos de las mayores entidades británicas
 * Análisis de sensibilidad del sistema bancario británico mediante pruebas de resistencia –
 stress testing
 * Preparación de informes y estadı́sticas para el Financial Policy Committee (FPC)
@@ -33,12 +33,12 @@ stress testing
 relacionados con FinTech
 * Análisis financiero de las solicitudes para constituirse como banco en UK
 
-#### CITIGROUP, LONDRES  (Marzo 2009 – Septiembre 2016)
+#### CITIGROUP, LONDRES  (Abril 2008 – Febrero 2009)
 
 * Elaboración de órdenes de inversión y desinversión solicitadas por los clientes
 * Control de las carteras de los clientes para que no se desvı́en de los objetivos originales
 * Gestión de cash management y estrategias de cobertura
-* Preparación de los informes de pé rdidas y ganancias
+* Preparación de los informes de pérdidas y ganancias
 
 #### STANDARD & POOR’S, LONDRES (Abril 2007 – Febrero 2008)
 
@@ -59,10 +59,10 @@ información financiera y estadı́stica de la entidad
 ***
 
 * Master in Data Analytics ISDI (2016 - 2017)
-* CertificaciónGoogleAnalytics(GAIQ) (2017)
+* CertificaciónGoogleAnalytics (GAIQ) (2017)
 * Investment Management Certificate (IMC) (2008)
 * Licenciado en Ciencias Empresariales ICADE (E2) (2000 - 2005)
-* Colegio Nuestra Señ ora del Recuerdo (Jesuitas) (1987 - 2000)
+* Colegio Nuestra Señora del Recuerdo (Jesuitas) (1987 - 2000)
 
 ***
 ### APTITUDES Y AFICIONES
