@@ -19,7 +19,8 @@
       <guid>https://www.storieswithdata.com/cv/</guid>
       <description>Pablo Ugarte ✉ : ugartelon@gmail.com
 ✆ : (+34) 656 45 17 17
-EXPERIENCIA LABORAL    MASTER IN DATA ANALYTICS ISDI, MADRID Octubre 2016 – Agosto 2017       Resolución de problemas y situaciones de negocio a partir del aná lisis de la información Uso de herramientas de analı́tica en el aná lisis de datos (Google Analytics, R y Tableau)     BANK OF ENGLAND - FSA, LONDRES Marzo 2009 – Septiembre 2016       Resolución de problemas y situaciones de negocio a partir del aná lisis de la información Análisis de estados financieros y planes estrat gicos de las mayores entidades britá nicas Análisis de sensibilidad del sistema bancario británico mediante pruebas de resistencia – stress testing Preparación de informes y estadı́sticas para el Financial Policy Committee (FPC) Representante de la divisió n Financial Stability, Strategy &amp;amp; Risk (FSSR) en asuntos relacionados con FinTech Análisis financiero de las solicitudes para constituirse como banco en UK     CITIGROUP, LONDRES Marzo 2009 – Septiembre 2016       Elaboración de órdenes de inversión y desinversión solicitadas por los clientes Control de las carteras de los clientes para que no se desvı́en de los objetivos originales Gestión de cash management y estrategias de cobertura Preparación de los informes de pé rdidas y ganancias     STANDARD &amp;amp; POOR’S, LONDRES Abril 2007 – Febrero 2008       Análisis y elaboración de rating de entidades financieras de UK Elaboración de informes sectoriales y de coyuntura económica con el fin de analizar la información financiera y estadı́stica de la entidad Seguimiento perió dico de la calidad de la deuda de las entidades analizadas     FITCH RATINGS, LONDRES Noviembre 2005 – Febrero 2007       Análisis y elaboración de rating de entidades financieras de España, Portugal y Andorra Elaboración de informes sectoriales y de coyuntura económica con el fin de analizar la información financiera y estadı́stica de la entidad Seguimiento perió dico de la calidad de la deuda de las entidades analizadas</description>
+EXPERIENCIA LABORAL MASTER IN DATA ANALYTICS ISDI, MADRID Octubre 2016 – Agosto 2017
+ Resolución de problemas y situaciones de negocio a partir del aná lisis de la información Uso de herramientas de analı́tica en el aná lisis de datos (Google Analytics, R y Tableau)  BANK OF ENGLAND - THE FINANCIAL SERVICES AUTHORITY, LONDRES Marzo 2009 – Septiembre 2016</description>
     </item>
     
     <item>
@@ -105,6 +106,15 @@ library(jsonlite) library(tidyverse) library(stringr) library(tibble) library(le
  Finally! I now have a blog. All thanks to the R package Blogdown. With Blogdown you can creat a personal website.
  After reading many articles, watching videos and multiple failed attempts, I was able to get my picked Hugo theme up and running with R Studio and Blogdown.
 There are many articles on the topic but the place I strongly recommend you visit is a youtube video by John Muschelli:</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://www.storieswithdata.com/cv/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.storieswithdata.com/cv/</guid>
+      <description>cv       code{white-space: pre;} pre:not([class]) { background-color: white; }  if (window.hljs &amp;&amp; document.readyState &amp;&amp; document.readyState === &#34;complete&#34;) { window.setTimeout(function() { hljs.initHighlighting(); }, 0); }  h1 { font-size: 34px; } h1.title { font-size: 38px; } h2 { font-size: 30px; } h3 { font-size: 24px; } h4 { font-size: 18px; } h5 { font-size: 16px; } h6 { font-size: 12px; } .table th:not([align]) { text-align: left; }    .</description>
     </item>
     
     <item>

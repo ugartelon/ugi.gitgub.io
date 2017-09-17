@@ -43,6 +43,10 @@
   </url>
   
   <url>
+    <loc>https://www.storieswithdata.com/cv/</loc>
+  </url>
+  
+  <url>
     <loc>https://www.storieswithdata.com/categories/</loc>
     <priority>0</priority>
   </url>
