@@ -46,7 +46,7 @@ relacionados con FinTech
 * Análisis y elaboración de rating de entidades financieras de UK
 * Elaboración de informes sectoriales y de coyuntura económica con el fin de analizar la
 información financiera y estadı́stica de la entidad
-* Seguimiento perió dico de la calidad de la deuda de las entidades analizadas
+* Seguimiento periódico de la calidad de la deuda de las entidades analizadas
 
 #### FITCH RATINGS, LONDRES (Noviembre 2005 – Febrero 2007)
 
