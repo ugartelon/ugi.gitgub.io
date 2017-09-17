@@ -16,8 +16,7 @@ tags: []
 #### EXPERIENCIA LABORAL
 ***
 
-##### MASTER IN DATA ANALYTICS ISDI, MADRID  
-Octubre 2016 – Agosto 2017
+##### MASTER IN DATA ANALYTICS ISDI, MADRID  |> Octubre 2016 – Agosto 2017
 
 * Resolución de problemas y situaciones de negocio a partir del aná lisis de la información
 * Uso de herramientas de analı́tica en el aná lisis de datos (Google Analytics, R y Tableau)
