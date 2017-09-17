@@ -19,7 +19,7 @@ tags: []
 
 #### MASTER IN DATA ANALYTICS ISDI, MADRID (Octubre 2016 – Agosto 2017)
 
-* Resolución de problemas y situaciones de negocio a partir del aná lisis de la información
+* Resolución de problemas y situaciones de negocio a partir del análisis de la información
 * Uso de herramientas de analítica en el ánalisis de datos (R, Google Analytics y Tableau) 
 
 
@@ -30,7 +30,7 @@ tags: []
 * Análisis de sensibilidad del sistema bancario británico mediante pruebas de resistencia –
 stress testing
 * Preparación de informes y estadı́sticas para el Financial Policy Committee (FPC)
-* Representante de la divisió n Financial Stability, Strategy & Risk (FSSR) en asuntos
+* Representante de la división Financial Stability, Strategy & Risk (FSSR) en asuntos
 relacionados con FinTech
 * Análisis financiero de las solicitudes para constituirse como banco en UK
 
@@ -53,14 +53,14 @@ información financiera y estadı́stica de la entidad
 * Análisis y elaboración de rating de entidades financieras de España, Portugal y Andorra
 * Elaboración de informes sectoriales y de coyuntura económica con el fin de analizar la
 información financiera y estadı́stica de la entidad
-* Seguimiento perió dico de la calidad de la deuda de las entidades analizadas
+* Seguimiento periódico de la calidad de la deuda de las entidades analizadas
 
 ***
 ### EDUCACIÓN Y FORMACIÓN
 ***
 
 * Master in Data Analytics ISDI (2016 - 2017)
-* CertificaciónGoogleAnalytics (GAIQ) (2017)
+* Certificación Google Analytics (GAIQ) (2017)
 * Investment Management Certificate (IMC) (2008)
 * Licenciado en Ciencias Empresariales ICADE (E2) (2000 - 2005)
 * Colegio Nuestra Señora del Recuerdo (Jesuitas) (1987 - 2000)
