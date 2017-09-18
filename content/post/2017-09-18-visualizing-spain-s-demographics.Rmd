@@ -1,0 +1,106 @@
+---
+title: Visualizing Spain’s demographics
+author: Pablo Ugarte
+date: '2017-09-18'
+slug: visualizing-spain-s-demographics
+categories:
+  - ggmap
+  - stringr
+tags: []
+---
+
+# Intro
+
+> Women have fewer children than ever in Spain since data exist. In fact, 2016 was the second consecutive year in which more people died than those who were born (negative vegetative balance). In this post our goal is to visualize this data.
+
+# Libraries
+
+We will first load the packages.
+
+```{r, message = FALSE, warning = FALSE}
+library(hrbrthemes) # Aesthetic defaults for ggplot2 charts
+library(ggplot2) # Charts
+library(stringr) # Manipulating strings
+library(tidyverse) # Data wrangling packages gather, spread...
+library(ggthemes) # Themes ggplot
+library(maps) # Spatial Visualization 
+library(readr) # Read docs
+```
+
+# Data
+
+Data comes from INE (Instituo Nacional de Estadistica) [^1]. 
+
+We are interested in:
+
+* Población por provincia
+* Tasa Bruta de Natalidad por provincia
+* Tasa Bruta de Mortalidad por provincia
+
+```{r, message = FALSE, warning = FALSE}
+spaindemo <- read_csv("~/Documents/R Working Directory/spaindemo.csv", col_types = cols(`Tasa mortalidad` = col_double()), locale = locale(grouping_mark = "."))
+View(spaindemo)
+```
+
+Some cleansing:
+
+* We create a new column: "Tasa neta" (births minus deadths)
+* We transform into % the "Tasa natalidad", "Tasa mortalidad" y "Tasa neta"
+
+```{r, message = FALSE, warning = FALSE}
+spaindemo <- spaindemo %>% mutate(`Tasa neta` = (`Tasa natalidad` - `Tasa mortalidad`)/100)
+spaindemo <- spaindemo %>% mutate(`Tasa natalidad` = `Tasa natalidad`/100)
+spaindemo <- spaindemo %>% mutate(`Tasa mortalidad` = `Tasa mortalidad`/100)
+```
+
+We will now geocode our data (to get the lat-long coordinates). Then we will merge the geo-data back onto the dataframe using cbind(). In our case by the city names.
+
+```{r, message = FALSE, warning = FALSE}
+data.geo <- geocode(spaindemo$Capital)
+spaindemo <- cbind(spaindemo, data.geo)
+View(spaindemo)
+```
+
+In order to visualize the data as a map, we need a map of Spain. To get this, we will use map_data() and filter by Spain [^2]. 
+
+```{r, message = FALSE, warning = FALSE}
+map.spain <- map_data("world") %>% 
+  filter(region == 'Spain') 
+   
+ggplot() +
+  geom_polygon(data = map.spain, aes(x = long, y = lat, group = group)) +
+  geom_point(data = spaindemo, aes(x = lon, y = lat, size = Poblacion, color = `Tasa neta`)) +
+  coord_cartesian(xlim = c(-9,4), ylim = c(36,44))
+```
+
+To make it more beautiful we just need to make a few changes: adding titles, adding theme elements and adjusting legends.
+
+```{r, echo = TRUE, message = FALSE, warning = FALSE}
+ggplot() +
+  geom_polygon(data = map.spain, aes(x = long, y = lat, group = group)) +
+  geom_point(data = spaindemo, aes(x = lon, y = lat, size = Poblacion, color = `Tasa neta`), alpha = .5) +
+  geom_point(data = spaindemo, aes(x = lon, y = lat, size = Poblacion, color = `Tasa neta`), shape = 1) +
+  coord_cartesian(xlim = c(-9,4), ylim = c(36,44)) +
+  scale_color_gradient2(low = "red", mid = "yellow", high = "green", midpoint = 0.001, labels = scales::percent_format()) +
+  scale_size_continuous(range = c(.9, 11),  breaks = c(1000000, 2000000, 6000000),labels = scales::comma_format()) +
+  guides(color = guide_legend(reverse = T, override.aes = list(alpha = 1, size = 4) )) +
+  labs(color = "Birth Rate minus Death Rate\nPercent"
+       ,size = "Total Population\n(metro area)"
+       ,title = "Spain’s demographics"
+       ,subtitle = "Based on population & change in population size") +
+  theme(text = element_text(colour = "#444444", family = "Gill Sans")
+        ,panel.background = element_blank()
+        ,axis.title = element_blank()
+        ,axis.ticks = element_blank()
+        ,axis.text = element_blank()
+        ,plot.title = element_text(size = 28)
+        ,plot.subtitle = element_text(size = 12)
+        ,legend.key = element_rect(fill = "white")
+        ) 
+```
+
+With R making these kind of plots is possible!
+
+
+[^1]: INE (http://www.ine.es/dyngs/INEbase/es/categoria.htm?c=Estadistica_P&cid=1254735572981)
+[^2]: Ceuta, Melilla and Canary Islands out of scope
