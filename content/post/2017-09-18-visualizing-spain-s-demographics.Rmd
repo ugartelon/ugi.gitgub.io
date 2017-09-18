@@ -1,12 +1,12 @@
 ---
-title: Visualizing Spain’s demographics
-author: Pablo Ugarte
+title: "Visualizing Spain’s demographics"
+author: "Pablo Ugarte"
 date: '2017-09-18'
 slug: visualizing-spain-s-demographics
-categories:
-  - ggmap
-  - stringr
 tags: []
+categories:
+- ggmap
+- stringr
 ---
 
 # Intro
@@ -25,6 +25,7 @@ library(tidyverse) # Data wrangling packages gather, spread...
 library(ggthemes) # Themes ggplot
 library(maps) # Spatial Visualization 
 library(readr) # Read docs
+library(ggmap) # Find latitude and longitude
 ```
 
 # Data
@@ -38,7 +39,7 @@ We are interested in:
 * Tasa Bruta de Mortalidad por provincia
 
 ```{r, message = FALSE, warning = FALSE}
-spaindemo <- read_csv("~/Documents/R Working Directory/spaindemo.csv", col_types = cols(`Tasa mortalidad` = col_double()), locale = locale(grouping_mark = "."))
+spaindemo <- read_csv("~/Documents/R Working Directory/Blog/First/content/post/spaindemo.csv", col_types = cols(`Tasa mortalidad` = col_double()), locale = locale(grouping_mark = "."))
 View(spaindemo)
 ```
 
@@ -58,7 +59,6 @@ We will now geocode our data (to get the lat-long coordinates). Then we will mer
 ```{r, message = FALSE, warning = FALSE}
 data.geo <- geocode(spaindemo$Capital)
 spaindemo <- cbind(spaindemo, data.geo)
-View(spaindemo)
 ```
 
 In order to visualize the data as a map, we need a map of Spain. To get this, we will use map_data() and filter by Spain [^2]. 
@@ -67,7 +67,7 @@ In order to visualize the data as a map, we need a map of Spain. To get this, we
 map.spain <- map_data("world") %>% 
   filter(region == 'Spain') 
    
-ggplot() +
+iteration1 <- ggplot() +
   geom_polygon(data = map.spain, aes(x = long, y = lat, group = group)) +
   geom_point(data = spaindemo, aes(x = lon, y = lat, size = Poblacion, color = `Tasa neta`)) +
   coord_cartesian(xlim = c(-9,4), ylim = c(36,44))
