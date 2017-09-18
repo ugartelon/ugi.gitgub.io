@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://www.storieswithdata.com/post/2017/09/18/visualizing-spain-s-demographics/</loc>
+    <lastmod>2017-09-18T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://www.storieswithdata.com/cv/</loc>
     <lastmod>2017-09-17T00:00:00+00:00</lastmod>
   </url>
@@ -54,6 +59,12 @@
   </url>
   
   <url>
+    <loc>https://www.storieswithdata.com/categories/ggmap/</loc>
+    <lastmod>2017-09-18T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://www.storieswithdata.com/categories/ggtheme/</loc>
     <lastmod>2017-09-15T00:00:00+00:00</lastmod>
     <priority>0</priority>
@@ -67,7 +78,7 @@
   
   <url>
     <loc>https://www.storieswithdata.com/</loc>
-    <lastmod>2017-09-17T00:00:00+00:00</lastmod>
+    <lastmod>2017-09-18T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -94,7 +105,7 @@
   
   <url>
     <loc>https://www.storieswithdata.com/post/</loc>
-    <lastmod>2017-09-15T00:00:00+00:00</lastmod>
+    <lastmod>2017-09-18T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -113,6 +124,12 @@
   <url>
     <loc>https://www.storieswithdata.com/categories/scraping/</loc>
     <lastmod>2017-09-15T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.storieswithdata.com/categories/stringr/</loc>
+    <lastmod>2017-09-18T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
