@@ -1,0 +1,110 @@
+---
+title: "A cool map"
+author: "Pablo Ugarte"
+date: '2017-09-20'
+slug: a-cool-map
+tags: []
+categories: []
+---
+
+# Intro
+
+>In this post we will be plotting population in Spain using Hex Bins in ggplot2.
+
+# Libraries
+
+We will first load the packages.
+
+```{r, message = FALSE, warning = FALSE}
+library(stringr) # Manipulating strings
+library(tidyverse) # Data wrangling packages gather, spread...
+library(maps) # Spatial Visualization 
+library(readr) # Read docs
+library(RColorBrewer) # Colors
+```
+
+# Data
+
+Data comes from MAXMIND [^1]. We select ES.zip file (for Spain). We remove cities with no population and rename columns.
+
+```{r, include = FALSE, message = FALSE, warning = FALSE}
+spaincities <- read_delim("~/Documents/R Working Directory/Blog/First/content/post/spaincities.txt", "\t", escape_double = FALSE, col_names = FALSE, trim_ws = TRUE)
+
+spaincities <- spaincities %>% select(X2,X15,X5,X6,X7,X8)
+colnames(spaincities) <- c("city","population","lat","lon","feature","feature2")
+spaincities <- spaincities %>% filter(feature == "P") %>% filter(!population == "0") %>% filter(lon > -13)
+View(spaincities)
+```
+
+# Plot
+
+```{r, message = FALSE, warning = FALSE}
+s <-
+    ggplot(spaincities, aes(x = lon, y = lat)) +
+    geom_hex() +
+    coord_equal()
+s
+```
+
+Looks ok but not easy to compare different cities on a continuous scale. 
+
+Better to break the bins in levels with R base function cut(): it breaks a continuous variable into a factor. 
+
+I chose seven levels so we can visualize the data easily. To do this, we call stat_binhex. And we add colour RColorBrewer palette (pre-made color palettes).
+
+```{r, message = FALSE, warning = FALSE}
+s <-
+    ggplot(spaincities, aes(x = lon, y = lat)) +
+    stat_binhex(
+        colour = NA,
+        aes(fill = cut(..count.., breaks =7))) +
+    coord_equal() +
+    labs(fill = NULL) +
+    scale_fill_brewer(
+        palette = "OrRed",
+        labels = c('<50,000','50,000-100,000','100,000-200,000','200,000-500,000','500,000-1000,000', '1,000,000+'))
+
+s
+```
+
+As expected, concentrations of population are found in the largest cities. We will now layer the largest cities on the map. To do this, we need to create a data frame with the names and coordinates info.
+
+```{r, message = FALSE, warning = FALSE}
+bigcity <- data.frame(
+    name = c("Madrid", "Barcelona", "Valencia", "Sevilla", "Zaragoza",
+             "Malaga", "Murcia", "Palma", "Bilbao", "Valladolid", "Cordoba", "Vigo", "Gijon", "Granada", "La Coruña", "Vitoria"),
+    long = c(-3.692220, 2.174100, -0.366667, -5.976133, -0.884861, -4.434802, -1.130042, 2.655222, -2.938764, -4.723720, -4.772748, -8.722637, -5.661519, -3.599201, -8.406812, -2.666667),
+    lat  = c(40.40857, 41.39837, 39.46667, 37.38241, 41.64531, 36.72667, 37.98704, 39.57434, 43.26092, 41.65518, 37.89155, 42.23282, 43.53573, 37.17835, 43.36661, 42.85000),
+    vjust = c(0, 1, 1, 1, 0, 0.5, 0.5, 0, 1, 1, 1, 1, 1, 1, 1, 1),
+    hjust = 0.5)
+```
+
+We use geom_text to overlay names on the ggplot.
+
+```{r, message = FALSE, warning = FALSE}
+s <- s + labs(title = "Spain, most populated cities") +
+    geom_text(aes(x = long, y = lat, label = name, vjust = vjust,
+                  hjust = hjust), data = bigcity, size = 3.8) +
+    theme(panel.background = element_rect(fill = "NA", colour = NA),
+          plot.background = element_rect(fill = "NA", colour = NA),
+          # Remove titles, ticks, gridlines, and borders
+          axis.text = element_blank(),
+          axis.title = element_blank(),
+          axis.ticks = element_blank(),
+          panel.grid = element_blank(),
+          panel.border = element_blank(),
+          # Set the legend background
+          legend.position = c(0.9,0.25),
+          legend.direction = "vertical",
+          legend.background = element_rect(fill = NA, colour = NA),
+          legend.key = element_rect(fill = NA, colour = NA),
+          legend.key.size = unit(1, "line"),
+          # Set margins so that the graphic fills the whole space.
+          plot.margin = unit(c(0, 0, -0.5, -0.5), "line")) 
+s
+```
+
+And we have have the plot! As you can see the plot can be done with a few lines of code. The rest is minor adjustment to make it more beautiful.
+
+[^1]: MAXMIND (http://download.geonames.org/export/dump/)
+
