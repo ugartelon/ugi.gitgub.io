@@ -6,10 +6,21 @@
     <description>Recent content in Home on A minimal Hugo website</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 20 Sep 2017 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 21 Sep 2017 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://www.storieswithdata.com/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Using waffle charts to analyze Spanish general election results, 2016</title>
+      <link>https://www.storieswithdata.com/post/2017/09/21/using-waffle-charts-to-analyze-spanish-general-election-results-2016/</link>
+      <pubDate>Thu, 21 Sep 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.storieswithdata.com/post/2017/09/21/using-waffle-charts-to-analyze-spanish-general-election-results-2016/</guid>
+      <description>Intro  In this post we wil show how the waffle package can be used plotting 2016 Spanish general elections
+ If you are interested in learning more about creating charts using the R Waffle package you can read more here:
+ Make waffle (square pie) charts in R 1 Infographic-style charts using the R waffle package 2   Libraries We will first load the packages (you will have to install the packages if you haven’t done so before).</description>
+    </item>
     
     <item>
       <title>A cool map</title>

@@ -1,0 +1,95 @@
+---
+title: "Using waffle charts to analyze Spanish general election results, 2016"
+author: "Pablo Ugarte"
+date: '2017-09-21'
+slug: using-waffle-charts-to-analyze-spanish-general-election-results-2016
+tags: []
+categories: []
+---
+
+
+
+<div id="intro" class="section level1">
+<h1>Intro</h1>
+<blockquote>
+<p>In this post we wil show how the waffle package can be used plotting 2016 Spanish general elections</p>
+</blockquote>
+<p>If you are interested in learning more about creating charts using the R Waffle package you can read more here:</p>
+<ul>
+<li>Make waffle (square pie) charts in R <a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a></li>
+<li>Infographic-style charts using the R waffle package <a href="#fn2" class="footnoteRef" id="fnref2"><sup>2</sup></a></li>
+</ul>
+</div>
+<div id="libraries" class="section level1">
+<h1>Libraries</h1>
+<p>We will first load the packages (you will have to install the packages if you haven’t done so before).</p>
+<pre class="r"><code>library(waffle) # Waffle charts
+library(stringr) # Manipulating strings
+library(tidyverse) # Data wrangling packages gather, spread...
+library(readr) # Read docs
+library(RColorBrewer) # Colors
+library(rvest) # Scraping
+library(tidyverse) # Data wrangling
+library(mosaic) # Quick exploratory analysis</code></pre>
+</div>
+<div id="scraping" class="section level1">
+<h1>Scraping</h1>
+<p>With the rvest package we can scrape the content of the table.</p>
+<ul>
+<li>We first use the html_nodes() function to select the
+<table>
+nodes</li>
+<li>To parse the HTML table data we use html_table(), which would create a list</li>
+<li>We coerce the list to dataframe to be able to work with the data manipulaton</li>
+</ul>
+<pre class="r"><code>webpage &lt;- read_html(&quot;https://en.wikipedia.org/wiki/Results_breakdown_of_the_Spanish_general_election,_2016_(Congress)&quot;)
+
+# Only parse the table interested
+congreso &lt;- webpage %&gt;%
+        html_nodes(&quot;table&quot;) %&gt;%
+        .[1] %&gt;%
+        html_table(fill = TRUE)
+
+# Coerce list to dataframe
+congreso &lt;- as.data.frame(congreso)</code></pre>
+</div>
+<div id="cleansing" class="section level1">
+<h1>Cleansing</h1>
+<p>If you look at the congreso dataframe variable, the headings are in line 5 and start from column 2. Let’s correct this.</p>
+<pre class="r"><code>congreso &lt;- congreso %&gt;% slice(5:15) %&gt;% select(X2,X3,X4,X5)
+colnames(congreso) &lt;- c(&quot;party&quot;, &quot;votes&quot;, &quot;percentage&quot;, &quot;mp&quot;)
+congreso &lt;- congreso %&gt;% slice(2:15)</code></pre>
+<p>Before plotting data, the comma has to be removed so that R will be able to convert it to a numeric variable. If you don’t remove the comma, you will get an NA for any number value. We will aslo remove the % sign.</p>
+<pre class="r"><code>congreso$votes &lt;- gsub(&quot;,&quot;,&quot;&quot;,congreso$votes)
+congreso$votes &lt;- as.numeric(congreso$votes)
+congreso$percentage &lt;- gsub(&quot;%&quot;,&quot;&quot;,congreso$percentage)
+congreso$percentage &lt;- as.numeric(congreso$percentage)</code></pre>
+<p>Next, let’s do some quick exploratory analysis on the votes received each political party month using a package called Mosaic.</p>
+<pre class="r"><code>favstats(congreso$votes)</code></pre>
+<pre><code>##    min       Q1   median      Q3     max    mean      sd  n missing
+##  81917 336132.5 703048.5 4601046 7941236 2405742 2827029 10       0</code></pre>
+<p>The max votes to any one of the political parties is 7,941,236 and the median is 703,048. We are now ready to use the waffle charts to understand more.</p>
+</div>
+<div id="plot" class="section level1">
+<h1>Plot</h1>
+<p>We will start by giving the colors from the viridis package to the different political parties. Then we can plot.</p>
+<pre class="r"><code>votes &lt;- c(`PP`= 7941236, `PSOE`= 5443846, `UPodemos`= 5087538, `Cs`= 3141570, 
+           `ERC–CatSí` = 639652, `CDC` = 483488, `EAJ/PNV` = 287014, `EH Bildu` = 184713, `CCa–PNC` = 81917
+, `Others` = 766445) 
+
+waffle(votes/100000, rows=6,
+colors=c(&quot;#FF8C00&quot;, &quot;#00FFFF&quot;, &quot;#000000&quot;, &quot;#7CFC00&quot;, &quot;#006400&quot;, 
+              &quot;#FFA500&quot;, &quot;#FFFF00&quot;, &quot;#FFC0CB&quot;, &quot;#FF0000&quot;, &quot;#0000FF&quot;),
+title=&quot;Spanish general election results, 2016&quot;,
+legend_pos=&quot;bottom&quot;,
+xlab=&quot;1 seat = 100K people&quot;)</code></pre>
+<p><img src="/post/2017-09-21-using-waffle-charts-to-analyze-spanish-general-election-results-2016_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p>That’s it. The waffle package has many functionalities. If you want to know more click these links or search on the internet for more examples. Nothing more, nothign else!</p>
+</div>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>Link1 (<a href="https://github.com/hrbrmstr/waffle" class="uri">https://github.com/hrbrmstr/waffle</a>)<a href="#fnref1">↩</a></p></li>
+<li id="fn2"><p>Link2 (<a href="https://nsaunders.wordpress.com/2017/09/08/infographic-style-charts-using-the-r-waffle-package/" class="uri">https://nsaunders.wordpress.com/2017/09/08/infographic-style-charts-using-the-r-waffle-package/</a>)<a href="#fnref2">↩</a></p></li>
+</ol>
+</div>

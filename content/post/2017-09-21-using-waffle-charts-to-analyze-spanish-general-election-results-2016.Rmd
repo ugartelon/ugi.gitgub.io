@@ -1,0 +1,102 @@
+---
+title: "Using waffle charts to analyze Spanish general election results, 2016"
+author: "Pablo Ugarte"
+date: '2017-09-21'
+slug: using-waffle-charts-to-analyze-spanish-general-election-results-2016
+tags: []
+categories: []
+---
+
+# Intro
+
+>In this post we wil show how the waffle package can be used plotting 2016 Spanish general elections
+
+If you are interested in learning more about creating charts using the R Waffle package you can read more here:
+
+* Make waffle (square pie) charts in R [^1]
+* Infographic-style charts using the R waffle package [^2]
+
+# Libraries
+
+We will first load the packages (you will have to install the packages if you haven't done so before).
+
+```{r, message = FALSE, warning = FALSE}
+library(waffle) # Waffle charts
+library(stringr) # Manipulating strings
+library(tidyverse) # Data wrangling packages gather, spread...
+library(readr) # Read docs
+library(RColorBrewer) # Colors
+library(rvest) # Scraping
+library(tidyverse) # Data wrangling
+library(mosaic) # Quick exploratory analysis
+```
+
+# Scraping
+
+With the rvest package we can scrape the content of the table. 
+
+* We first use the html_nodes() function to select the <table> nodes
+* To parse the HTML table data we use html_table(), which would create a list
+* We coerce the list to dataframe to be able to work with the data manipulaton
+
+```{r, message = FALSE, warning = FALSE}
+webpage <- read_html("https://en.wikipedia.org/wiki/Results_breakdown_of_the_Spanish_general_election,_2016_(Congress)")
+
+# Only parse the table interested
+congreso <- webpage %>%
+        html_nodes("table") %>%
+        .[1] %>%
+        html_table(fill = TRUE)
+
+# Coerce list to dataframe
+congreso <- as.data.frame(congreso)
+```
+
+# Cleansing
+
+If you look at the congreso dataframe variable, the headings are in line 5 and start from column 2. Let's correct this.
+
+```{r, message = FALSE, warning = FALSE}
+congreso <- congreso %>% slice(5:15) %>% select(X2,X3,X4,X5)
+colnames(congreso) <- c("party", "votes", "percentage", "mp")
+congreso <- congreso %>% slice(2:15)
+```
+
+Before plotting data, the comma has to be removed so that R will be able to convert it to a numeric variable.  If you don’t remove the comma, you will get an NA for any number value. We will aslo remove the % sign.
+
+```{r, message = FALSE, warning = FALSE}
+congreso$votes <- gsub(",","",congreso$votes)
+congreso$votes <- as.numeric(congreso$votes)
+congreso$percentage <- gsub("%","",congreso$percentage)
+congreso$percentage <- as.numeric(congreso$percentage)
+```
+
+Next, let's do some quick exploratory analysis on the votes received each political party month using a package called Mosaic.
+
+```{r, message = FALSE, warning = FALSE}
+favstats(congreso$votes)
+```
+
+The max votes to any one of the political parties is 7,941,236 and the median is 703,048. We are now ready to use the waffle charts to understand more.
+
+# Plot
+
+We will start by giving the colors from the viridis package to the different political parties. Then we can plot.
+
+```{r, message = FALSE, warning = FALSE}
+votes <- c(`PP`= 7941236, `PSOE`= 5443846, `UPodemos`= 5087538, `Cs`= 3141570, 
+           `ERC–CatSí` = 639652, `CDC` = 483488, `EAJ/PNV` = 287014, `EH Bildu` = 184713, `CCa–PNC` = 81917
+, `Others` = 766445) 
+
+waffle(votes/100000, rows=6,
+colors=c("#FF8C00", "#00FFFF", "#000000", "#7CFC00", "#006400", 
+              "#FFA500", "#FFFF00", "#FFC0CB", "#FF0000", "#0000FF"),
+title="Spanish general election results, 2016",
+legend_pos="bottom",
+xlab="1 seat = 100K people")
+```
+
+That's it. The waffle package has many functionalities. If you want to know more click these links or search on the internet for more examples. Nothing more, nothign else!
+
+[^1]: Link1 (https://github.com/hrbrmstr/waffle)
+[^2]: Link2 (https://nsaunders.wordpress.com/2017/09/08/infographic-style-charts-using-the-r-waffle-package/)
