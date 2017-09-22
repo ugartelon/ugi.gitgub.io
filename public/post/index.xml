@@ -12,6 +12,17 @@
     
     
     <item>
+      <title>RSelenium &amp; Web Scraper Chrome to gather data</title>
+      <link>https://www.storieswithdata.com/post/2017/09/21/using-rselenium-to-gather-data/</link>
+      <pubDate>Thu, 21 Sep 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.storieswithdata.com/post/2017/09/21/using-rselenium-to-gather-data/</guid>
+      <description>Intro  In this post, we scrape data and data wrangle to get a picture of type oj jobs offered in the expansion website.
+  Libraries Overall, we are going to use the following R packages:
+library(XML) # For web scraping library(rvest) # For web scraping library(tidyverse) # Data wrangling packages gather, spread... library(lubridate) # To work with dates library(hrbrthemes) # Aesthetic defaults for ggplot2 charts library(stringr) # For manipulating strings One way would be to make vector of all the urls you are interested in and then use sapply.</description>
+    </item>
+    
+    <item>
       <title>Waffle charts and Spanish general elections</title>
       <link>https://www.storieswithdata.com/post/2017/09/21/using-waffle-charts-to-analyze-spanish-general-election-results-2016/</link>
       <pubDate>Thu, 21 Sep 2017 00:00:00 +0000</pubDate>

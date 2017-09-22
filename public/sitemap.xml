@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://www.storieswithdata.com/post/2017/09/21/using-rselenium-to-gather-data/</loc>
+    <lastmod>2017-09-21T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://www.storieswithdata.com/post/2017/09/21/using-waffle-charts-to-analyze-spanish-general-election-results-2016/</loc>
     <lastmod>2017-09-21T00:00:00+00:00</lastmod>
   </url>
@@ -134,6 +139,12 @@
   <url>
     <loc>https://www.storieswithdata.com/categories/scraping/</loc>
     <lastmod>2017-09-15T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.storieswithdata.com/categories/selenium/</loc>
+    <lastmod>2017-09-21T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
