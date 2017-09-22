@@ -87,8 +87,10 @@ expansion2$Cargo &lt;- gsub(pattern=&quot;[[:punct:]]&quot;, expansion2$Cargo, r
 <p>We use it inside ‘mutate’ command so that it will return TRUE or FALSE. And then calculate the percentage we seek.</p>
 <pre class="r"><code># Create a vector of a list of names I want to extract into a new column in the dataframe
 extract &lt;- c(&quot;beca&quot;,&quot;becario&quot;, &quot;prácticas&quot;, &quot;práctica&quot;, &quot;practicas&quot;)
+
 #  str_detect only accepts a length-1 pattern so we use paste(..., collapse = &#39;|&#39;)
 expansion2 &lt;- expansion2 %&gt;% mutate(subpar = str_detect(expansion2$Cargo, paste(extract, collapse = &#39;|&#39;)))
+
 # Lets&#39;s change the following subpar’ names using ‘recode’ function from dplyr package
 expansion2 &lt;- expansion2 %&gt;% 
   mutate(subpar=replace(subpar, subpar==FALSE, &quot;Good quality&quot;)) %&gt;%
@@ -130,7 +132,7 @@ labs(x=&quot;Type of jobs&quot;, y=&quot;Share (%)&quot;,
        caption=&quot;Source: Expansion empleo&quot;) + 
 theme_ipsum(grid=&quot;Y&quot;) </code></pre>
 <p><img src="/post/2017-09-21-using-rselenium-to-gather-data_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
-<p>In this article, we have briefly explored the web scraping of public data shown some of the R’s power for data analysis.</p>
+<p>In this article, we have briefly explored the web scraping of public data and shown some of the R’s power for data analysis.</p>
 </div>
 <div class="footnotes">
 <hr />
