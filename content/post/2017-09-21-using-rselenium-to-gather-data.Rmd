@@ -84,8 +84,10 @@ We use it inside ‘mutate’ command so that it will return TRUE or FALSE. And 
 ```{r, message = FALSE, warning = FALSE}
 # Create a vector of a list of names I want to extract into a new column in the dataframe
 extract <- c("beca","becario", "prácticas", "práctica", "practicas")
+
 #  str_detect only accepts a length-1 pattern so we use paste(..., collapse = '|')
 expansion2 <- expansion2 %>% mutate(subpar = str_detect(expansion2$Cargo, paste(extract, collapse = '|')))
+
 # Lets's change the following subpar’ names using ‘recode’ function from dplyr package
 expansion2 <- expansion2 %>% 
   mutate(subpar=replace(subpar, subpar==FALSE, "Good quality")) %>%
@@ -143,7 +145,7 @@ labs(x="Type of jobs", y="Share (%)",
 theme_ipsum(grid="Y") 
 ```
 
-In this article, we have briefly explored the web scraping of public data shown some of the R’s power for data analysis.
+In this article, we have briefly explored the web scraping of public data and shown some of the R’s power for data analysis.
 
 [^1]: Link1 (https://stackoverflow.com/questions/40140133/scraping-tables-on-multiple-web-pages-with-rvest-in-r)
 [^2]: Link2 (https://stackoverflow.com/questions/2851327/convert-a-list-of-data-frames-into-one-data-frame)
