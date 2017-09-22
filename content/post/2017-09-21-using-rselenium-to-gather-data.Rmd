@@ -1,0 +1,150 @@
+---
+title: "RSelenium & Web Scraper Chrome to gather data"
+author: "Pablo Ugarte"
+date: '2017-09-21'
+slug: using-rselenium-to-gather-data
+tags: []
+categories: Selenium
+---
+
+# Intro
+
+>In this post, we scrape data and data wrangle to get a picture of type oj jobs offered in the expansion website.
+
+# Libraries
+
+Overall, we are going to use the following R packages:
+
+```{r, message = FALSE, warning = FALSE}
+library(XML) # For web scraping
+library(rvest) # For web scraping
+library(tidyverse) # Data wrangling packages gather, spread...
+library(lubridate) # To work with dates
+library(hrbrthemes) # Aesthetic defaults for ggplot2 charts
+library(stringr) # For manipulating strings
+```
+
+One way would be to make vector of all the urls you are interested in and then use sapply.
+
+Results should be a list of 6 data.frame objects (pages - 0,1,2,3,5,6); each should be named with the url (i.e., page) they represent. That is, results[1] corresponds to the first page, and results[5] corresponds to last page [^1].
+
+To convert a list of data frames into one data frame we use the dplyr::rbind_all(). This will do the trick ;) [^2].
+
+```{r, message = FALSE, warning = FALSE}
+pages <- 0:5
+urls <- paste0("http://www.expansionyempleo.com/buscar-trabajo-empleo/cid/3BC18A08D9BB661C9B65C93203B654EF/canal/0/pagenumber/",pages)
+
+get_table <- function(url) {
+  url %>%
+    read_html() %>%
+    html_nodes(xpath = '//*[@id="mytable"]') %>% 
+    html_table()
+}
+
+results <- sapply(urls, get_table)
+results <- rbind_all(results)
+View(results)
+```
+
+However, I am getting an error when I increase the number of pages to more than 5. So I decided to use the Web Scraper Chrome extension [^3] and download the file to csv.
+
+```{r, message = FALSE, warning = FALSE}
+expansion2 <- read_csv("~/Documents/R Working Directory/Blog/First/content/post/expansion2.csv")
+```
+
+# Cleansing
+
+We now we can start our analysis. 
+
+The dataframe has 5 columns:
+
+* Fecha (date - format %d/%m)
+* Cargo (job)
+* Empresa (company/headhunter)
+* Vacantes (vacancies)
+* Zona (city)
+
+Expansion is the main financial newspaper in Spain and hence quality of the jobs posted are meant to be above average (in terms of salary and job responsabilities). 
+
+However, by having a quick read looks like becas/practicas (internships) seem to be fairly substantial.
+
+Let's go into more detail and get a sense of the proportion of "bad quality jobs" out of the total. 
+
+We first convert selected columns of the dataframe to lower case. We will aso clean text from punctutation using R Base gsub.
+
+```{r, message = FALSE, warning = FALSE}
+expansion2 <- expansion2 %>% mutate(Cargo = tolower(Cargo)) %>% mutate(Empresa = tolower(Empresa)) %>% mutate(Zona = tolower(Zona))
+expansion2$Cargo <- gsub(pattern="[[:punct:]]", expansion2$Cargo, replacement=" ")
+```
+
+We can find out the jobs (Cargo) that contain ‘prácticas’ or ‘beca’ (or related like becario) by using ‘str_detect’ function from ‘stringr’ package. 
+
+We use it inside ‘mutate’ command so that it will return TRUE or FALSE. And then calculate the percentage we seek. 
+
+```{r, message = FALSE, warning = FALSE}
+# Create a vector of a list of names I want to extract into a new column in the dataframe
+extract <- c("beca","becario", "prácticas", "práctica", "practicas")
+#  str_detect only accepts a length-1 pattern so we use paste(..., collapse = '|')
+expansion2 <- expansion2 %>% mutate(subpar = str_detect(expansion2$Cargo, paste(extract, collapse = '|')))
+# Lets's change the following subpar’ names using ‘recode’ function from dplyr package
+expansion2 <- expansion2 %>% 
+  mutate(subpar=replace(subpar, subpar==FALSE, "Good quality")) %>%
+  mutate(subpar=replace(subpar, subpar==TRUE, "Bad quality")) 
+```
+
+Now, let’s say we want to understand what are the percentage of low quality vacancies/jobs out of the total.
+
+```{r, message = FALSE, warning = FALSE}
+qualityjobs <- expansion2 %>% 
+  group_by(subpar) %>%
+  summarise (n = sum(Vacantes)) %>%
+  mutate(freq = n / sum(n))
+View(expansion2)
+View(qualityjobs)
+```
+
+Let's plot the above.
+
+```{r, message = FALSE, warning = FALSE}
+ggplot(data=qualityjobs, aes(subpar, freq)) +
+geom_col() +
+scale_y_percent() +
+labs(x="Type of jobs", y="Share (%)",
+       title="Proportion of jobs that are 'good' and 'bad' quality",
+       subtitle="Data extracted with Web Scraper Chrome extension",
+       caption="Source: Expansion empleo") + 
+theme_ipsum(grid="Y")
+```
+
+Now, let’s see which city offers more bad quality jobs. We will select the top 5 cities for each type of quality job based on frequency (in % terms of total by that city). 
+
+```{r, message = FALSE, warning = FALSE}
+qualityjobszona <- expansion2 %>% 
+  group_by(Zona, subpar) %>%
+  summarise (n = sum(Vacantes)) %>%
+  mutate(freq = n / sum(n)) %>%
+  filter(n > 10) %>%
+  filter(subpar == "Bad quality") %>%
+  arrange(desc(freq)) %>%
+  top_n(5, freq)
+View(qualityjobszona)
+```
+
+Let's plot the above.
+
+```{r, message = FALSE, warning = FALSE}
+ggplot(data=qualityjobszona, aes(reorder(Zona, -freq), freq)) +
+geom_col() +
+scale_y_percent() +
+labs(x="Type of jobs", y="Share (%)",
+       title="Cities with most 'bad' quality jobs posted",
+       subtitle="Data extracted with Web Scraper Chrome extension",
+       caption="Source: Expansion empleo") + 
+theme_ipsum(grid="Y") 
+```
+
+In this article, we have briefly explored the web scraping of public data shown some of the R’s power for data analysis.
+
+[^1]: Link1 (https://stackoverflow.com/questions/40140133/scraping-tables-on-multiple-web-pages-with-rvest-in-r)
+[^2]: Link2 (https://stackoverflow.com/questions/2851327/convert-a-list-of-data-frames-into-one-data-frame)
+[^3]: Lik3 (http://webscraper.io/)
