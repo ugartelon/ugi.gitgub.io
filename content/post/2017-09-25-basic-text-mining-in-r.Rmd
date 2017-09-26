@@ -1,13 +1,13 @@
 ---
-title: Basic Text Mining in R
-author: Pablo Ugarte
+title: "Basic Text Mining in R"
+author: "Pablo Ugarte"
 date: '2017-09-25'
 slug: basic-text-mining-in-r
-categories: []
 tags: []
+categories: []
 ---
 
->In this post, we will do some basic text mining of the speech in Madrid last May of Catalan president Carles Puigdemont
+>In this post, we will do some basic text mining of the speech in Madrid last May of Catalan president Carles Puigdemont.
 
 # Libraries
 
@@ -24,6 +24,7 @@ library(SnowballC) # Word stemming algorithm for collapsing words to a common ro
 library(RColorBrewer) # Colors
 library(wordcloud) # Wordcloud
 library(hrbrthemes) # Aesthetic defaults for ggplot2 charts
+library(ggplot2)
 ```
 
 # Load texts
@@ -42,14 +43,13 @@ docs <- VCorpus(DirSource(texto))
 
 # Load texts
 
-Now, it is time to remove numbers, capitalization, common words and punctuation. Also note that we exclude common and uninteresting words (y, o , un etc..). In this case, we use spanish (but english could be used if the text was in english). These words are are very common and not informative and would contaminate the analysis of the text. We also remove particular words (sino, solo, etc...).
+Now, it is time to remove numbers, capitalization, common words and punctuation. Also note that we exclude common and uninteresting words (y, o , un, etc..). In this case, we use spanish (but english could be used if the text was in english). These words are are very common and not informative that would contaminate the analysis of the text. We also remove particular words (sino, solo, etc...).
 
 ```{r, message = FALSE, warning = FALSE}
 docs <- tm_map(docs,removePunctuation)   
 docs <- tm_map(docs, removeNumbers)   
 docs <- tm_map(docs, tolower)   
 docs <- tm_map(docs, removeWords, stopwords("spanish"))   
-docs <- tm_map(docs, stemDocument, "spanish")
 docs <- tm_map(docs, stripWhitespace)
 docs <- tm_map(docs, removeWords, c("sino", "solo","sólo","parec","nadi"))
 docs <- tm_map(docs, PlainTextDocument) 
@@ -57,7 +57,7 @@ docs <- tm_map(docs, PlainTextDocument)
 
 # Next step and plot
 
-Next we create a Term Document Matrix (TDM) which reflects the number of times each word in the corpus is found in each of the documents. Then we use the ‘removeSparseTerms()’ function to remove the infrequently used words, leaving only the most well-used words in the corpus. In this example with sparse = 0.1, only terms occurring in one tenth of the documents were retained.
+Next we create a Term Document Matrix (TDM) which reflects the number of times each word in the corpus is found in each of the documents. Then we use the ‘removeSparseTerms()’ function to remove the infrequently used words, leaving only the most well-used words in the corpus. In this example with sparse = 0.1, only terms occurring at least in one tenth of the documents were retained.
 
 ```{r, message = FALSE, warning = FALSE}
 # Stage the Data      
