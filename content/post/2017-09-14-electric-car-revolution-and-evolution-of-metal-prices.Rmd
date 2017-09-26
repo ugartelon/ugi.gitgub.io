@@ -1,6 +1,6 @@
 ---
 title: "Electric cars and metal prices"
-author: "Pablo Uagarte"
+author: "Pablo Ugarte"
 date: '2017-09-14'
 slug: electric-cars-and-metal-prices
 tags: []

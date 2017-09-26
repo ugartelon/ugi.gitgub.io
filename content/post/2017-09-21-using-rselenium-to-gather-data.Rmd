@@ -32,7 +32,7 @@ To convert a list of data frames into one data frame we use the dplyr::rbind_all
 
 ```{r, message = FALSE, warning = FALSE}
 pages <- 0:5
-urls <- paste0("http://www.expansionyempleo.com/buscar-trabajo-empleo/cid/3BC18A08D9BB661C9B65C93203B654EF/canal/0/pagenumber/",pages)
+url <- paste0("http://www.expansionyempleo.com/buscar-trabajo-empleo/cid/3BC18A08D9BB661C9B65C93203B654EF/canal/0/pagenumber/",pages)
 
 get_table <- function(url) {
   url %>%
@@ -41,7 +41,7 @@ get_table <- function(url) {
     html_table()
 }
 
-results <- sapply(urls, get_table)
+results <- sapply(url, get_table)
 results <- rbind_all(results)
 View(results)
 ```

@@ -28,7 +28,7 @@ library(stringr) # For manipulating strings</code></pre>
 <p>Results should be a list of 6 data.frame objects (pages - 0,1,2,3,5,6); each should be named with the url (i.e., page) they represent. That is, results[1] corresponds to the first page, and results[5] corresponds to last page <a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a>.</p>
 <p>To convert a list of data frames into one data frame we use the dplyr::rbind_all(). This will do the trick ;) <a href="#fn2" class="footnoteRef" id="fnref2"><sup>2</sup></a>.</p>
 <pre class="r"><code>pages &lt;- 0:5
-urls &lt;- paste0(&quot;http://www.expansionyempleo.com/buscar-trabajo-empleo/cid/3BC18A08D9BB661C9B65C93203B654EF/canal/0/pagenumber/&quot;,pages)
+url &lt;- paste0(&quot;http://www.expansionyempleo.com/buscar-trabajo-empleo/cid/3BC18A08D9BB661C9B65C93203B654EF/canal/0/pagenumber/&quot;,pages)
 
 get_table &lt;- function(url) {
   url %&gt;%
@@ -37,7 +37,7 @@ get_table &lt;- function(url) {
     html_table()
 }
 
-results &lt;- sapply(urls, get_table)
+results &lt;- sapply(url, get_table)
 results &lt;- rbind_all(results)
 View(results)</code></pre>
 <p>However, I am getting an error when I increase the number of pages to more than 5. So I decided to use the Web Scraper Chrome extension <a href="#fn3" class="footnoteRef" id="fnref3"><sup>3</sup></a> and download the file to csv.</p>

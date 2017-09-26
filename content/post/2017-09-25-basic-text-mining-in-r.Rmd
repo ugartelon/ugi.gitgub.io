@@ -1,0 +1,99 @@
+---
+title: Basic Text Mining in R
+author: Pablo Ugarte
+date: '2017-09-25'
+slug: basic-text-mining-in-r
+categories: []
+tags: []
+---
+
+>In this post, we will do some basic text mining of the speech in Madrid last May of Catalan president Carles Puigdemont
+
+# Libraries
+
+We are going to use the following R packages:
+
+```{r, message = FALSE, warning = FALSE}
+# Load packages
+library(stringr)
+library(dplyr)
+library(lubridate)
+library(readr)
+library(tm) # Process text documents in an effective manner.
+library(SnowballC) # Word stemming algorithm for collapsing words to a common root
+library(RColorBrewer) # Colors
+library(wordcloud) # Wordcloud
+library(hrbrthemes) # Aesthetic defaults for ggplot2 charts
+```
+
+# Load texts
+
+We start by saving the text file (or files) in a folder titled: “texts” This will be the “corpus” (body) of texts you are mining.
+
+Note: The texts used in this example is a speech by Carles Puigdemont that were copied and pasted into a text document. 
+
+```{r, message = FALSE, warning = FALSE}
+# On Mac, save the folder to your desktop and use the following code chunk
+texto <- file.path("~", "Documents/R Working Directory/Blog/First/content/post/", "texts")
+  
+# Load your texts into R
+docs <- VCorpus(DirSource(texto))
+```
+
+# Load texts
+
+Now, it is time to remove numbers, capitalization, common words and punctuation. Also note that we exclude common and uninteresting words (y, o , un etc..). In this case, we use spanish (but english could be used if the text was in english). These words are are very common and not informative and would contaminate the analysis of the text. We also remove particular words (sino, solo, etc...).
+
+```{r, message = FALSE, warning = FALSE}
+docs <- tm_map(docs,removePunctuation)   
+docs <- tm_map(docs, removeNumbers)   
+docs <- tm_map(docs, tolower)   
+docs <- tm_map(docs, removeWords, stopwords("spanish"))   
+docs <- tm_map(docs, stemDocument, "spanish")
+docs <- tm_map(docs, stripWhitespace)
+docs <- tm_map(docs, removeWords, c("sino", "solo","sólo","parec","nadi"))
+docs <- tm_map(docs, PlainTextDocument) 
+```
+
+# Next step and plot
+
+Next we create a Term Document Matrix (TDM) which reflects the number of times each word in the corpus is found in each of the documents. Then we use the ‘removeSparseTerms()’ function to remove the infrequently used words, leaving only the most well-used words in the corpus. In this example with sparse = 0.1, only terms occurring in one tenth of the documents were retained.
+
+```{r, message = FALSE, warning = FALSE}
+# Stage the Data      
+dtm <- DocumentTermMatrix(docs)   
+tdm <- TermDocumentMatrix(docs) 
+
+# This makes a matrix that is 10% empty space, maximum
+dtms <- removeSparseTerms(dtm, 0.1) 
+freq <- colSums(as.matrix(dtms)) 
+wf <- data.frame(word=names(freq), freq=freq)  
+
+# Plot words that appear at least 6 times
+p <- ggplot(subset(wf, freq>6), aes(reorder(word, -freq),freq)) +
+        geom_bar(stat="identity") +
+        theme_ipsum(grid="Y") +
+        theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
+        theme(axis.title.x=element_blank()) 
+p  
+```
+
+# Word cloud
+
+We plot words that occur at least 5 times. We also add color and plot words occurring at least 5 times.
+
+Note: The “set.seed()"" function just makes the configuration of the layout of the clouds consistent each time you plot them. You can omit that part if you are not concerned with preserving a particular layout. 
+
+```{r, message = FALSE, warning = FALSE}
+set.seed(142) 
+wordcloud(names(freq), freq, min.freq=5)  
+wordcloud(names(freq), freq, min.freq=7, scale=c(5, .1), colors=brewer.pal(6, "Dark2"))
+```
+
+From the word cloud we observe very neatly the main message Puigdemont wanted to convey in his speech in Madrid. Madrid had left his government with no choice but to call the vote. Lies, lies and lies! If people knew what happens in Cataluna they would be shocked. In essence, democracy there has been kindnapped. Education and puclic tv to put some examples are labs that just generate hate and promote deliverately factual errors in support of their conclusions. Anecdotly, here is a link in Spanish to how education works in that part of Spain that no longer wants to obey their own laws [^3].
+
+To learn more about text mining specifically, or data mining in general, I suggest you vist "Text Mining with R" [^1] and this article [^2] that explains very well the whole process.
+
+[^1]: Link1 (http://tidytextmining.com/topicmodeling.html)
+[^2]: Link2 (https://rpubs.com/pjmurphy/265713)
+[^3]: Link2 (http://www.elmundo.es/espana/2017/09/26/59c91dbf468aebe2658b4590.html)
