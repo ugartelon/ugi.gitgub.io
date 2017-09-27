@@ -16,6 +16,7 @@ We are going to use the following R packages:
 
 ```{r, message = FALSE, warning = FALSE}
 # Load packages
+library(hrbrthemes)
 library(rvest)
 library(stringr)
 library(dplyr)
@@ -121,7 +122,7 @@ p <- ggplot(indepe, aes(factor(date),percentage, fill = factor(vote))) + geom_bo
 p <- p + scale_fill_manual(values=c( "#00007f", "#999999", "#FFC0CB"),
 guide = guide_legend(title = element_blank()))
 p <- p + ggtitle("Opinion polls on the independence issue") 
-p <- p + labs(x = "",y = "Polled respondents") + theme(strip.background = element_blank())
+p <- p + labs(x = "",y = "Polled respondents") + theme(strip.background = element_blank()) + theme_ipsum()
 
 # Insert breaks
 p <- p + scale_y_continuous(breaks = breakss)

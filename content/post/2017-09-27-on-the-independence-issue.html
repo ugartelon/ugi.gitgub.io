@@ -16,6 +16,7 @@ categories: []
 <h1>Libraries</h1>
 <p>We are going to use the following R packages:</p>
 <pre class="r"><code># Load packages
+library(hrbrthemes)
 library(rvest)
 library(stringr)
 library(dplyr)
@@ -107,7 +108,7 @@ p &lt;- ggplot(indepe, aes(factor(date),percentage, fill = factor(vote))) + geom
 p &lt;- p + scale_fill_manual(values=c( &quot;#00007f&quot;, &quot;#999999&quot;, &quot;#FFC0CB&quot;),
 guide = guide_legend(title = element_blank()))
 p &lt;- p + ggtitle(&quot;Opinion polls on the independence issue&quot;) 
-p &lt;- p + labs(x = &quot;&quot;,y = &quot;Polled respondents&quot;) + theme(strip.background = element_blank())
+p &lt;- p + labs(x = &quot;&quot;,y = &quot;Polled respondents&quot;) + theme(strip.background = element_blank()) + theme_ipsum()
 
 # Insert breaks
 p &lt;- p + scale_y_continuous(breaks = breakss)
