@@ -102,7 +102,7 @@ breakss &lt;- c(0,10,20,30,40,50)
 indepe$vote_f = factor(indepe$vote, levels=c(&#39;Yes&#39;,&#39;No&#39;,&#39;Neutral&#39;))
 
 # Plot boxplot
-p &lt;- ggplot(indepe, aes(factor(date),percentage, fill = factor(vote))) + geom_boxplot() + facet_grid(vote_f ~ .)
+p &lt;- ggplot(indepe, aes(factor(date),percentage, fill = vote_f)) + geom_boxplot() + facet_grid(vote_f ~ .)
 
 # Change colours and add legend, titles and axes labels
 p &lt;- p + scale_fill_manual(values=c( &quot;#00007f&quot;, &quot;#999999&quot;, &quot;#FFC0CB&quot;),
