@@ -1,0 +1,128 @@
+---
+title: "On the independence issue"
+author: "Pablo Ugarte"
+date: '2017-09-27'
+slug: on-the-independence-issue
+tags: []
+categories: []
+---
+
+
+
+<blockquote>
+<p>In this post, we will look at a list of different surveys from Wikipedia on Catalan Independence vote and plot using a box plot.</p>
+</blockquote>
+<div id="libraries" class="section level1">
+<h1>Libraries</h1>
+<p>We are going to use the following R packages:</p>
+<pre class="r"><code># Load packages
+library(rvest)
+library(stringr)
+library(dplyr)
+library(lubridate)
+library(readr)
+library(hrbrthemes) # Aesthetic defaults for ggplot2 charts
+library(ggplot2)
+library(tidyverse)</code></pre>
+</div>
+<div id="scraping" class="section level1">
+<h1>Scraping</h1>
+<p>With the rvest package we can scrape the content of the table.</p>
+<ul>
+<li>We first use the html_nodes() function to select the
+<table>
+nodes</li>
+<li>To parse the HTML table data we use html_table(), which would create a list</li>
+<li>We coerce the list to dataframe to be able to work with the data manipulaton</li>
+</ul>
+<p>We are interested in the 7th table with title “On the independence issue”.</p>
+<pre class="r"><code>webpage &lt;- read_html(&quot;https://en.wikipedia.org/wiki/Catalan_independence_referendum,_2017&quot;)
+
+# Only parse the table interested
+indepe &lt;- webpage %&gt;%
+        html_nodes(&quot;table&quot;) %&gt;%
+        .[7] %&gt;%
+        html_table(fill = TRUE)
+
+# Coerce list to dataframe
+indepe &lt;- as.data.frame(indepe)</code></pre>
+</div>
+<div id="data-wrangling" class="section level1">
+<h1>Data wrangling</h1>
+<p>We need to do a bit of cleaning and tyding up:</p>
+<ul>
+<li>Rename headings</li>
+<li>Select desired columns</li>
+<li>Filter excluding duplicated row and unnecesary table headings within the table</li>
+<li>Convert from character string to number</li>
+<li>Coerce NA to 0</li>
+<li>Get year from date</li>
+<li>Remove the [p xx] from polling commissioner</li>
+<li>Add neutal + other</li>
+</ul>
+<pre class="r"><code>indepe &lt;- indepe %&gt;% rename(date = Fieldwork.date, survey = Polling.firm.Commissioner, date = Fieldwork.date, size = Sample.size, neutral = Other..Abst., other = X.)
+
+indepe &lt;- indepe %&gt;% select(1,2,4,5,6,7) %&gt;% 
+    filter(!survey %in% c(&quot;Polling firm/Commissioner&quot;, &quot;2015 Catalan regional election&quot;, &quot;2014 Catalan self-determination referendum&quot;, &quot;2012 Catalan regional election&quot;)) 
+
+indepe &lt;- indepe %&gt;% slice(1:59)
+
+indepe$Yes &lt;- unlist(lapply(indepe$Yes, as.numeric))
+indepe$No &lt;- unlist(lapply(indepe$No, as.numeric))
+indepe$neutral &lt;- unlist(lapply(indepe$neutral, as.numeric))
+indepe$other &lt;- unlist(lapply(indepe$other, as.numeric))
+
+indepe$neutral &lt;- replace(indepe$neutral,is.na(indepe$neutral),0)
+indepe$date &lt;- str_sub(indepe$date, -4, -1)
+indepe$survey &lt;- str_sub(indepe$survey, end = -7)
+
+# \\ for the first bracket, .* for anything inside
+indepe$survey &lt;- gsub(&quot;\\[.*]&quot;, &quot;&quot;, indepe$survey)
+
+indepe &lt;- indepe %&gt;%
+  rowwise() %&gt;%
+  mutate(Neutral = sum(other,neutral)) %&gt;%
+  select(-other,-neutral)
+
+indepe &lt;- indepe %&gt;% filter(date != 2010 &amp; date != 2011)</code></pre>
+<p>We need to use gather to get “Yes”, “No” and “Neutral” in the same column before we can plot our box plot.</p>
+<pre class="r"><code>indepe &lt;- indepe %&gt;% gather(vote, percentage, Yes:Neutral)
+View(indepe)</code></pre>
+</div>
+<div id="plot" class="section level1">
+<h1>Plot</h1>
+<p>The boxes indicate the boundaries of the middle 50% of the data, with the black line in the middle representing the (median) average.</p>
+<p>So a longer box means more debate on the independence issue whereas a shorter box means there’s more consensus about where they stand. A line with no box around it at all surveys or opinion polls agreed precisely on the issue.</p>
+<p>The lines extending out from the boxes show where the outliers lie, and the really far-out ones are represented as dots.</p>
+<pre class="r"><code># Create breaks
+breakss &lt;- c(0,10,20,30,40,50)
+
+# Make vote a factor in dataframe
+indepe$vote_f = factor(indepe$vote, levels=c(&#39;Yes&#39;,&#39;No&#39;,&#39;Neutral&#39;))
+
+# Plot boxplot
+p &lt;- ggplot(indepe, aes(factor(date),percentage, fill = factor(vote))) + geom_boxplot() + facet_grid(vote_f ~ .)
+
+# Change colours and add legend, titles and axes labels
+p &lt;- p + scale_fill_manual(values=c( &quot;#00007f&quot;, &quot;#999999&quot;, &quot;#FFC0CB&quot;),
+guide = guide_legend(title = element_blank()))
+p &lt;- p + ggtitle(&quot;Opinion polls on the independence issue&quot;) 
+p &lt;- p + labs(x = &quot;&quot;,y = &quot;Polled respondents&quot;) + theme(strip.background = element_blank())
+
+# Insert breaks
+p &lt;- p + scale_y_continuous(breaks = breakss)
+
+# Other styling
+p &lt;- p + theme(axis.title=element_text(size=12),
+ axis.text=element_text(size=12),
+ plot.title=element_text(size=12),
+ legend.key.size = unit(1, &quot;cm&quot;),
+ legend.text = element_text(size = 12),
+ legend.title = element_text(size = 12))
+
+p</code></pre>
+<p><img src="/post/2017-09-27-on-the-independence-issue_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p>By just looking at the polls collected we see the vote is split between Yes and No to independence. Note, however, how the No vote had been gaining momentum in the last years when supossedly people backing independence was thought to be the great majority. Far fromthe truth.</p>
+<p>As I wrote in my previous post, the root of the problem is how the central government (the Spanish gov) has allowed regions in Spain to do anything they wished. In Cataluna there has been a deliverate and continuos attempt to hook the audience with fear and hatred towards anthing related to Sapin and Spanish values.</p>
+<p>Thats it, a bit of R and political commentary on something that is filling lately the headlines.</p>
+</div>

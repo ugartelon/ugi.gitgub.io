@@ -6,10 +6,22 @@
     <description>Recent content in Home on A minimal Hugo website</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 25 Sep 2017 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 27 Sep 2017 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://www.storieswithdata.com/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>On the independence issue</title>
+      <link>https://www.storieswithdata.com/post/2017/09/27/on-the-independence-issue/</link>
+      <pubDate>Wed, 27 Sep 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.storieswithdata.com/post/2017/09/27/on-the-independence-issue/</guid>
+      <description>In this post, we will look at a list of different surveys from Wikipedia on Catalan Independence vote and plot using a box plot.
+ Libraries We are going to use the following R packages:
+# Load packages library(rvest) library(stringr) library(dplyr) library(lubridate) library(readr) library(hrbrthemes) # Aesthetic defaults for ggplot2 charts library(ggplot2) library(tidyverse)  Scraping With the rvest package we can scrape the content of the table.
+ We first use the html_nodes() function to select the  nodes To parse the HTML table data we use html_table(), which would create a list We coerce the list to dataframe to be able to work with the data manipulaton  We are interested in the 7th table with title “On the independence issue”.</description>
+    </item>
     
     <item>
       <title>Basic Text Mining in R</title>
