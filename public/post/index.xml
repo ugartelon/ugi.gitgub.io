@@ -6,10 +6,32 @@
     <description>Recent content in Posts on A minimal Hugo website</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 27 Sep 2017 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 02 Oct 2017 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://www.storieswithdata.com/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Choropleth Maps in R</title>
+      <link>https://www.storieswithdata.com/post/2017/10/02/choropleth-maps-in-r/</link>
+      <pubDate>Mon, 02 Oct 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.storieswithdata.com/post/2017/10/02/choropleth-maps-in-r/</guid>
+      <description>Intro  Choropleths are thematic maps where geographic regions or countries are colored according to some metric, such as the number of people who live in that region. In this post we will look at the catalan regional elections 2015 and plot it using the fantastic choropleth package.
+  Libraries We will first load the packages.
+library(hrbrthemes) # Aesthetic defaults for ggplot2 charts library(ggplot2) # Charts library(stringr) # Manipulating strings library(tidyverse) # Data wrangling packages gather, spread.</description>
+    </item>
+    
+    <item>
+      <title>Rajoy vc Sanchez Word Clouds</title>
+      <link>https://www.storieswithdata.com/post/2017/10/02/rajoy-vc-sanchez-word-clouds/</link>
+      <pubDate>Mon, 02 Oct 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.storieswithdata.com/post/2017/10/02/rajoy-vc-sanchez-word-clouds/</guid>
+      <description>In this post, we will do some basic text mining of the speech of Spain president Mariano Rajoy and opposition party leader Pedro Sanchez.
+ Libraries We are going to use the following R packages:
+# Load packages library(stringr) library(dplyr) library(tm) # Process text documents in an effective manner. library(SnowballC) # Word stemming algorithm for collapsing words to a common root library(RColorBrewer) # Colors library(wordcloud) # Wordcloud library(hrbrthemes) # Aesthetic defaults for ggplot2 charts library(ggplot2) library(pdftools) library(cowplot)  Use pdftools::pdf_text The most important function is pdf_text which returns a character vector of length equal to the number of pages in the pdf.</description>
+    </item>
     
     <item>
       <title>On the independence issue</title>
