@@ -41,8 +41,6 @@ texto <- file.path("~", "Documents/R Working Directory/Blog/First/content/post/"
 docs <- VCorpus(DirSource(texto))
 ```
 
-# Load texts
-
 Now, it is time to remove numbers, capitalization, common words and punctuation. Also note that we exclude common and uninteresting words (y, o , un, etc..). In this case, we use spanish (but english could be used if the text was in english). These words are are very common and not informative that would contaminate the analysis of the text. We also remove particular words (sino, solo, etc...).
 
 ```{r, message = FALSE, warning = FALSE}
@@ -82,7 +80,7 @@ p
 
 We plot words that occur at least 5 times. We also add color and plot words occurring at least 5 times.
 
-Note: The “set.seed()"" function just makes the configuration of the layout of the clouds consistent each time you plot them. You can omit that part if you are not concerned with preserving a particular layout. 
+Note: The "set.seed()" function just makes the configuration of the layout of the clouds consistent each time you plot them. You can omit that part if you are not concerned with preserving a particular layout. 
 
 ```{r, message = FALSE, warning = FALSE}
 set.seed(142) 

@@ -1,0 +1,182 @@
+---
+title: "Rajoy vs Sanchez 1-0 speech"
+author: "Pablo Ugarte"
+date: '2017-10-02'
+slug: pablo-ugarte
+tags: []
+categories: []
+---
+
+>In this post, we will do some basic text mining of the speech of Spain president Mariano Rajoy and opposition party leader Pedro Sanchez.
+
+# Libraries
+
+We are going to use the following R packages:
+
+```{r, message = FALSE, warning = FALSE}
+# Load packages
+library(stringr)
+library(dplyr)
+library(tm) # Process text documents in an effective manner.
+library(SnowballC) # Word stemming algorithm for collapsing words to a common root
+library(RColorBrewer) # Colors
+library(wordcloud) # Wordcloud
+library(hrbrthemes) # Aesthetic defaults for ggplot2 charts
+library(ggplot2)
+library(pdftools)
+library(cowplot)
+```
+
+# Use pdftools::pdf_text
+
+The most important function is pdf_text which returns a character vector of length equal to the number of pages in the pdf. 
+
+Each string in the vector contains a plain text version of the text on that page.
+
+We will read in the pdf file in R, unlist it and have the output in a character string (as opposed to a vector of characters).
+
+We will do text mining of the speech given yesterday by Mariano Rajoy and Pedro Sanchez on the back of the illegal referedum (or pseudo referendum=vote as many times you want=nobody is checking=democracy=not).
+
+## Mariano Rajoy
+
+```{r, message = FALSE, warning = FALSE}
+txt <- pdf_text("mrajoy.pdf")
+txt <- unlist(txt)
+txt <- paste(txt, collapse = " ")
+# Exporting data to TXT (Tab Delimited Text File)
+write.table(txt, "rajoy", sep=",")
+```
+
+### Load texts
+
+We start by saving the text file (or files) in a folder titled: “texts” This will be the “corpus” (body) of texts you are mining.
+
+```{r, message = FALSE, warning = FALSE}
+# On Mac, save the folder to your desktop and use the following code chunk
+texto <- file.path("~", "Documents/R Working Directory/Blog/First/content/post/", "gov")
+  
+# Load your texts into R
+docs <- VCorpus(DirSource(texto))
+```
+
+Now, it is time to remove numbers, capitalization, common words and punctuation. 
+
+Also note that we exclude common and uninteresting words (y, o , un, etc..). In this case, we use spanish (but english could be used if the text was in english). These words are are very common and not informative that would contaminate the analysis of the text. 
+
+We also remove particular words.
+
+```{r, message = FALSE, warning = FALSE}
+docs <- tm_map(docs,removePunctuation)   
+docs <- tm_map(docs, removeNumbers)   
+docs <- tm_map(docs, tolower)   
+docs <- tm_map(docs, removeWords, stopwords("spanish"))   
+docs <- tm_map(docs, stripWhitespace)
+docs <- tm_map(docs, removeWords, c("madrid", "fax", "correo", "wwwlamoncloagobes", "tel", "prensa", "moncloa", "complejo", "comunicacion", "comunicación", "presidencia", "secretaría", "página", "electrónico"))
+docs <- tm_map(docs, PlainTextDocument) 
+```
+
+### TDM and plot
+
+Next we create a Term Document Matrix (TDM) which reflects the number of times each word in the corpus is found in each of the documents. 
+
+Then we use the ‘removeSparseTerms()’ function to remove the infrequently used words, leaving only the most well-used words in the corpus. 
+
+In this example with sparse = 0.1, only terms occurring at least in one tenth of the documents were retained.
+
+```{r, message = FALSE, warning = FALSE}
+# Stage the Data      
+dtm <- DocumentTermMatrix(docs)   
+tdm <- TermDocumentMatrix(docs) 
+
+# This makes a matrix that is 10% empty space, maximum
+dtms <- removeSparseTerms(dtm, 0.1) 
+freq <- colSums(as.matrix(dtms)) 
+wf <- data.frame(word=names(freq), freq=freq)  
+
+# Plot words that appear at least 6 times
+p <- ggplot(subset(wf, freq>6), aes(reorder(word, -freq),freq)) +
+        geom_bar(stat="identity") +
+        theme_ipsum(grid="Y") +
+        theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
+        theme(axis.title.x=element_blank()) 
+p  
+```
+
+### Word cloud
+
+We plot words that occur at least 6 times. We also add color and plot words occurring at least 6 times.
+
+Note: The "set.seed()" function just makes the configuration of the layout of the clouds consistent each time you plot them. You can omit that part if you are not concerned with preserving a particular layout. 
+
+```{r, message = FALSE, warning = FALSE}
+set.seed(142) 
+rajoy <- wordcloud(names(freq), freq, min.freq=6, scale=c(5, .1), colors=brewer.pal(6, "Dark2"))
+```
+
+## Pedro Sanchez
+
+```{r, message = FALSE, warning = FALSE}
+txt1 <- pdf_text("psanchez.pdf")
+txt1 <- unlist(txt1)
+txt1 <- paste(txt, collapse = " ")
+# Exporting data to TXT (Tab Delimited Text File)
+write.table(txt1, "sanchez", sep=",")
+```
+
+### Load texts
+
+```{r, message = FALSE, warning = FALSE}
+# On Mac, save the folder to your desktop and use the following code chunk
+texto1 <- file.path("~", "Documents/R Working Directory/Blog/First/content/post/", "psoe")
+  
+# Load your texts into R
+docs <- VCorpus(DirSource(texto1))
+```
+
+```{r, message = FALSE, warning = FALSE}
+docs <- tm_map(docs,removePunctuation)   
+docs <- tm_map(docs, removeNumbers)   
+docs <- tm_map(docs, tolower)   
+docs <- tm_map(docs, removeWords, stopwords("spanish"))   
+docs <- tm_map(docs, stripWhitespace)
+docs <- tm_map(docs, removeWords, c("pedro", "sanchez", "sánchez"))
+docs <- tm_map(docs, PlainTextDocument) 
+```
+
+### TDM and plot
+
+```{r, message = FALSE, warning = FALSE}
+# Stage the Data      
+dtm <- DocumentTermMatrix(docs)   
+tdm <- TermDocumentMatrix(docs) 
+
+# This makes a matrix that is 10% empty space, maximum
+dtms <- removeSparseTerms(dtm, 0.1) 
+freq <- colSums(as.matrix(dtms)) 
+wf <- data.frame(word=names(freq), freq=freq)  
+
+# Plot words that appear at least 6 times
+p <- ggplot(subset(wf, freq>6), aes(reorder(word, -freq),freq)) +
+        geom_bar(stat="identity") +
+        theme_ipsum(grid="Y") +
+        theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
+        theme(axis.title.x=element_blank()) 
+p  
+```
+
+### Word cloud
+
+```{r, message = FALSE, warning = FALSE}
+set.seed(142) 
+sanchez <- wordcloud(names(freq), freq, min.freq=6, scale=c(5, .1), colors=brewer.pal(6, "Dark2"))
+```
+
+# Plot them side-by-sid
+
+```{r, message = FALSE, warning = FALSE}
+par(mfrow=c(1,2))
+rajoy <- wordcloud(names(freq), freq, min.freq=6, scale=c(5, .1), colors=brewer.pal(6, "Dark2"))
+sanchez <- wordcloud(names(freq), freq, min.freq=6, scale=c(5, .1), colors=brewer.pal(6, "Dark2"))
+title("Rajoy (lhs) vs Sanchez (rhs) 1-0 speech", side = 3, line = -2, outer = TRUE)
+```
+

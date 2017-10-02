@@ -1,0 +1,188 @@
+---
+title: Choropleth Maps in R
+author: Pablo Ugarte
+date: '2017-09-28'
+slug: choropleth-maps-in-r
+categories: []
+tags: []
+---
+
+# Intro
+
+> Choropleths are thematic maps where geographic regions or countries are colored according to some metric, such as the number of people who live in that region. In this post we will look at the catalan regional elections 2015 and plot it using the fantastic choropleth package.
+
+# Libraries
+
+We will first load the packages.
+
+```{r, message = FALSE, warning = FALSE}
+library(hrbrthemes) # Aesthetic defaults for ggplot2 charts
+library(ggplot2) # Charts
+library(stringr) # Manipulating strings
+library(tidyverse) # Data wrangling packages gather, spread...
+library(readr) # Read docs
+library(data.table)
+library(tibble)
+library(stringi)
+library(gridExtra)
+```
+
+# Scraping
+
+With the rvest package we can scrape the content of the table. 
+
+* We first use the html_nodes() function to select the <table> nodes
+* To parse the HTML table data we use html_table(), which would create a list
+* We coerce the list to dataframe to be able to work with the data manipulaton
+
+```{r, message = FALSE, warning = FALSE}
+webpage <- read_html("https://es.wikipedia.org/wiki/Elecciones_al_Parlamento_de_Cataluña_de_2015")
+
+# Only parse the table interested
+tbl_cat <- webpage %>%
+        html_nodes("table") %>%
+        .[39] %>%
+        html_table(fill = TRUE)
+
+# Coerce list to dataframe
+df <- as.data.frame(tbl_cat)
+```
+
+# Cleansing
+
+```{r, message = FALSE, warning = FALSE}
+# Rename columns
+colnames(df) <- c("candidatura", "Votosbar", "%bar",
+                            "Dip.bar", "Votosgir", "%gir",
+                            "Dip.gir","Votosll", "%ll",
+                            "Dip.ll","Votostarr", "%tarr",
+                            "Dip.tarr","Votostot", "%tot",
+                            "Dip.tot")
+
+# Remove first and last rows (only interested in >2% votes)
+df <- df %>% slice(2:8)
+
+# Create columns with names regions and total
+df <- add_column(df, barcelona = 0, .before = 2)
+df <- add_column(df, girona = 0, .before = 6)
+df <- add_column(df, lleida = 0, .before = 10)
+df <- add_column(df, tarragona = 0, .before = 14)
+df <- add_column(df, total = 0, .before = 18)
+
+# Add values to the columns created
+df$barcelona <- rep("provincia de barcelona",nrow(df))
+df$girona <- rep("provincia de girona",nrow(df))
+df$lleida <- rep("provincia de lleida",nrow(df))
+df$tarragona <- rep("provincia de tarragona",nrow(df))
+df$total <- rep("total",nrow(df))
+
+# Clean PUNCT from regional votes columns data
+df$Votosbar <- gsub(pattern="[[:punct:]]", df$Votosbar, replacement="")
+df$Votosgir <- gsub(pattern="[[:punct:]]", df$Votosgir, replacement="")
+df$Votosll <- gsub(pattern="[[:punct:]]", df$Votosll, replacement="")
+df$Votostarr <- gsub(pattern="[[:punct:]]", df$Votostarr, replacement="")
+df$Votostot <- gsub(pattern="[[:punct:]]", df$Votostot, replacement="")
+
+# Force right numbers for regional votes columns data
+df$Votosbar <- c(1112922,581032,421487,312527,272804,255328,75700)
+df$Votosgir <- c(216333,48346,33416,18399,22660,33117,8295)
+df$Votosll <- c(126922,26612,19364,9879,16761,18736,8178)
+df$Votostarr <- c(172537,80374,49016,26808,36968,30613,11120)
+df$Votostot <- c(1628714,736364,523283,367613,349193,337794,103293)
+
+# Remove space, tab or new line from stringi package
+df$Votosbar <- stri_replace_all_charclass(df$Votosbar, "\\p{WHITE_SPACE}", "")
+df$Votosgir <- stri_replace_all_charclass(df$Votosgir, "\\p{WHITE_SPACE}", "")
+df$Votosll <- stri_replace_all_charclass(df$Votosll, "\\p{WHITE_SPACE}", "")
+df$Votostarr <- stri_replace_all_charclass(df$Votostarr, "\\p{WHITE_SPACE}", "")
+df$Votostot <- stri_replace_all_charclass(df$Votostot, "\\p{WHITE_SPACE}", "")
+
+# Replace "," with "."
+cols <- c(4, 8, 12, 16, 20)   
+df[,cols] <- apply(df[,cols], 2, function(x) as.numeric(gsub(",", ".", x)))
+
+# Change a set of columns from character to numeric
+cols <- c(3, 5, 7, 9, 11, 13, 15, 17, 19, 21)   
+df[,cols] <- apply(df[,cols], 2, function(x) as.numeric(x))
+
+# Change a set of columns from character to numeric
+df1 <- df %>% select(1,2,3,4,5) 
+df2 <- df %>% select(1,6,7,8,9) 
+df3 <- df %>% select(1,10,11,12,13) 
+df4 <- df %>% select(1,14,15,16,17) 
+df5 <- df %>% select(1,18,19,20,21) 
+
+# For rbind to work the dataframes should have the same number of columns
+colnames(df1)=colnames(df2)=colnames(df3)=colnames(df4)=colnames(df5)
+df <- rbind(df1, df2, df3, df4, df5)
+
+# Rename columns and remove total
+colnames(df) <- c("candidatura", "region", "votos", "%tot", "mp's")
+df <- df %>% filter(region != "total")
+```
+
+To create choropleth maps, choroplethr requires: a data.frame with a column named “region” and a column named “value”. Elements in the “region” column must exactly match how regions are named in the “region” column in ?country.map.
+
+```{r, message = FALSE, warning = FALSE}
+# Lets create dataframes that will map later for each political party and total
+JxSí <- df %>% filter(candidatura == "JxSí")
+Ciudadanos <- df %>% filter(candidatura == "C's")
+PSC <- df %>% filter(candidatura == "PSC-PSOE")
+CatSiqueesPot <- df %>% filter(candidatura == "CatSiqueesPot")
+PP <- df %>% filter(candidatura == "PP")
+CUP <- df %>% filter(candidatura == "CUP")
+UDC <- df %>% filter(candidatura == "UDC")
+
+# Create column value that has votes data
+JxSí$value <- JxSí$votos
+Ciudadanos$value <- Ciudadanos$votos
+PSC$value <- PSC$votos
+CatSiqueesPot$value <- CatSiqueesPot$votos
+PP$value <- PP$votos
+CUP$value <- CUP$votos
+UDC$value <- UDC$votos
+
+# Default map of Spain and zoom in the Cataluna region and use a continuous scale
+cataluna = c("provincia de barcelona", "provincia de girona", "provincia de lleida", "provincia de tarragona")
+JxSí <- admin1_choropleth("spain",
+                   JxSí,
+                   "JxSí",
+                   "Votes",
+                    4,
+                    cataluna) 
+Ciudadanos <- admin1_choropleth("spain",
+                    Ciudadanos,
+                   "Ciudadanos",
+                   "Votes",
+                    4,
+                    cataluna)
+PSC <- admin1_choropleth("spain",
+                    PSC,
+                   "PSC",
+                   "Votes",
+                    4,
+                    cataluna)
+PP <- admin1_choropleth("spain",
+                    PP,
+                   "PP",
+                   "Votes",
+                    4,
+                    cataluna)
+CUP <- admin1_choropleth("spain",
+                    CUP,
+                   "CUP",
+                   "Votes",
+                    4,
+                    cataluna)
+UDC <- admin1_choropleth("spain",
+                    UDC,
+                   "UDC",
+                   "Votes",
+                    4,
+                    cataluna)
+
+p <- grid.arrange(JxSí, Ciudadanos, PSC, PP, CUP, UDC, ncol = 3, nrow = 2, top = "Catalan Regional Elections, 2015")
+p
+```
+
+[^1]: Link1 (http://rstudio-pubs-static.s3.amazonaws.com/209498_51996005830d4f64bdafe50fae8236f4.html)
