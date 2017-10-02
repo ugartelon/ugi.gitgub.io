@@ -1,5 +1,5 @@
 ---
-title: "Rajoy vc Sanchez Word Clouds"
+title: "Rajoy vs Sanchez Word Clouds"
 author: "Pablo Ugarte"
 date: '2017-10-02'
 slug: rajoy-vc-sanchez-word-clouds
@@ -153,10 +153,10 @@ tdm <- TermDocumentMatrix(docs)
 # This makes a matrix that is 10% empty space, maximum
 dtms <- removeSparseTerms(dtm, 0.1) 
 freq <- colSums(as.matrix(dtms)) 
-wf <- data.frame(word=names(freq), freq=freq)  
+wf1 <- data.frame(word=names(freq), freq=freq)  
 
 # Plot words that appear at least 6 times
-p <- ggplot(subset(wf, freq>6), aes(reorder(word, -freq),freq)) +
+p <- ggplot(subset(wf1, freq>6), aes(reorder(word, -freq),freq)) +
         geom_bar(stat="identity") +
         theme_ipsum(grid="Y") +
         theme(axis.text.x = element_text(angle = 90, hjust = 1)) +

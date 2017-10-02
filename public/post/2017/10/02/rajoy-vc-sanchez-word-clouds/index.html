@@ -145,10 +145,10 @@ tdm &lt;- TermDocumentMatrix(docs)
 # This makes a matrix that is 10% empty space, maximum
 dtms &lt;- removeSparseTerms(dtm, 0.1) 
 freq &lt;- colSums(as.matrix(dtms)) 
-wf &lt;- data.frame(word=names(freq), freq=freq)  
+wf1 &lt;- data.frame(word=names(freq), freq=freq)  
 
 # Plot words that appear at least 6 times
-p &lt;- ggplot(subset(wf, freq&gt;6), aes(reorder(word, -freq),freq)) +
+p &lt;- ggplot(subset(wf1, freq&gt;6), aes(reorder(word, -freq),freq)) +
         geom_bar(stat=&quot;identity&quot;) +
         theme_ipsum(grid=&quot;Y&quot;) +
         theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
