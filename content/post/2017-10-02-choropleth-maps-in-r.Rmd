@@ -1,10 +1,10 @@
 ---
-title: Choropleth Maps in R
-author: Pablo Ugarte
-date: '2017-09-28'
+title: "Choropleth Maps in R"
+author: "Pablo Ugarte"
+date: '2017-10-02'
 slug: choropleth-maps-in-r
-categories: []
 tags: []
+categories: []
 ---
 
 # Intro
@@ -184,5 +184,7 @@ UDC <- admin1_choropleth("spain",
 p <- grid.arrange(JxSí, Ciudadanos, PSC, PP, CUP, UDC, ncol = 3, nrow = 2, top = "Catalan Regional Elections, 2015")
 p
 ```
+
+I suggest this site for more info [^1].
 
 [^1]: Link1 (http://rstudio-pubs-static.s3.amazonaws.com/209498_51996005830d4f64bdafe50fae8236f4.html)

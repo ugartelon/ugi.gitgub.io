@@ -1,8 +1,8 @@
 ---
-title: "Rajoy vs Sanchez 1-0 speech"
+title: "Rajoy vc Sanchez Word Clouds"
 author: "Pablo Ugarte"
 date: '2017-10-02'
-slug: pablo-ugarte
+slug: rajoy-vc-sanchez-word-clouds
 tags: []
 categories: []
 ---
@@ -179,4 +179,3 @@ rajoy <- wordcloud(names(freq), freq, min.freq=6, scale=c(5, .1), colors=brewer.
 sanchez <- wordcloud(names(freq), freq, min.freq=6, scale=c(5, .1), colors=brewer.pal(6, "Dark2"))
 title("Rajoy (lhs) vs Sanchez (rhs) 1-0 speech", side = 3, line = -2, outer = TRUE)
 ```
-
